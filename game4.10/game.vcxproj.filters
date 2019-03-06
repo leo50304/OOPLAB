@@ -129,7 +129,7 @@
     <ClCompile Include="Source\CBouncingBall.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="CHero.cpp">
+    <ClCompile Include="Source\CHero.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,7 +170,7 @@
     <ClInclude Include="Source\CBouncingBall.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="CHero.h">
+    <ClInclude Include="Source\CHero.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
@@ -182,6 +182,24 @@
   <ItemGroup>
     <Image Include="RES\title.png" />
     <Image Include="RES\title.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\gcm_01.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\gwr_01.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\gm_00.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bmp00001.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -44,6 +44,21 @@
 #include "CBouncingBall.h"
 
 namespace game_framework {
+
+	class MapBrown
+	{
+	public:
+		MapBrown();
+		void LoadBitMap();
+		void OnShow();
+	protected:
+		CMovingBitmap block;
+		int map[20][15];
+		const int X, Y;
+		const int MV, MH;
+	};
+
+
 	/////////////////////////////////////////////////////////////////////////////
 	// Constants
 	/////////////////////////////////////////////////////////////////////////////
@@ -96,6 +111,7 @@ namespace game_framework {
 	private:
 		const int		NUMBALLS;	// 球的總數
 		CMovingBitmap	background;	// 背景圖
+		MapBrown		mapBrown;
 		CMovingBitmap	help;		// 說明圖
 		CBall			*ball;		// 球的陣列
 		CMovingBitmap	corner;		// 角落圖

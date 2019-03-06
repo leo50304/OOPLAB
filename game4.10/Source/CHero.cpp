@@ -5,7 +5,6 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "CHero.h"
-#include "CBall.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -39,7 +38,7 @@ namespace game_framework {
 
 	void CHero::Initialize()
 	{
-		const int X_POS = 280;
+		const int X_POS = 300;
 		const int Y_POS = 400;
 		x = X_POS;
 		y = Y_POS;
@@ -48,15 +47,15 @@ namespace game_framework {
 
 	void CHero::LoadBitmap()
 	{
-		animation.AddBitmap(IDB_ERASER1, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_ERASER2, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_ERASER3, RGB(255, 255, 255));
-		animation.AddBitmap(IDB_ERASER2, RGB(255, 255, 255));
+		animation.AddBitmap(GWR_01, RGB(255, 255, 255));
+		animation.AddBitmap(GWR_02, RGB(255, 255, 255));
+		//animation.AddBitmap(GWR_01, RGB(255, 255, 255));
+		//animation.AddBitmap(TITLE_INIT, RGB(255, 255, 255));
 	}
 
 	void CHero::OnMove()
 	{
-		const int STEP_SIZE = 2;
+		const int STEP_SIZE = 3;
 		animation.OnMove();
 		if (isMovingLeft)
 			x -= STEP_SIZE;
