@@ -305,6 +305,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
+    <ClInclude Include="Source\Block.h" />
     <ClInclude Include="Source\CBall.h" />
     <ClInclude Include="Source\CBouncingBall.h" />
     <ClInclude Include="Source\CEraser.h" />
@@ -313,6 +314,7 @@
     <ClInclude Include="Source\gameDoc.h" />
     <ClInclude Include="Source\gameView.h" />
     <ClInclude Include="Source\MainFrm.h" />
+    <ClInclude Include="Source\map.h" />
     <ClInclude Include="Source\Resource.h" />
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />
@@ -329,6 +331,9 @@
     <Image Include="data\ch\gcm_01.bmp" />
     <Image Include="data\ch\gwr_01.bmp" />
     <Image Include="data\map\gm_00.bmp" />
+    <Image Include="data\map\gm_01.bmp" />
+    <Image Include="data\map\gm_02.bmp" />
+    <Image Include="data\map\gm__03.bmp" />
     <Image Include="res\bitmap4.bmp" />
     <Image Include="res\bitmap5.bmp" />
     <Image Include="res\bmp00001.bmp" />

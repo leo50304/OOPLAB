@@ -58,36 +58,55 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "mygame.h"
+#include <fstream>
+
 
 namespace game_framework {
 
 MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 {
-	int map_init[20][15] = {0};
-	for (int i = 0; i < 20; ++i) {
-		for (int j = 0; j < 15; ++j) {
-			map[i][j] = map_init[i][j];
+
+	mapObjects[0] = new Blank();
+	mapObjects[1] = new Block();
+	mapObjects[2] = new Ladder();
+	mapObjects[3] = new LadderBlock();
+	mapObjects[4] = new Blank();
+	mapObjects[5] = new Blank();
+	mapObjects[6] = new Blank();
+
+	fstream file;
+	file.open("./data/map/map.txt", ios::in);
+	for (int i = 0; i < 14; i++)
+		for (int j = 0; j < 19; j++) {
+			file >> map[i][j];
 		}
-	}
+	file.close();
 }
+
+int MapBrown::GetBlock(int i, int j) 
+{
+	return map[j][i];
+}
+
+MapObject* MapBrown::getMapObject(int i) 
+{
+	return mapObjects[i];
+}
+
 
 void MapBrown::LoadBitMap() 
 {
-	block.LoadBitmap(BG1_BASE);
+	for (int i = 0; i < sizeof(mapObjects) / sizeof(mapObjects[0]); ++i) 
+	{
+		mapObjects[i]->LoadBitMap();
+	}
 }
 
 void MapBrown::OnShow() 
 {
-	for (int i = 0; i < 20; ++i) {
-		for (int j = 0; j < 15; ++j) {
-			switch (map[i][j]) {
-			case 1:
-				break;
-			case 0:
-				block.SetTopLeft(X + (MV*i), Y + (MH*j));
-				block.ShowBitmap();
-				break;
-			}
+	for (int i = 0; i < 14; ++i) {
+		for (int j = 0; j < 19; ++j) {
+			mapObjects[map[i][j]]->PutBlock(0 + (MV*j), 0 + (MH*i));
 		}
 	}
 }
@@ -258,6 +277,8 @@ void CGameStateRun::OnBeginState()
 	CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
 }
 
+MapObject mapObject[7] = {};
+
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	//
@@ -273,35 +294,37 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 移動球
 	//
-	int i;
-	for (i=0; i < NUMBALLS; i++)
-		ball[i].OnMove();
+	//int i;
+	//for (i=0; i < NUMBALLS; i++)
+	//	ball[i].OnMove();
 	//
 	// 移動擦子
 	//
-	eraser.OnMove();
-	hero.OnMove();
+	//eraser.OnMove();
 	//
 	// 判斷擦子是否碰到球
 	//
-	for (i=0; i < NUMBALLS; i++)
-		if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
-			ball[i].SetIsAlive(false);
-			CAudio::Instance()->Play(AUDIO_DING);
-			hits_left.Add(-1);
-			//
-			// 若剩餘碰撞次數為0，則跳到Game Over狀態
-			//
-			if (hits_left.GetInteger() <= 0) {
-				CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
-				CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
-				GotoGameState(GAME_STATE_OVER);
-			}
-		}
+
+	hero.OnMove(&mapBrown);
+	
+	//for (i=0; i < NUMBALLS; i++)
+	//	if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
+	//		ball[i].SetIsAlive(false);
+	//		CAudio::Instance()->Play(AUDIO_DING);
+	//		hits_left.Add(-1);
+	//		//
+	//		// 若剩餘碰撞次數為0，則跳到Game Over狀態
+	//		//
+	//		if (hits_left.GetInteger() <= 0) {
+	//			CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
+	//			CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
+	//			GotoGameState(GAME_STATE_OVER);
+	//		}
+	//	}
 	//
 	// 移動彈跳的球
 	//
-	bball.OnMove();
+	//bball.OnMove();
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -426,7 +449,7 @@ void CGameStateRun::OnShow()
 	//
 	//  貼上背景圖、撞擊數、球、擦子、彈跳的球
 	//
-	background.ShowBitmap();			// 貼上背景圖
+	//background.ShowBitmap();			// 貼上背景圖
 	mapBrown.OnShow();
 	//help.ShowBitmap();					// 貼上說明圖
 	//hits_left.ShowBitmap();

@@ -112,9 +112,13 @@ GWR_01                  BITMAP                  "..\\res\\bitmap4.bmp"
 
 GWR_02                  BITMAP                  "..\\res\\bitmap5.bmp"
 
-BG1_BASE                BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\map\\gm_00.bmp"
+GM_03                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\map\\gm_03.bmp"
 
-BG1_01                  BITMAP                  "..\\res\\bmp00001.bmp"
+GM_00                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\map\\gm_00.bmp"
+
+GM_01                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\map\\gm_01.bmp"
+
+GM_02                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\map\\gm_02.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

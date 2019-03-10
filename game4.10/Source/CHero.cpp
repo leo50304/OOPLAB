@@ -5,11 +5,10 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "CHero.h"
+#include "Block.h"
+#include "map.h"
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// CEraser: Eraser class
-	/////////////////////////////////////////////////////////////////////////////
 
 	CHero::CHero()
 	{
@@ -36,12 +35,20 @@ namespace game_framework {
 		return y + animation.Height();
 	}
 
+	void CHero::SetOnLadder(bool flag) 
+	{
+		isOnLadder = flag;
+	}
+
 	void CHero::Initialize()
 	{
-		const int X_POS = 300;
-		const int Y_POS = 400;
+		const int X_POS = 32*2;
+		const int Y_POS = 32*12;
 		x = X_POS;
 		y = Y_POS;
+		isOnLadder = false;
+		onDrop = false;
+		previousBlock = 0;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 	}
 
@@ -49,22 +56,58 @@ namespace game_framework {
 	{
 		animation.AddBitmap(GWR_01, RGB(255, 255, 255));
 		animation.AddBitmap(GWR_02, RGB(255, 255, 255));
-		//animation.AddBitmap(GWR_01, RGB(255, 255, 255));
-		//animation.AddBitmap(TITLE_INIT, RGB(255, 255, 255));
 	}
 
-	void CHero::OnMove()
+	bool CHero::IsOnLadder() 
 	{
-		const int STEP_SIZE = 3;
+		return isOnLadder;
+	}
+
+	void CHero::Drop() 
+	{
+		onDrop = true;
+	}
+
+	void CHero::OnMove(MapBrown* map)
+	{
+		const int STEP_SIZE = 4;
 		animation.OnMove();
-		if (isMovingLeft)
+
+		//if (onDrop) 
+		//	y += STEP_SIZE;
+		if (isMovingLeft) 
+		{
 			x -= STEP_SIZE;
-		if (isMovingRight)
+			if (!map->getMapObject(map->GetBlock(x / 32, y / 32))->HitHeroAction(x, y, isOnLadder, "Left"))
+			{
+				x += STEP_SIZE;
+			}
+		}
+		if (isMovingRight) 
+		{
 			x += STEP_SIZE;
+
+			if (!map->getMapObject(map->GetBlock((x+31) / 32, y / 32))->HitHeroAction(x, y, isOnLadder, "Right"))
+			{
+				x -= STEP_SIZE;
+			}
+		}
 		if (isMovingUp)
+		{
 			y -= STEP_SIZE;
-		if (isMovingDown)
+			if (!map->getMapObject(map->GetBlock(x / 32, y / 32))->HitHeroAction(x, y, isOnLadder, "Up"))
+			{
+				y += STEP_SIZE;
+			}
+		}
+		if (isMovingDown) 
+		{
 			y += STEP_SIZE;
+			if (!map->getMapObject(map->GetBlock(x / 32, (y+31) / 32))->HitHeroAction(x, y, isOnLadder, "Down"))
+			{
+				y -= STEP_SIZE;
+			}
+		}
 	}
 
 	void CHero::SetMovingDown(bool flag)

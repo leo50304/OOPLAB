@@ -40,23 +40,12 @@
 
 #include "CEraser.h"
 #include "CBall.h"
-#include "CHero.h"
 #include "CBouncingBall.h"
+//#include "Block.h"
+#include "map.h"
+#include "CHero.h"
 
 namespace game_framework {
-
-	class MapBrown
-	{
-	public:
-		MapBrown();
-		void LoadBitMap();
-		void OnShow();
-	protected:
-		CMovingBitmap block;
-		int map[20][15];
-		const int X, Y;
-		const int MV, MH;
-	};
 
 
 	/////////////////////////////////////////////////////////////////////////////
