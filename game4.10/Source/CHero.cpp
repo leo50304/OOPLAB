@@ -75,19 +75,22 @@ namespace game_framework {
 
 		//if (onDrop) 
 		//	y += STEP_SIZE;
-		if (isMovingLeft) 
+		if (isMovingLeft)
 		{
 			x -= STEP_SIZE;
-			if (!map->getMapObject(map->GetBlock(x / 32, y / 32))->HitHeroAction(x, y, isOnLadder, "Left"))
+			int px = x / 32;
+			int py = y / 32;
+			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Left", px * 32))
 			{
 				x += STEP_SIZE;
 			}
 		}
-		if (isMovingRight) 
+		if (isMovingRight)
 		{
 			x += STEP_SIZE;
-
-			if (!map->getMapObject(map->GetBlock((x+31) / 32, y / 32))->HitHeroAction(x, y, isOnLadder, "Right"))
+			int px = (x + 31) / 32;
+			int py = y / 32;
+			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Right", px * 32))
 			{
 				x -= STEP_SIZE;
 			}
@@ -95,19 +98,45 @@ namespace game_framework {
 		if (isMovingUp)
 		{
 			y -= STEP_SIZE;
-			if (!map->getMapObject(map->GetBlock(x / 32, y / 32))->HitHeroAction(x, y, isOnLadder, "Up"))
+			int px = (x + 16) / 32;
+			int py = y / 32;
+			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Up", px * 32))
 			{
 				y += STEP_SIZE;
 			}
 		}
-		if (isMovingDown) 
+		if (isMovingDown)
 		{
 			y += STEP_SIZE;
-			if (!map->getMapObject(map->GetBlock(x / 32, (y+31) / 32))->HitHeroAction(x, y, isOnLadder, "Down"))
+			int px = (x + 16) / 32;
+			int py = (y + 31) / 32;
+			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Down", px * 32))
 			{
 				y -= STEP_SIZE;
 			}
 		}
+
+		if (x < 0)
+		{
+			map->UpdateMap('L');
+			x = 580;
+		}
+		else if (x > 600)
+		{
+			map->UpdateMap('R');
+			x = 0;
+		}
+		else if (y < 0)
+		{
+			map->UpdateMap('U');
+			y = 480;
+		}
+		else if (y > 460) 
+		{
+			map->UpdateMap('D');
+			y = 0;
+		}
+
 	}
 
 	void CHero::SetMovingDown(bool flag)

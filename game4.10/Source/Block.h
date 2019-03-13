@@ -9,7 +9,7 @@ namespace game_framework {
 	class MapObject
 	{
 	public:
-		virtual bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos) {return false; }; //return true if can move
+		virtual bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px) {return false; }; //return true if can move
 		virtual void LoadBitMap() {};
 		void PutBlock(int px, int py)
 		{
@@ -27,9 +27,9 @@ namespace game_framework {
 		{
 			block.LoadBitmap(GM_00);
 		}
-		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos)
+		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px)
 		{
-			if (isOnLadder && y % 32 < 4)
+			if (pos == "Up" && isOnLadder && y % 32 < 4)
 			{
 				y -= y % 32;
 				isOnLadder = false;
@@ -54,7 +54,7 @@ namespace game_framework {
 		{
 			block.LoadBitmap(GM_01);
 		}
-		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos)
+		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px)
 		{
 			if (pos == "Down") 
 			{
@@ -71,17 +71,15 @@ namespace game_framework {
 		{
 			block.LoadBitmap(GM_03);
 		}
-		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos)
+		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px)
 		{
 
 			if (pos == "Left")
 			{
-				atLadder = x % 32 < 16;
 				return !isOnLadder;
 			}
 			else if (pos == "Right")
 			{
-				atLadder = x % 32 > 16;
 				return !isOnLadder;
 			}
 			else if (pos == "Up") 
@@ -94,17 +92,9 @@ namespace game_framework {
 				{
 					return true;
 				}
-				else if (atLadder)
+				else if (px - x<16 && px - x>-16)
 				{
-					if (x % 32 > 16)
-					{
-						x = x + (32 - x % 32);
-					}
-					else
-					{
-						x -= x % 32;
-					}
-					atLadder = false;
+					x = px;
 					isOnLadder = true;
 					return true;
 				}
@@ -115,8 +105,6 @@ namespace game_framework {
 			}
 			throw "Ladder error";
 		}
-	private:
-		bool atLadder = false;
 	};
 
 	class Ladder : public MapObject
@@ -126,16 +114,14 @@ namespace game_framework {
 		{
 			block.LoadBitmap(GM_02);
 		}
-		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos)
+		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px)
 		{
 			if (pos == "Left") 
 			{
-				atLadder = x % 32 < 16;
 				return !isOnLadder;
 			}
 			else if (pos == "Right") 
 			{
-				atLadder = x % 32 > 16;
 				return !isOnLadder;
 			}
 			else if(pos == "Up" || pos == "Down")
@@ -144,29 +130,19 @@ namespace game_framework {
 				{
 					return true;
 				}
-				else if (atLadder)
+				else if (px-x<=16 && px-x>=-16)
 				{
-					if (x % 32 > 16)
-					{
-						x += (32 - (x % 32));
-					}
-					else
-					{
-						x -= x % 32;
-					}
-					atLadder = false;
+					x = px;
 					isOnLadder = true;
 					return true;
 				}
-				else
+				else 
 				{
 					return false;
 				}
 			}
 			throw "Ladder error";
 		}
-	private:
-		bool atLadder = false;
 	};
 
 }

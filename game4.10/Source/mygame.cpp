@@ -59,6 +59,7 @@
 #include "gamelib.h"
 #include "mygame.h"
 #include <fstream>
+#include <sstream>
 
 
 namespace game_framework {
@@ -74,17 +75,82 @@ MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 	mapObjects[5] = new Blank();
 	mapObjects[6] = new Blank();
 
+	mapPosX = 0;
+	mapPosY = 0;
+	mapOfMap[0][0] = 0;
+	mapOfMap[0][1] = 1;
+	next = mapOfMap[mapPosX][mapPosY];
+
 	fstream file;
-	file.open("./data/map/map.txt", ios::in);
-	for (int i = 0; i < 14; i++)
-		for (int j = 0; j < 19; j++) {
-			file >> map[i][j];
+
+	for (int i = 0; i < 2; i++) 
+	{
+		int** ary = new int*[14];
+		for (int i = 0; i < 14; i++)
+			ary[i] = new int[19];
+		std::stringstream s;
+		s << i;
+		string fileName = "./data/map/map" + s.str() + ".txt";
+		file.open(fileName, ios::in);
+		for (int i = 0; i < 14; i++)
+		{
+			for (int j = 0; j < 19; j++)
+			{
+				file >> ary[i][j];
+			}
 		}
-	file.close();
+		mapList.push_back(ary);
+
+		file.close();
+	}
+
+	for (int i = 0; i < 14; i++)
+	{
+		for (int j = 0; j < 19; j++)
+		{
+			map[i][j] = mapList[next][i][j];
+		}
+	}
+}
+
+void MapBrown::UpdateMap(char nextPos)
+{
+	if (nextPos == 'L')
+	{
+		mapPosX -= 1;
+	}
+	else if (nextPos == 'R')
+	{
+		mapPosX += 1;
+	}
+	else if (nextPos == 'U')
+	{
+		mapPosY -= 1;
+	}
+	else if (nextPos == 'D')
+	{
+		mapPosY -= 1;
+	}
+	else 
+	{
+		throw "update map error";
+	}
+	next = mapOfMap[mapPosY][mapPosX];
+	for (int i = 0; i < 14; i++)
+	{
+		for (int j = 0; j < 19; j++)
+		{
+			map[i][j] = mapList[next][i][j];
+		}
+	}
 }
 
 int MapBrown::GetBlock(int i, int j) 
 {
+	if (i >= 19 || j >= 14) 
+	{
+		return 0;
+	}
 	return map[j][i];
 }
 
