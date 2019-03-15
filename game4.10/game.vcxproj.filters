@@ -217,5 +217,14 @@
     <Image Include="data\map\gm_02.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\ch\gwr_02.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\gwr_03.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\gm_03.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

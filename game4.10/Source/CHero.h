@@ -33,6 +33,11 @@ namespace game_framework {
 		void SetOnLadder(bool flag);
 	protected:
 		CAnimation animation;		// 擦子的動畫
+		CAnimation moveRAnimation;
+		CAnimation moveLAnimation;
+		CAnimation moveUAnimation;
+		CAnimation moveDAnimation;
+
 		int x, y;					// 擦子左上角座標
 		bool onDrop;
 		int previousBlock;

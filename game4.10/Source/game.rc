@@ -106,19 +106,21 @@ IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
 TITLE_INIT              BITMAP                  "..\\res\\title.bmp"
 
-GWR_BASE                BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\gwr_01.bmp"
+GWR_01                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\gwr_00.bmp"
 
-GWR_01                  BITMAP                  "..\\res\\bitmap4.bmp"
+GWR_02                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\gwr_01.bmp"
 
-GWR_02                  BITMAP                  "..\\res\\bitmap5.bmp"
+GM_03                   BITMAP                  "..\\data\\map\\gm_03.bmp"
 
-GM_03                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\map\\gm_03.bmp"
+GM_00                   BITMAP                  "..\\data\\map\\gm_00.bmp"
 
-GM_00                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\map\\gm_00.bmp"
+GM_01                   BITMAP                  "..\\data\\map\\gm_01.bmp"
 
-GM_01                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\map\\gm_01.bmp"
+GM_02                   BITMAP                  "..\\data\\map\\gm_02.bmp"
 
-GM_02                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\map\\gm_02.bmp"
+GWR_M0                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\gwr_02.bmp"
+
+GWR_M1                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\gwr_03.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

@@ -439,19 +439,19 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN = 0x28; // keyboard下箭頭
 	if (nChar == KEY_LEFT) {
-		eraser.SetMovingLeft(true);
+		//eraser.SetMovingLeft(true);
 		hero.SetMovingLeft(true);
 	}
 	if (nChar == KEY_RIGHT) {
-		eraser.SetMovingRight(true);
+		//eraser.SetMovingRight(true);
 		hero.SetMovingRight(true);
 	}
 	if (nChar == KEY_UP) {
-		eraser.SetMovingUp(true);
+		//eraser.SetMovingUp(true);
 		hero.SetMovingUp(true);
 	}
 	if (nChar == KEY_DOWN){
-		eraser.SetMovingDown(true);
+		//eraser.SetMovingDown(true);
 		hero.SetMovingDown(true);
 	}
 }
@@ -463,19 +463,19 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
 	if (nChar == KEY_LEFT) {
-		eraser.SetMovingLeft(false);
+		//eraser.SetMovingLeft(false);
 		hero.SetMovingLeft(false);
 	}
 	if (nChar == KEY_RIGHT) {
-		eraser.SetMovingRight(false);
+		//eraser.SetMovingRight(false);
 		hero.SetMovingRight(false);
 	}
 	if (nChar == KEY_UP) {
-		eraser.SetMovingUp(false);
+		//eraser.SetMovingUp(false);
 		hero.SetMovingUp(false);
 	}
 	if (nChar == KEY_DOWN) {
-		eraser.SetMovingDown(false);
+		//eraser.SetMovingDown(false);
 		hero.SetMovingDown(false);
 	}
 }
@@ -527,9 +527,9 @@ void CGameStateRun::OnShow()
 	//
 	//  貼上左上及右下角落的圖
 	//
-	corner.SetTopLeft(0,0);
-	corner.ShowBitmap();
-	corner.SetTopLeft(SIZE_X-corner.Width(), SIZE_Y-corner.Height());
-	corner.ShowBitmap();
+	//corner.SetTopLeft(0,0);
+	//corner.ShowBitmap();
+	//corner.SetTopLeft(SIZE_X-corner.Width(), SIZE_Y-corner.Height());
+	//corner.ShowBitmap();
 }
 }

@@ -73,7 +73,6 @@ namespace game_framework {
 		}
 		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px)
 		{
-
 			if (pos == "Left")
 			{
 				return !isOnLadder;

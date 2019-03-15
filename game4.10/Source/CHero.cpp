@@ -56,6 +56,20 @@ namespace game_framework {
 	{
 		animation.AddBitmap(GWR_01, RGB(255, 255, 255));
 		animation.AddBitmap(GWR_02, RGB(255, 255, 255));
+
+		moveRAnimation.AddBitmap(GWR_M0, RGB(255, 255, 255));
+		moveRAnimation.AddBitmap(GWR_M1, RGB(255, 255, 255));
+
+		moveLAnimation.AddBitmap(GWR_M0, RGB(255, 255, 255));
+		moveLAnimation.AddBitmap(GWR_M1, RGB(255, 255, 255));
+
+		moveUAnimation.AddBitmap(GWR_M0, RGB(255, 255, 255));
+		moveUAnimation.AddBitmap(GWR_M1, RGB(255, 255, 255));
+
+		moveDAnimation.AddBitmap(GWR_M0, RGB(255, 255, 255));
+		moveDAnimation.AddBitmap(GWR_M1, RGB(255, 255, 255));
+
+
 	}
 
 	bool CHero::IsOnLadder() 
@@ -72,36 +86,22 @@ namespace game_framework {
 	{
 		const int STEP_SIZE = 4;
 		animation.OnMove();
+		moveRAnimation.OnMove();
+		moveDAnimation.OnMove();
+		moveUAnimation.OnMove();
+		moveLAnimation.OnMove();
 
 		//if (onDrop) 
 		//	y += STEP_SIZE;
-		if (isMovingLeft)
-		{
-			x -= STEP_SIZE;
-			int px = x / 32;
-			int py = y / 32;
-			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Left", px * 32))
-			{
-				x += STEP_SIZE;
-			}
-		}
-		if (isMovingRight)
-		{
-			x += STEP_SIZE;
-			int px = (x + 31) / 32;
-			int py = y / 32;
-			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Right", px * 32))
-			{
-				x -= STEP_SIZE;
-			}
-		}
 		if (isMovingUp)
 		{
 			y -= STEP_SIZE;
+			//isMovingDown = false;
 			int px = (x + 16) / 32;
 			int py = y / 32;
 			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Up", px * 32))
 			{
+				//isMovingUp = false;
 				y += STEP_SIZE;
 			}
 		}
@@ -112,9 +112,33 @@ namespace game_framework {
 			int py = (y + 31) / 32;
 			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Down", px * 32))
 			{
+				//isMovingDown = false;
 				y -= STEP_SIZE;
 			}
 		}
+		if (isMovingLeft)
+		{
+			x -= STEP_SIZE;
+			int px = x / 32;
+			int py = y / 32;
+			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Left", px * 32))
+			{
+				//isMovingLeft = false;
+				x += STEP_SIZE;
+			}
+		}
+		if (isMovingRight)
+		{
+			x += STEP_SIZE;
+			int px = (x + 31) / 32;
+			int py = y / 32;
+			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Right", px * 32))
+			{
+				//isMovingRight = false;
+				x -= STEP_SIZE;
+			}
+		}
+
 
 		if (x < 0)
 		{
@@ -166,7 +190,30 @@ namespace game_framework {
 
 	void CHero::OnShow()
 	{
-		animation.SetTopLeft(x, y);
-		animation.OnShow();
+		if (isMovingUp) 
+		{
+			moveUAnimation.SetTopLeft(x, y);
+			moveUAnimation.OnShow();
+		}
+		else if (isMovingDown) 
+		{
+			moveDAnimation.SetTopLeft(x, y);
+			moveDAnimation.OnShow();
+		}
+		else if (isMovingRight) 
+		{
+			moveRAnimation.SetTopLeft(x, y);
+			moveRAnimation.OnShow();
+		}
+		else if (isMovingLeft) 
+		{
+			moveLAnimation.SetTopLeft(x, y);
+			moveLAnimation.OnShow();
+		}
+		else 
+		{
+			animation.SetTopLeft(x, y);
+			animation.OnShow();
+		}
 	}
 }
