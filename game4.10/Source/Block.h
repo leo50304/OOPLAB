@@ -91,7 +91,7 @@ namespace game_framework {
 				{
 					return true;
 				}
-				else if (px - x<16 && px - x>-16)
+				else if (px - x<=8 && px - x>=-8)
 				{
 					x = px;
 					isOnLadder = true;
@@ -129,7 +129,7 @@ namespace game_framework {
 				{
 					return true;
 				}
-				else if (px-x<=16 && px-x>=-16)
+				else if (px-x<=8 && px-x>=-8)
 				{
 					x = px;
 					isOnLadder = true;

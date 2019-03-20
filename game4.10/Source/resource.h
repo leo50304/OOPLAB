@@ -44,10 +44,26 @@
 #define GM_03                           167
 #define GM_00                           168
 #define GM_01                           169
-#define IDB_BITMAP7                     170
 #define GM_02                           170
-#define GWR_M0                          171
-#define GWR_M1                          172
+#define MWW_L                           173
+#define MWW_R                           174
+#define WWA_L                           175
+#define WWA_R                           176
+#define WWD                             177
+#define WWH_L                           178
+#define WWH_R                           179
+#define WWJ_L                           180
+#define WWJ_R                           181
+#define WWL_1                           182
+#define WWL_2                           183
+#define WWL3                            184
+#define WWL_3                           184
+#define WWS_L                           185
+#define WWS_R                           186
+#define WWR_L1                          187
+#define WWR_L2                          188
+#define WWR_R1                          192
+#define WWR_R2                          193
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -60,7 +76,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        173
+#define _APS_NEXT_RESOURCE_VALUE        194
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

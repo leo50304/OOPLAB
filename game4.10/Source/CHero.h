@@ -16,8 +16,6 @@ namespace game_framework {
 		CHero();
 		int  GetX1();					// 上 x 座標
 		int  GetY1();					// 上 y 座標
-		int  GetX2();					// 下 x 座標
-		int  GetY2();					// 下 y 座標
 		void Initialize();				// 設定擦子為初始值
 		void LoadBitmap();				// 載入圖形
 		void OnMove(MapBrown* map);     // 移動
@@ -32,16 +30,27 @@ namespace game_framework {
 		void Drop();
 		void SetOnLadder(bool flag);
 	protected:
-		CAnimation animation;		// 擦子的動畫
+		CMovingBitmap standL;		// 擦子的動畫
+		CMovingBitmap standR;		// 擦子的動畫
+		CMovingBitmap stayOnLadder;
+		CMovingBitmap jumpL;
+		CMovingBitmap jumpR;
+		int speed;
+
 		CAnimation moveRAnimation;
 		CAnimation moveLAnimation;
 		CAnimation moveUAnimation;
 		CAnimation moveDAnimation;
-
+		
+		int faceSide = 1;
 		int x, y;					// 擦子左上角座標
-		bool onDrop;
+		bool onDrop = false;
+		bool onJump = false;
+		int TopLimit;
+		int jumpTop;
 		int previousBlock;
 		bool isOnLadder;
+		bool isOnLadderSide;
 		bool isMovingDown;			// 是否正在往下移動
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動

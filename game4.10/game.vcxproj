@@ -329,9 +329,31 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="data\ch\gcm_01.bmp" />
+    <Image Include="data\ch\gwr_00.bmp" />
     <Image Include="data\ch\gwr_01.bmp" />
     <Image Include="data\ch\gwr_02.bmp" />
     <Image Include="data\ch\gwr_03.bmp" />
+    <Image Include="data\ch\mwwl.bmp" />
+    <Image Include="data\ch\mwwr.bmp" />
+    <Image Include="data\ch\wwal.bmp" />
+    <Image Include="data\ch\wwar.bmp" />
+    <Image Include="data\ch\wwd.bmp" />
+    <Image Include="data\ch\wwhl.bmp" />
+    <Image Include="data\ch\wwhr.bmp" />
+    <Image Include="data\ch\wwjl.bmp" />
+    <Image Include="data\ch\wwjr.bmp" />
+    <Image Include="data\ch\wwl1.bmp" />
+    <Image Include="data\ch\wwl2.bmp" />
+    <Image Include="data\ch\wwl3.bmp" />
+    <Image Include="data\ch\wwrl.bmp" />
+    <Image Include="data\ch\wwrr.bmp" />
+    <Image Include="data\ch\wwsl(lhf).bmp" />
+    <Image Include="data\ch\wwsl(rhf).bmp" />
+    <Image Include="data\ch\wwsr(lhf).bmp" />
+    <Image Include="data\ch\wwsr(rhf).bmp" />
+    <Image Include="data\ch\wwt1l.bmp" />
+    <Image Include="data\ch\wwt2l.bmp" />
+    <Image Include="data\ch\wwt3l.bmp" />
     <Image Include="data\map\gm_00.bmp" />
     <Image Include="data\map\gm_01.bmp" />
     <Image Include="data\map\gm_02.bmp" />

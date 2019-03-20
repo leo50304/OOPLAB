@@ -226,5 +226,71 @@
     <Image Include="data\map\gm_03.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\ch\gwr_00.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwr.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwd.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwhl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwhr.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwjl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwjr.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwl1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwl2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwl3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwrl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwrr.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwsl(lhf).bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwsl(rhf).bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwt1l.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwt2l.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwt3l.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwsr(lhf).bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\wwsr(rhf).bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
