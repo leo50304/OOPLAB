@@ -5,12 +5,14 @@
 //#include "CHero.h"
 #include <stdio.h>
 
+
 namespace game_framework {
 	class MapObject
 	{
 	public:
 		virtual bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px) {return false; }; //return true if can move
 		virtual void LoadBitMap() {};
+		virtual bool IsSolid() { return true; };
 		void PutBlock(int px, int py)
 		{
 			block.SetTopLeft(px, py);
@@ -26,6 +28,10 @@ namespace game_framework {
 		void LoadBitMap()
 		{
 			block.LoadBitmap(GM_00);
+		}
+		bool IsSolid() 
+		{
+			return false;
 		}
 		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px)
 		{
@@ -54,6 +60,10 @@ namespace game_framework {
 		{
 			block.LoadBitmap(GM_01);
 		}
+		bool IsSolid()
+		{
+			return true;
+		}
 		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px)
 		{
 			if (pos == "Down") 
@@ -70,6 +80,10 @@ namespace game_framework {
 		void LoadBitMap()
 		{
 			block.LoadBitmap(GM_03);
+		}
+		bool IsSolid()
+		{
+			return true;
 		}
 		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px)
 		{
@@ -112,6 +126,10 @@ namespace game_framework {
 		void LoadBitMap()
 		{
 			block.LoadBitmap(GM_02);
+		}
+		bool IsSolid()
+		{
+			return false;
 		}
 		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px)
 		{

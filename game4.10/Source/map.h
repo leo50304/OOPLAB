@@ -10,12 +10,15 @@ namespace game_framework {
 	class MapBrown
 	{
 	public:
+		~MapBrown();
 		MapBrown();
 		void LoadBitMap();
 		void OnShow();
 		int GetBlock(int i, int j);
 		MapObject* getMapObject(int i);
 		void UpdateMap(char nextPos);
+		bool isBlockSolid(int i, int j);
+
 	protected:
 		int map[14][19];
 		int mapOfMap[1][2];

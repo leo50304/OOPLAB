@@ -84,6 +84,8 @@ namespace game_framework {
 
 	void CHero::OnMove(MapBrown* map)
 	{
+		double ACCELERATE = 0.89;
+
 		const int STEP_SIZE = 4;
 
 		moveRAnimation.OnMove();
@@ -96,25 +98,25 @@ namespace game_framework {
 		{
 			if (!onDrop) //上升
 			{
-				speed -= 1;
+				speed = (double)speed - ACCELERATE;
 				if (speed < 1) 
 				{
 					speed = 1;
 				}
-				y -= 7;
+				y -= (int)speed;
 			}
 			else //下降
 			{
-				speed += 1;
-				y += 7;
+				speed = (double)speed+ ACCELERATE;
+				y += (int)speed;
 			}
-			if ((map->GetBlock(x / 32, (y + 31) / 32) != 0 && map->GetBlock(x / 32, (y + 31) / 32) != 2) || (map->GetBlock((x+22) / 32, (y + 31) / 32) != 0 && map->GetBlock((x+22) / 32, (y + 31) / 32) != 2))
+			if (map->isBlockSolid(x / 32, (y + 31) / 32) || map->isBlockSolid((x+22) / 32, (y + 31) / 32)) //落地
 			{
 				y = (y / 32) * 32;
 				onJump = false;
 				onDrop = false;
 			}
-			if ((map->GetBlock(x / 32, (y - 1) / 32) != 0 && map->GetBlock(x / 32, (y - 1) / 32) != 2) || (map->GetBlock((x + 22) / 32, (y - 1) / 32) != 0 && map->GetBlock((x + 22) / 32, (y - 1) / 32) != 2)) 
+			if (map->isBlockSolid(x / 32, (y - 1) / 32) || map->isBlockSolid((x + 22) / 32, (y - 1) / 32)) //撞到頭
 			{
 				onDrop = true;
 				y = ((y - 1) / 32) * 32 + 32;
@@ -125,7 +127,7 @@ namespace game_framework {
 				onDrop = true;
 			}
 		}
-		else if(!isOnLadder && map->GetBlock(x / 32, (y + 32) / 32) != 1 && map->GetBlock(x / 32, (y + 32) / 32) != 3 && map->GetBlock((x+22) / 32, (y + 32) / 32) != 1 && map->GetBlock((x+22) / 32, (y + 32) / 32) != 3)
+		else if(!isOnLadder && !map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid((x+22) / 32, (y + 32) / 32)) //踩空
 		{
 			speed = 1;
 			onJump = true;
@@ -146,11 +148,11 @@ namespace game_framework {
 
 				if (!onJump)
 				{
-					speed = 8;
+					speed = 14;
 					onJump = true;
 					onDrop = false;
 					jumpTop = y - 32; //跳躍上限
-					TopLimit = y - 32 * 4;//大跳上限
+					TopLimit = y - 32 * 3;//大跳上限
 				}
 			}
 
@@ -161,7 +163,7 @@ namespace game_framework {
 		}
 		if (isMovingUp && onJump && !onDrop) 
 		{
-			jumpTop -= 7;
+			jumpTop -= 10;
 			if (jumpTop < TopLimit) 
 			{
 				jumpTop = TopLimit;		

@@ -35,7 +35,7 @@ namespace game_framework {
 		CMovingBitmap stayOnLadder;
 		CMovingBitmap jumpL;
 		CMovingBitmap jumpR;
-		int speed;
+		double speed;
 
 		CAnimation moveRAnimation;
 		CAnimation moveLAnimation;
