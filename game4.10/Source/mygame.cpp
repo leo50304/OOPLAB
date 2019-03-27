@@ -67,6 +67,14 @@ namespace game_framework {
 
 MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 {
+	const int mapsX = 3;
+	const int mapsY = 2;
+	const int mapSizeX = 18;
+	const int mapSizeY = 13;
+	const int mapsNum = 4;
+
+	mapPosX = 0;
+	mapPosY = 1;
 
 	mapObjects[0] = new Blank();
 	mapObjects[1] = new Grass();
@@ -81,26 +89,30 @@ MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 	mapObjects[10] = new Spike();
 	mapObjects[11] = new Lever();
 
-	mapPosX = 0;
-	mapPosY = 0;
-	mapOfMap[0][0] = 0;
-	mapOfMap[0][1] = 1;
-	next = mapOfMap[mapPosX][mapPosY];
+	fstream mapsfile;
+	mapsfile.open("./data/map/maps.txt");
+	for (int i = 0; i < mapsY; i++) {
+		for (int j = 0; j < mapsX; j++) {
+			mapsfile >> mapOfMap[i][j];
+		}
+	}
+	mapsfile.close();
 
 	fstream file;
 
-	for (int i = 0; i < 2; i++) 
+	for (int i = 0; i < mapsNum; i++)
 	{
-		int** ary = new int*[13];
-		for (int i = 0; i < 13; i++)
-			ary[i] = new int[18];
+		int** ary = new int*[mapSizeY];
+		for (int i = 0; i < mapSizeY; i++)
+			ary[i] = new int[mapSizeX];
 		std::stringstream s;
 		s << i;
 		string fileName = "./data/map/map" + s.str() + ".txt";
 		file.open(fileName, ios::in);
-		for (int i = 0; i < 13; i++)
+
+		for (int i = 0; i < mapSizeY; i++)
 		{
-			for (int j = 0; j < 18; j++)
+			for (int j = 0; j < mapSizeX; j++)
 			{
 				file >> ary[i][j];
 			}
@@ -110,9 +122,11 @@ MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 		file.close();
 	}
 
-	for (int i = 0; i < 13; i++)
+	next = mapOfMap[mapPosY][mapPosX];
+
+	for (int i = 0; i < mapSizeY; i++)
 	{
-		for (int j = 0; j < 18; j++)
+		for (int j = 0; j < mapSizeX; j++)
 		{
 			map[i][j] = mapList[next][i][j];
 		}
@@ -152,7 +166,7 @@ void MapBrown::UpdateMap(char nextPos)
 	}
 	else if (nextPos == 'D')
 	{
-		mapPosY -= 1;
+		mapPosY += 1;
 	}
 	else 
 	{
@@ -207,7 +221,7 @@ void MapBrown::OnShow()
 {
 	for (int i = 0; i < 13; ++i) {
 		for (int j = 0; j < 18; ++j) {
-			mapObjects[GetBlock(j,i)]->PutBlock(0 + (MV*j), 0 + (MH*i), map[i][j]);
+			mapObjects[GetBlock(j,i)]->PutBlock(X + (MV*j), Y + (MH*i), map[i][j]);
 		}
 	}
  }
@@ -232,7 +246,7 @@ void CGameStateInit::OnInit()
 	// 開始載入資料
 	//
 	logo.LoadBitmap(TITLE_INIT);
-	Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+	//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 	//
 	// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
 	//
@@ -273,7 +287,7 @@ void CGameStateInit::OnShow()
 	fp=pDC->SelectObject(&f);					// 選用 font f
 	pDC->SetBkColor(RGB(0,0,0));
 	pDC->SetTextColor(RGB(255,255,0));
-	pDC->TextOut(120,220,"Please click mouse or press SPACE to begin.");
+	pDC->TextOut(120,220,"Please press SPACE to begin.");
 	pDC->TextOut(5,395,"Press Ctrl-F to switch in between window mode and full screen mode.");
 	if (ENABLE_GAME_PAUSE)
 		pDC->TextOut(5,425,"Press Ctrl-Q to pause the Game.");
@@ -481,6 +495,7 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 	if (nChar == KEY_UP) {
 		//eraser.SetMovingUp(false);
+		hero.SetHoldUp(false);
 		hero.SetMovingUp(false);
 	}
 	if (nChar == KEY_DOWN) {

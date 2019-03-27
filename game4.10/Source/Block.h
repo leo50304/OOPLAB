@@ -11,6 +11,13 @@ namespace game_framework {
 	class MapObject
 	{
 	public:
+		~MapObject() 
+		{
+			for (unsigned int i = 0; i < block.size(); ++i) 
+			{
+				delete block[i];
+			}
+		}
 		virtual bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px) {return false; }; //return true if can move
 		virtual void LoadBitMap() {};
 		virtual bool IsSolid() { return true; };
@@ -37,8 +44,10 @@ namespace game_framework {
 		}
 		void PutBlock(int px, int py, int type)
 		{
-			block[0]->SetTopLeft(px, py);
-			block[0]->ShowBitmap();
+			if (type%100 >= 6)
+				type = 0;
+			block[type % 100]->SetTopLeft(px, py);
+			block[type % 100]->ShowBitmap();
 		}
 		bool IsSolid() 
 		{
@@ -205,21 +214,17 @@ namespace game_framework {
 	public:
 		void LoadBitMap()
 		{
-			for (int i = 0; i < 6; ++i)
+			for (int i = 0; i < 2; ++i)
 			{
 				block.push_back(new CMovingBitmap());
 			}
-			block[0]->LoadBitmap(GM_00);
-			block[1]->LoadBitmap(GM_00);
-			block[2]->LoadBitmap(GM_00);
-			block[3]->LoadBitmap(GM_00);
-			block[4]->LoadBitmap(GM_00);
-			block[5]->LoadBitmap(GM_00);
+			block[0]->LoadBitmap(M_100);
+			block[1]->LoadBitmap(M_101);
 		}
 		void PutBlock(int px, int py, int type)
 		{
-			block[0]->SetTopLeft(px, py);
-			block[0]->ShowBitmap();
+			block[type%100]->SetTopLeft(px, py);
+			block[type % 100]->ShowBitmap();
 		}
 		bool IsSolid()
 		{
@@ -251,21 +256,17 @@ namespace game_framework {
 	public:
 		void LoadBitMap()
 		{
-			for (int i = 0; i < 6; ++i)
+			for (int i = 0; i < 2; ++i)
 			{
 				block.push_back(new CMovingBitmap());
 			}
-			block[0]->LoadBitmap(GM_00);
-			block[1]->LoadBitmap(GM_00);
-			block[2]->LoadBitmap(GM_00);
-			block[3]->LoadBitmap(GM_00);
-			block[4]->LoadBitmap(GM_00);
-			block[5]->LoadBitmap(GM_00);
+			block[0]->LoadBitmap(M_200);
+			block[1]->LoadBitmap(M_201);
 		}
 		void PutBlock(int px, int py, int type)
 		{
-			block[0]->SetTopLeft(px, py);
-			block[0]->ShowBitmap();
+			block[type % 100]->SetTopLeft(px, py);
+			block[type % 100]->ShowBitmap();
 		}
 		bool IsSolid()
 		{

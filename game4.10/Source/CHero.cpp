@@ -88,6 +88,11 @@ namespace game_framework {
 		onDrop = true;
 	}
 
+	void CHero::SetHoldUp(bool flag)
+	{
+		onHold = flag;
+	}
+
 	void CHero::SetAttack(bool flag) 
 	{
 		if (flag == true && onAttack) 
@@ -135,6 +140,7 @@ namespace game_framework {
 			}
 			if (map->isBlockSolid(x / 32, (y - 1) / 32) || map->isBlockSolid((x + 22) / 32, (y - 1) / 32)) //¼²¨ìÀY
 			{
+				speed = 1;
 				onDrop = true;
 				y = ((y - 1) / 32) * 32 + 32;
 			}
@@ -147,16 +153,12 @@ namespace game_framework {
 		}
 		else if(!isOnLadder && !map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid((x+22) / 32, (y + 32) / 32)) //½òªÅ
 		{
-			int xx = (x + 22) / 32;
-			int yy = (y + 32) / 32;
 			int b = map->GetBlock((x + 22) / 32, (y + 32) / 32);
 			speed = 1;
 			onJump = true;
 			onDrop = true;
 		}
 
-		//if (onDrop) 
-		//	y += STEP_SIZE;
 		if (isMovingUp && !onJump)
 		{
 			y -= STEP_SIZE;
@@ -167,7 +169,7 @@ namespace game_framework {
 			{
 				y += STEP_SIZE;
 
-				if (!onJump)
+				if (!onJump && !onHold)
 				{
 					speed = 14;
 					onJump = true;
@@ -181,6 +183,8 @@ namespace game_framework {
 			{
 				isOnLadderSide = false;
 			}
+			onHold = true;
+
 		}
 		if (isMovingUp && onJump && !onDrop) 
 		{
@@ -239,9 +243,9 @@ namespace game_framework {
 		if (x < 0)
 		{
 			map->UpdateMap('L');
-			x = 548;
+			x = 32*18-32;
 		}
-		else if (x > 568)
+		else if (x > 32*18-32)
 		{
 			map->UpdateMap('R');
 			x = 0;
@@ -249,9 +253,9 @@ namespace game_framework {
 		else if (y < 0)
 		{
 			map->UpdateMap('U');
-			y = 448;
+			y = 32*13-32;
 		}
-		else if (y > 428)
+		else if (y > 32 * 13 -32)
 		{
 			map->UpdateMap('D');
 			y = 0;

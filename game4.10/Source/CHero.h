@@ -30,6 +30,7 @@ namespace game_framework {
 		void Drop();
 		void SetOnLadder(bool flag);
 		void SetAttack(bool flag);
+		void SetHoldUp(bool flag);
 	protected:
 		CMovingBitmap standL;		// 擦子的動畫
 		CMovingBitmap standR;		// 擦子的動畫
@@ -54,6 +55,7 @@ namespace game_framework {
 		int x, y;					// 擦子左上角座標
 		bool onDrop = false;
 		bool onJump = false;
+		bool onHold = false;
 		int TopLimit;
 		int jumpTop;
 		int previousBlock;
