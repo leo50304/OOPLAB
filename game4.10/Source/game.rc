@@ -106,9 +106,9 @@ IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
 TITLE_INIT              BITMAP                  "..\\res\\title.bmp"
 
-GWR_01                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\gwr_00.bmp"
+GWR_01                  BITMAP                  "..\\data\\ch\\gwr_00.bmp"
 
-GWR_02                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\gwr_01.bmp"
+GWR_02                  BITMAP                  "..\\data\\ch\\gwr_01.bmp"
 
 GM_03                   BITMAP                  "..\\data\\map\\gm_03.bmp"
 
@@ -118,41 +118,103 @@ GM_01                   BITMAP                  "..\\data\\map\\gm_01.bmp"
 
 GM_02                   BITMAP                  "..\\data\\map\\gm_02.bmp"
 
-MWW_L                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\mwwl.bmp"
+MWW_L                   BITMAP                  "..\\data\\ch\\mwwl.bmp"
 
-MWW_R                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\mwwr.bmp"
+MWW_R                   BITMAP                  "..\\data\\ch\\mwwr.bmp"
 
-WWA_L                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwal.bmp"
+WWA_L                   BITMAP                  "..\\data\\ch\\wwal.bmp"
 
-WWA_R                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwar.bmp"
+WWA_R                   BITMAP                  "..\\data\\ch\\wwar.bmp"
 
-WWD                     BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwd.bmp"
+WWD                     BITMAP                  "..\\data\\ch\\wwd.bmp"
 
-WWH_L                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwhl.bmp"
+WWH_L                   BITMAP                  "..\\data\\ch\\wwhl.bmp"
 
-WWH_R                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwhr.bmp"
+WWH_R                   BITMAP                  "..\\data\\ch\\wwhr.bmp"
 
-WWJ_L                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwjl.bmp"
+WWJ_L                   BITMAP                  "..\\data\\ch\\wwjl.bmp"
 
-WWJ_R                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwjr.bmp"
+WWJ_R                   BITMAP                  "..\\data\\ch\\wwjr.bmp"
 
-WWL_1                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwl1.bmp"
+WWL_1                   BITMAP                  "..\\data\\ch\\wwl1.bmp"
 
-WWL_2                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwl2.bmp"
+WWL_2                   BITMAP                  "..\\data\\ch\\wwl2.bmp"
 
-WWL_3                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwl3.bmp"
+WWL_3                   BITMAP                  "..\\data\\ch\\wwl3.bmp"
 
-WWS_L                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwrl.bmp"
+WWS_L                   BITMAP                  "..\\data\\ch\\wwrl.bmp"
 
-WWS_R                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwrr.bmp"
+WWS_R                   BITMAP                  "..\\data\\ch\\wwrr.bmp"
 
-WWR_L1                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwsl(lhf).bmp"
+WWR_L1                  BITMAP                  "..\\data\\ch\\wwsl(lhf).bmp"
 
-WWR_L2                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwsl(rhf).bmp"
+WWR_L2                  BITMAP                  "..\\data\\ch\\wwsl(rhf).bmp"
 
-WWR_R1                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwsr(lhf).bmp"
+WWR_R1                  BITMAP                  "..\\data\\ch\\wwsr(lhf).bmp"
 
-WWR_R2                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\wwsr(rhf).bmp"
+WWR_R2                  BITMAP                  "..\\data\\ch\\wwsr(rhf).bmp"
+
+M_000                   BITMAP                  "..\\data\\map\mapdata\\000.bmp"
+
+M_001                   BITMAP                  "..\\data\\map\mapdata\\001.bmp"
+
+M_002                   BITMAP                  "..\\data\\map\mapdata\\002.bmp"
+
+M_003                   BITMAP                  "..\\data\\map\mapdata\\003.bmp"
+
+M_004                   BITMAP                  "..\\data\\map\mapdata\\004.bmp"
+
+M_005                   BITMAP                  "..\\data\\map\mapdata\\005.bmp"
+
+M_100                   BITMAP                  "..\\data\\map\mapdata\\100.bmp"
+
+M_101                   BITMAP                  "..\\data\\map\mapdata\\101.bmp"
+
+M_200                   BITMAP                  "..\\data\\map\mapdata\\200.bmp"
+
+M_201                   BITMAP                  "..\\data\\map\mapdata\\201.bmp"
+
+M_300                   BITMAP                  "..\\data\\map\mapdata\\300.bmp"
+
+M_400                   BITMAP                  "..\\data\\map\mapdata\\400.bmp"
+
+M_500                   BITMAP                  "..\\data\\map\mapdata\\500.bmp"
+
+M_501                   BITMAP                  "..\\data\\map\mapdata\\501.bmp"
+
+M_502                   BITMAP                  "..\\data\\map\mapdata\\502.bmp"
+
+M_503                   BITMAP                  "..\\data\\map\mapdata\\503.bmp"
+
+M_504                   BITMAP                  "..\\data\\map\mapdata\\504.bmp"
+
+M_505                   BITMAP                  "..\\data\\map\mapdata\\505.bmp"
+
+M_600                   BITMAP                  "..\\data\\map\mapdata\\600.bmp"
+
+M_601                   BITMAP                  "..\\data\\map\mapdata\\601.bmp"
+
+M_700                   BITMAP                  "..\\data\\map\mapdata\\700.bmp"
+
+M_800                   BITMAP                  "..\\data\\map\mapdata\\800.bmp"
+
+M_900                   BITMAP                  "..\\data\\map\mapdata\\900.bmp"
+
+M_901                   BITMAP                  "..\\data\\map\mapdata\\901.bmp"
+
+M_1000                   BITMAP                  "..\\data\\map\mapdata\\1000.bmp"
+
+M_1100                   BITMAP                  "..\\data\\map\mapdata\\1100.bmp"
+
+M_1101                   BITMAP                  "..\\data\\map\mapdata\\1101.bmp"
+
+
+
+
+
+
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////

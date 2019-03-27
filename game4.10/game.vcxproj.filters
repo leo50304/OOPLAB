@@ -277,5 +277,86 @@
     <Image Include="data\ch\wwsr(rhf).bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\map\mapdata\000.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\001.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\002.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\003.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\004.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\005.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\100.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\101.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\200.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\201.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\300.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\400.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\500.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\501.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\502.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\503.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\504.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\505.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\600.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\601.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\700.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\800.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\900.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\901.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\1000.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\1100.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\map\mapdata\1101.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

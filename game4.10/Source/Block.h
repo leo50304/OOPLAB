@@ -28,12 +28,12 @@ namespace game_framework {
 			{
 				block.push_back(new CMovingBitmap());
 			}
-			block[0]->LoadBitmap(GM_00);
-			block[1]->LoadBitmap(GM_00);
-			block[2]->LoadBitmap(GM_00);
-			block[3]->LoadBitmap(GM_00);
-			block[4]->LoadBitmap(GM_00);
-			block[5]->LoadBitmap(GM_00);
+			block[0]->LoadBitmap(M_000);
+			block[1]->LoadBitmap(M_001);
+			block[2]->LoadBitmap(M_002);
+			block[3]->LoadBitmap(M_003);
+			block[4]->LoadBitmap(M_004);
+			block[5]->LoadBitmap(M_005);
 		}
 		void PutBlock(int px, int py, int type)
 		{
@@ -74,17 +74,17 @@ namespace game_framework {
 			{
 				block.push_back(new CMovingBitmap());
 			}
-			block[0]->LoadBitmap(GM_01);
-			block[1]->LoadBitmap(GM_00);
-			block[2]->LoadBitmap(GM_00);
-			block[3]->LoadBitmap(GM_00);
-			block[4]->LoadBitmap(GM_00);
-			block[5]->LoadBitmap(GM_00);
+			block[0]->LoadBitmap(M_500);
+			block[1]->LoadBitmap(M_501);
+			block[2]->LoadBitmap(M_502);
+			block[3]->LoadBitmap(M_503);
+			block[4]->LoadBitmap(M_504);
+			block[5]->LoadBitmap(M_505);
 		}
 		void PutBlock(int px, int py, int type)
 		{
-			block[0]->SetTopLeft(px, py);
-			block[0]->ShowBitmap();
+			block[type % 100]->SetTopLeft(px, py);
+			block[type % 100]->ShowBitmap();
 		}
 		bool IsSolid()
 		{
