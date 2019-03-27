@@ -33,11 +33,12 @@ namespace game_framework {
 	void CHero::Initialize()
 	{
 		const int X_POS = 32 * 2;
-		const int Y_POS = 32 * 12;
+		const int Y_POS = 32 * 11;
 		x = X_POS;
 		y = Y_POS;
 		isOnLadder = false;
 		onDrop = false;
+		onAttack = false;
 		previousBlock = 0;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 	}
@@ -48,6 +49,11 @@ namespace game_framework {
 		standR.LoadBitmap(WWS_R, RGB(255, 255, 255));
 		jumpL.LoadBitmap(WWJ_L, RGB(255, 255, 255));
 		jumpR.LoadBitmap(WWJ_R, RGB(255, 255, 255));
+
+		swordL.LoadBitmap(MWW_L, RGB(255, 255, 255));
+		swordR.LoadBitmap(MWW_R, RGB(255, 255, 255));
+		attackL.LoadBitmap(WWA_L, RGB(255, 255, 255));
+		attackR.LoadBitmap(WWA_R, RGB(255, 255, 255));
 
 		stayOnLadder.LoadBitmap(WWL_2, RGB(255, 255, 255));
 
@@ -82,10 +88,25 @@ namespace game_framework {
 		onDrop = true;
 	}
 
+	void CHero::SetAttack(bool flag) 
+	{
+		if (flag == true && onAttack) 
+		{
+			return;
+		}
+		onAttack = flag;
+		attackFrameCount = 0;
+	}
+
 	void CHero::OnMove(MapBrown* map)
 	{
-		double ACCELERATE = 0.89;
-
+		if (attackFrameCount == 10)
+		{
+ 			onAttack = false;
+			attackFrameCount = 0;
+		}
+		double ACCELERATE = 0.892;
+		attackFrameCount++;
 		const int STEP_SIZE = 4;
 
 		moveRAnimation.OnMove();
@@ -99,15 +120,11 @@ namespace game_framework {
 			if (!onDrop) //上升
 			{
 				speed = (double)speed - ACCELERATE;
-				if (speed < 1) 
-				{
-					speed = 1;
-				}
 				y -= (int)speed;
 			}
 			else //下降
 			{
-				speed = (double)speed+ ACCELERATE;
+				speed = (double)speed + ACCELERATE;
 				y += (int)speed;
 			}
 			if (map->isBlockSolid(x / 32, (y + 31) / 32) || map->isBlockSolid((x+22) / 32, (y + 31) / 32)) //落地
@@ -121,14 +138,18 @@ namespace game_framework {
 				onDrop = true;
 				y = ((y - 1) / 32) * 32 + 32;
 			}
-			if (y <= jumpTop)
+			if (y <= jumpTop && !onDrop)
 			{
+				speed = 0;
 				y = jumpTop;
 				onDrop = true;
 			}
 		}
 		else if(!isOnLadder && !map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid((x+22) / 32, (y + 32) / 32)) //踩空
 		{
+			int xx = (x + 22) / 32;
+			int yy = (y + 32) / 32;
+			int b = map->GetBlock((x + 22) / 32, (y + 32) / 32);
 			speed = 1;
 			onJump = true;
 			onDrop = true;
@@ -218,9 +239,9 @@ namespace game_framework {
 		if (x < 0)
 		{
 			map->UpdateMap('L');
-			x = 580;
+			x = 548;
 		}
-		else if (x > 600)
+		else if (x > 568)
 		{
 			map->UpdateMap('R');
 			x = 0;
@@ -228,9 +249,9 @@ namespace game_framework {
 		else if (y < 0)
 		{
 			map->UpdateMap('U');
-			y = 480;
+			y = 448;
 		}
-		else if (y > 460)
+		else if (y > 428)
 		{
 			map->UpdateMap('D');
 			y = 0;
@@ -265,8 +286,25 @@ namespace game_framework {
 
 	void CHero::OnShow()
 	{
-		if (onJump) 
-		{	
+		if (onAttack) 
+		{
+			if (faceSide == 0)
+			{
+				attackL.SetTopLeft(x, y);
+				attackL.ShowBitmap();
+				swordL.SetTopLeft(x-31,y+2);
+				swordL.ShowBitmap();
+			}
+			else if (faceSide == 1)
+			{
+				attackR.SetTopLeft(x, y);
+				attackR.ShowBitmap();
+				swordR.SetTopLeft(x + 31, y+2);
+				swordR.ShowBitmap();
+			}
+		}
+		else if (onJump) 
+		{
 			if (faceSide == 0)
 			{
 				jumpL.SetTopLeft(x, y);

@@ -29,19 +29,27 @@ namespace game_framework {
 		bool IsOnLadder();
 		void Drop();
 		void SetOnLadder(bool flag);
+		void SetAttack(bool flag);
 	protected:
 		CMovingBitmap standL;		// 擦子的動畫
 		CMovingBitmap standR;		// 擦子的動畫
 		CMovingBitmap stayOnLadder;
 		CMovingBitmap jumpL;
 		CMovingBitmap jumpR;
-		double speed;
+		CMovingBitmap swordL;
+		CMovingBitmap swordR;
+		CMovingBitmap attackL;
+		CMovingBitmap attackR;
 
+		double speed;
+		bool onAttack;
 		CAnimation moveRAnimation;
 		CAnimation moveLAnimation;
 		CAnimation moveUAnimation;
 		CAnimation moveDAnimation;
 		
+
+		int attackFrameCount = 0;
 		int faceSide = 1;
 		int x, y;					// 擦子左上角座標
 		bool onDrop = false;

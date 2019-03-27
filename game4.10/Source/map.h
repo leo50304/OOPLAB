@@ -20,9 +20,9 @@ namespace game_framework {
 		bool isBlockSolid(int i, int j);
 
 	protected:
-		int map[14][19];
+		int map[13][18];
 		int mapOfMap[1][2];
-		MapObject* mapObjects[6];
+		MapObject* mapObjects[12];
 		std::vector<int**> mapList;
 		const int X, Y;
 		const int MV, MH;

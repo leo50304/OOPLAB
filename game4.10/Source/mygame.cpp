@@ -69,12 +69,17 @@ MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 {
 
 	mapObjects[0] = new Blank();
-	mapObjects[1] = new Block();
-	mapObjects[2] = new Ladder();
-	mapObjects[3] = new LadderBlock();
-	mapObjects[4] = new Blank();
-	mapObjects[5] = new Blank();
-	mapObjects[6] = new Blank();
+	mapObjects[1] = new Grass();
+	mapObjects[2] = new Bone();
+	mapObjects[3] = new Tomb();
+	mapObjects[4] = new Shop();
+	mapObjects[5] = new Block();
+	mapObjects[6] = new WeakBlock();
+	mapObjects[7] = new LadderBlock();
+	mapObjects[8] = new Ladder();
+	mapObjects[9] = new Door();
+	mapObjects[10] = new Spike();
+	mapObjects[11] = new Lever();
 
 	mapPosX = 0;
 	mapPosY = 0;
@@ -86,16 +91,16 @@ MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 
 	for (int i = 0; i < 2; i++) 
 	{
-		int** ary = new int*[14];
-		for (int i = 0; i < 14; i++)
-			ary[i] = new int[19];
+		int** ary = new int*[13];
+		for (int i = 0; i < 13; i++)
+			ary[i] = new int[18];
 		std::stringstream s;
 		s << i;
 		string fileName = "./data/map/map" + s.str() + ".txt";
 		file.open(fileName, ios::in);
-		for (int i = 0; i < 14; i++)
+		for (int i = 0; i < 13; i++)
 		{
-			for (int j = 0; j < 19; j++)
+			for (int j = 0; j < 18; j++)
 			{
 				file >> ary[i][j];
 			}
@@ -105,9 +110,9 @@ MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 		file.close();
 	}
 
-	for (int i = 0; i < 14; i++)
+	for (int i = 0; i < 13; i++)
 	{
-		for (int j = 0; j < 19; j++)
+		for (int j = 0; j < 18; j++)
 		{
 			map[i][j] = mapList[next][i][j];
 		}
@@ -118,7 +123,7 @@ MapBrown ::~MapBrown()
 {
 	for (unsigned int i = 0; i < mapList.size(); ++i)
 	{
-		for (int j = 0; j < 14; ++j) {
+		for (int j = 0; j < 13; ++j) {
 			delete[] mapList[i][j];
 		}
 
@@ -154,32 +159,34 @@ void MapBrown::UpdateMap(char nextPos)
 		throw "update map error";
 	}
 	next = mapOfMap[mapPosY][mapPosX];
-	for (int i = 0; i < 14; i++)
+	for (int i = 0; i < 13; i++)
 	{
-		for (int j = 0; j < 19; j++)
+		for (int j = 0; j < 18; j++)
 		{
 			map[i][j] = mapList[next][i][j];
 		}
 	}
 }
 
-int MapBrown::GetBlock(int i, int j) 
+int MapBrown::GetBlock(int x, int y) 
 {
-	if (i >= 19 || j >= 14) 
+	if (x >= 18 || y >= 13) 
 	{
 		return 0;
 	}
-	return map[j][i];
+
+	int block = map[y][x];
+	return (block / 100);
 }
 
 bool MapBrown::isBlockSolid(int i, int j)
 {
-	if (i >= 19 || j >= 14)
+	if (i >= 18 || j >= 13)
 	{
 		return 0;
 	}
 	
-	return mapObjects[map[j][i]]->IsSolid();
+	return mapObjects[GetBlock(i,j)]->IsSolid();
 }
 
 MapObject* MapBrown::getMapObject(int i) 
@@ -198,12 +205,12 @@ void MapBrown::LoadBitMap()
 
 void MapBrown::OnShow() 
 {
-	for (int i = 0; i < 14; ++i) {
-		for (int j = 0; j < 19; ++j) {
-			mapObjects[map[i][j]]->PutBlock(0 + (MV*j), 0 + (MH*i));
+	for (int i = 0; i < 13; ++i) {
+		for (int j = 0; j < 18; ++j) {
+			mapObjects[GetBlock(j,i)]->PutBlock(0 + (MV*j), 0 + (MH*i), map[i][j]);
 		}
 	}
-}
+ }
 
 /////////////////////////////////////////////////////////////////////////////
 // 這個class為遊戲的遊戲開頭畫面物件
@@ -371,7 +378,7 @@ void CGameStateRun::OnBeginState()
 	CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
 }
 
-MapObject mapObject[7] = {};
+//MapObject* mapObject[7] = {};
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
@@ -435,6 +442,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_UP = 0x26; // keyboard上箭頭
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN = 0x28; // keyboard下箭頭
+	const char KEY_SPACE = 0x20;
 	if (nChar == KEY_LEFT) {
 		//eraser.SetMovingLeft(true);
 		hero.SetMovingLeft(true);
@@ -450,6 +458,10 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	if (nChar == KEY_DOWN){
 		//eraser.SetMovingDown(true);
 		hero.SetMovingDown(true);
+	}
+	if (nChar == KEY_SPACE) {
+		//eraser.SetMovingDown(true);
+ 		hero.SetAttack(true);
 	}
 }
 

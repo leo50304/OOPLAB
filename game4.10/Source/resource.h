@@ -33,7 +33,6 @@
 #define IDB_CONTINUE                    152
 #define IDC_GAMECURSOR                  153
 #define IDB_HELP                        155
-#define IDB_BITMAP2                     156
 #define IDB_LOADING                     156
 #define TITLE_INIT                      159
 #define GWR_BASE                        161
