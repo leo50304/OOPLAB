@@ -105,6 +105,10 @@ namespace game_framework {
 
 	void CHero::OnMove(MapBrown* map)
 	{
+		if (isOnLadder && !isOnLadderSide) 
+		{
+			onAttack = false;
+		}
 		if (attackFrameCount == 10)
 		{
  			onAttack = false;

@@ -358,5 +358,11 @@
     <Image Include="data\map\mapdata\1101.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\map\mapdata\bitmap2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\E_00.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

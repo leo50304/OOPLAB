@@ -154,67 +154,61 @@ WWR_R1                  BITMAP                  "..\\data\\ch\\wwsr(lhf).bmp"
 
 WWR_R2                  BITMAP                  "..\\data\\ch\\wwsr(rhf).bmp"
 
-M_000                   BITMAP                  "..\\data\\map\mapdata\\000.bmp"
+M_000                   BITMAP                  "..\\data\\map\\mapdata\\000.bmp"
 
-M_001                   BITMAP                  "..\\data\\map\mapdata\\001.bmp"
+M_001                   BITMAP                  "..\\data\\map\\mapdata\\001.bmp"
 
-M_002                   BITMAP                  "..\\data\\map\mapdata\\002.bmp"
+M_002                   BITMAP                  "..\\data\\map\\mapdata\\002.bmp"
 
-M_003                   BITMAP                  "..\\data\\map\mapdata\\003.bmp"
+M_003                   BITMAP                  "..\\data\\map\\mapdata\\003.bmp"
 
-M_004                   BITMAP                  "..\\data\\map\mapdata\\004.bmp"
+M_004                   BITMAP                  "..\\data\\map\\mapdata\\004.bmp"
 
-M_005                   BITMAP                  "..\\data\\map\mapdata\\005.bmp"
+M_005                   BITMAP                  "..\\data\\map\\mapdata\\005.bmp"
 
-M_100                   BITMAP                  "..\\data\\map\mapdata\\100.bmp"
+M_100                   BITMAP                  "..\\data\\map\\mapdata\\100.bmp"
 
-M_101                   BITMAP                  "..\\data\\map\mapdata\\101.bmp"
+M_101                   BITMAP                  "..\\data\\map\\mapdata\\101.bmp"
 
-M_200                   BITMAP                  "..\\data\\map\mapdata\\200.bmp"
+M_200                   BITMAP                  "..\\data\\map\\mapdata\\200.bmp"
 
-M_201                   BITMAP                  "..\\data\\map\mapdata\\201.bmp"
+M_201                   BITMAP                  "..\\data\\map\\mapdata\\201.bmp"
 
-M_300                   BITMAP                  "..\\data\\map\mapdata\\300.bmp"
+M_300                   BITMAP                  "..\\data\\map\\mapdata\\300.bmp"
 
-M_400                   BITMAP                  "..\\data\\map\mapdata\\400.bmp"
+M_400                   BITMAP                  "..\\data\\map\\mapdata\\400.bmp"
 
-M_500                   BITMAP                  "..\\data\\map\mapdata\\500.bmp"
+M_500                   BITMAP                  "..\\data\\map\\mapdata\\500.bmp"
 
-M_501                   BITMAP                  "..\\data\\map\mapdata\\501.bmp"
+M_501                   BITMAP                  "..\\data\\map\\mapdata\\501.bmp"
 
-M_502                   BITMAP                  "..\\data\\map\mapdata\\502.bmp"
+M_502                   BITMAP                  "..\\data\\map\\mapdata\\502.bmp"
 
-M_503                   BITMAP                  "..\\data\\map\mapdata\\503.bmp"
+M_503                   BITMAP                  "..\\data\\map\\mapdata\\503.bmp"
 
-M_504                   BITMAP                  "..\\data\\map\mapdata\\504.bmp"
+M_504                   BITMAP                  "..\\data\\map\\mapdata\\504.bmp"
 
-M_505                   BITMAP                  "..\\data\\map\mapdata\\505.bmp"
+M_505                   BITMAP                  "..\\data\\map\\mapdata\\505.bmp"
 
-M_600                   BITMAP                  "..\\data\\map\mapdata\\600.bmp"
+M_600                   BITMAP                  "..\\data\\map\\mapdata\\600.bmp"
 
-M_601                   BITMAP                  "..\\data\\map\mapdata\\601.bmp"
+M_601                   BITMAP                  "..\\data\\map\\mapdata\\601.bmp"
 
-M_700                   BITMAP                  "..\\data\\map\mapdata\\700.bmp"
+M_700                   BITMAP                  "..\\data\\map\\mapdata\\700.bmp"
 
-M_800                   BITMAP                  "..\\data\\map\mapdata\\800.bmp"
+M_800                   BITMAP                  "..\\data\\map\\mapdata\\800.bmp"
 
-M_900                   BITMAP                  "..\\data\\map\mapdata\\900.bmp"
+M_900                   BITMAP                  "..\\data\\map\\mapdata\\900.bmp"
 
-M_901                   BITMAP                  "..\\data\\map\mapdata\\901.bmp"
+M_901                   BITMAP                  "..\\data\\map\\mapdata\\901.bmp"
 
-M_1000                   BITMAP                  "..\\data\\map\mapdata\\1000.bmp"
+M_1000                  BITMAP                  "..\\data\\map\\mapdata\\1000.bmp"
 
-M_1100                   BITMAP                  "..\\data\\map\mapdata\\1100.bmp"
+M_1100                  BITMAP                  "..\\data\\map\\mapdata\\1100.bmp"
 
-M_1101                   BITMAP                  "..\\data\\map\mapdata\\1101.bmp"
+M_1101                  BITMAP                  "..\\data\\map\\mapdata\\1101.bmp"
 
-
-
-
-
-
-
-
+E_01                    BITMAP                  "..\\data\\e\\E_00.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

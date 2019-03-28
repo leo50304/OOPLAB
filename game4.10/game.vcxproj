@@ -349,6 +349,7 @@
     <Image Include="data\ch\wwt1l.bmp" />
     <Image Include="data\ch\wwt2l.bmp" />
     <Image Include="data\ch\wwt3l.bmp" />
+    <Image Include="data\e\E_00.bmp" />
     <Image Include="data\map\gm_00.bmp" />
     <Image Include="data\map\gm_01.bmp" />
     <Image Include="data\map\gm_02.bmp" />
@@ -381,6 +382,7 @@
     <Image Include="data\map\mapdata\800.bmp" />
     <Image Include="data\map\mapdata\900.bmp" />
     <Image Include="data\map\mapdata\901.bmp" />
+    <Image Include="data\map\mapdata\bitmap2.bmp" />
     <Image Include="res\bitmap4.bmp" />
     <Image Include="res\bitmap5.bmp" />
     <Image Include="res\bmp00001.bmp" />

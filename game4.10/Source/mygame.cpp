@@ -89,14 +89,24 @@ MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 	mapObjects[10] = new Spike();
 	mapObjects[11] = new Lever();
 
-	fstream mapsfile;
+	/*fstream mapsfile;
 	mapsfile.open("./data/map/maps.txt");
 	for (int i = 0; i < mapsY; i++) {
 		for (int j = 0; j < mapsX; j++) {
 			mapsfile >> mapOfMap[i][j];
 		}
 	}
-	mapsfile.close();
+	mapsfile.close();*/
+	int maps[2][3] = {
+		{99,3,99},
+		{0,1,2}
+	};
+
+	for (int i = 0; i < mapsY; i++) {
+		for (int j = 0; j < mapsX; j++) {
+			mapOfMap[i][j] = maps[i][j];
+		}
+	}
 
 	fstream file;
 
@@ -131,6 +141,11 @@ MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 			map[i][j] = mapList[next][i][j];
 		}
 	}
+}
+
+int MapBrown::getNext() 
+{
+	return next;
 }
 
 MapBrown ::~MapBrown()
@@ -287,7 +302,7 @@ void CGameStateInit::OnShow()
 	fp=pDC->SelectObject(&f);					// 選用 font f
 	pDC->SetBkColor(RGB(0,0,0));
 	pDC->SetTextColor(RGB(255,255,0));
-	pDC->TextOut(120,220,"Please press SPACE to begin.");
+	pDC->TextOut(185,230,"Please press SPACE to begin.");
 	pDC->TextOut(5,395,"Press Ctrl-F to switch in between window mode and full screen mode.");
 	if (ENABLE_GAME_PAUSE)
 		pDC->TextOut(5,425,"Press Ctrl-Q to pause the Game.");
@@ -387,9 +402,9 @@ void CGameStateRun::OnBeginState()
 	//help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	//hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 	//hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
-	CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
-	CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
-	CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
+	//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
+	CAudio::Instance()->Play(AUDIO_BGM, false);		// 撥放 WAVE
+	//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
 }
 
 //MapObject* mapObject[7] = {};
@@ -427,6 +442,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	eraser.LoadBitmap();
 	hero.LoadBitmap();
 	background.LoadBitmap(IDB_BACKGROUND);	*/				// 載入背景的圖形
+	Enemy.LoadBitmap(E_01, RGB(255, 255, 255));
 	hero.LoadBitmap();
 	mapBrown.LoadBitMap();
 	//
@@ -442,9 +458,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//corner.ShowBitmap(background);							// 將corner貼到background
 	//bball.LoadBitmap();										// 載入圖形
 	//hits_left.LoadBitmap();									
-	CAudio::Instance()->Load(AUDIO_DING,  "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
-	CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
-	CAudio::Instance()->Load(AUDIO_NTUT,  "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
+	//CAudio::Instance()->Load(AUDIO_DING,  "Sounds\\ding.wav");	// 載入編號0的聲音ding.wav
+	CAudio::Instance()->Load(AUDIO_BGM,  "Sounds\\KYOUDANB.MID");	// 載入編號1的聲音lake.mp3
+	//CAudio::Instance()->Load(AUDIO_NTUT,  "Sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
 	//
 	// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 	//
@@ -547,6 +563,11 @@ void CGameStateRun::OnShow()
 	//	ball[i].OnShow();				// 貼上第i號球
 	//bball.OnShow();						// 貼上彈跳的球
 	//eraser.OnShow();					// 貼上擦子
+	if (mapBrown.getNext() == 3) 
+	{
+		Enemy.SetTopLeft(32*11, 32*1);
+		Enemy.ShowBitmap();
+	}
 	hero.OnShow();
 	//
 	//  貼上左上及右下角落的圖

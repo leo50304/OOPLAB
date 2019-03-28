@@ -18,6 +18,7 @@ namespace game_framework {
 		MapObject* getMapObject(int i);
 		void UpdateMap(char nextPos);
 		bool isBlockSolid(int i, int j);
+		int getNext();
 
 	protected:
 		int map[13][18];
