@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_008668F541EC48629061FB9B42CEAB74"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0099EFC04E3D44B98795B8EEF3539DBE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -291,6 +297,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_797FC5F1C2FF420FB0F79CDB3F17599B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7F54BED6D4DA49469332C21B87011E1F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -298,6 +310,12 @@
         "Entry"
         {
         "MsmKey" = "8:_8302FC63B90541BC92814A1E6B41BA71"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_89CCBB083EF044478F3EF1149ACBB1E4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -405,12 +423,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C7A1B50DDCE249EDB8F3B761F4A88494"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_C9F9DC033AD54CAE821B68E32F94F130"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -454,6 +466,12 @@
         "Entry"
         {
         "MsmKey" = "8:_F48D0F41FDF24CEA846BCEC6CCC58DE3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F578BB8EDD634E5C81A5006DA4A180EC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -505,6 +523,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -558,6 +584,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_008668F541EC48629061FB9B42CEAB74"
+            {
+            "SourcePath" = "8:..\\game4.10\\data\\e\\E_L1.bmp"
+            "TargetName" = "8:E_L1.bmp"
+            "Tag" = "8:"
+            "Folder" = "8:_15C65C84DDF446488F279493F5DD1DED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0099EFC04E3D44B98795B8EEF3539DBE"
             {
             "SourcePath" = "8:..\\game4.10\\Bitmaps\\ball1.bmp"
@@ -1458,6 +1504,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_797FC5F1C2FF420FB0F79CDB3F17599B"
+            {
+            "SourcePath" = "8:..\\game4.10\\data\\e\\E_R0.bmp"
+            "TargetName" = "8:E_R0.bmp"
+            "Tag" = "8:"
+            "Folder" = "8:_15C65C84DDF446488F279493F5DD1DED"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7F54BED6D4DA49469332C21B87011E1F"
             {
             "SourcePath" = "8:..\\game4.10\\data\\ch\\wwjr.bmp"
@@ -1484,6 +1550,26 @@
             "TargetName" = "8:503.bmp"
             "Tag" = "8:"
             "Folder" = "8:_99CAD82E28BC48528EB5860E1B3B2432"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_89CCBB083EF044478F3EF1149ACBB1E4"
+            {
+            "SourcePath" = "8:..\\game4.10\\data\\e\\E_L0.bmp"
+            "TargetName" = "8:E_L0.bmp"
+            "Tag" = "8:"
+            "Folder" = "8:_15C65C84DDF446488F279493F5DD1DED"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1838,26 +1924,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C7A1B50DDCE249EDB8F3B761F4A88494"
-            {
-            "SourcePath" = "8:..\\game4.10\\data\\e\\E_00.bmp"
-            "TargetName" = "8:E_00.bmp"
-            "Tag" = "8:"
-            "Folder" = "8:_15C65C84DDF446488F279493F5DD1DED"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C9F9DC033AD54CAE821B68E32F94F130"
             {
             "SourcePath" = "8:..\\game4.10\\data\\ch\\gwr_03.bmp"
@@ -2004,6 +2070,26 @@
             "TargetName" = "8:gm_03.bmp"
             "Tag" = "8:"
             "Folder" = "8:_0738ED9D50C84E9994820738517AF27F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F578BB8EDD634E5C81A5006DA4A180EC"
+            {
+            "SourcePath" = "8:..\\game4.10\\data\\e\\E_R1.bmp"
+            "TargetName" = "8:E_R1.bmp"
+            "Tag" = "8:"
+            "Folder" = "8:_15C65C84DDF446488F279493F5DD1DED"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2263,7 +2349,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:LegendCave 1.0"
         "ProductCode" = "8:{DFC2E004-0A30-4245-8623-033D965B9252}"
-        "PackageCode" = "8:{8C5079D8-07E6-4AE5-9D3F-EB7B7F9C850C}"
+        "PackageCode" = "8:{6F547F2B-4BA1-4D98-BC4F-48A70F1C06BB}"
         "UpgradeCode" = "8:{C2B7A445-D436-470C-808F-790DA7ADB28E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

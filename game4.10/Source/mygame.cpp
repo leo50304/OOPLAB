@@ -423,7 +423,20 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	background.SetTopLeft(background.Left(),background.Top()+1);*/
 
 	hero.OnMove(&mapBrown);
-	
+	enemy.OnMove(&mapBrown);
+	enemy2.OnMove(&mapBrown);
+	if (hero.isOnAttack()) 
+	{
+		if (hero.InAttackRange(enemy.GetX1(), enemy.GetY1()))
+		{
+			enemy.Distroy();
+		}
+		if (hero.InAttackRange(enemy2.GetX1(), enemy2.GetY1()))
+		{
+			enemy2.Distroy();
+		}
+	}
+
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -442,7 +455,11 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	eraser.LoadBitmap();
 	hero.LoadBitmap();
 	background.LoadBitmap(IDB_BACKGROUND);	*/				// 載入背景的圖形
-	Enemy.LoadBitmap(E_01, RGB(255, 255, 255));
+	enemy.LoadBitmap();
+	enemy2.LoadBitmapA();
+	enemy.SetXY(32 * 11, 32 * 1);
+	enemy2.SetXY(32 * 9, 32 * 7);
+
 	hero.LoadBitmap();
 	mapBrown.LoadBitMap();
 	//
@@ -563,10 +580,13 @@ void CGameStateRun::OnShow()
 	//	ball[i].OnShow();				// 貼上第i號球
 	//bball.OnShow();						// 貼上彈跳的球
 	//eraser.OnShow();					// 貼上擦子
-	if (mapBrown.getNext() == 3) 
+	if (mapBrown.getNext() == 3 && !enemy.IsDistroyed())
 	{
-		Enemy.SetTopLeft(32*11, 32*1);
-		Enemy.ShowBitmap();
+		enemy.OnShow();
+	}
+	if (mapBrown.getNext() == 0 && !enemy2.IsDistroyed())
+	{
+		enemy2.OnShow();
 	}
 	hero.OnShow();
 	//

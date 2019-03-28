@@ -260,6 +260,7 @@
     <ClCompile Include="Source\audio.cpp" />
     <ClCompile Include="Source\Block.cpp" />
     <ClCompile Include="Source\CHero.cpp" />
+    <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\game.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -305,6 +306,7 @@
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\Block.h" />
     <ClInclude Include="Source\CHero.h" />
+    <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\gameDoc.h" />
     <ClInclude Include="Source\gameView.h" />
@@ -350,6 +352,10 @@
     <Image Include="data\ch\wwt2l.bmp" />
     <Image Include="data\ch\wwt3l.bmp" />
     <Image Include="data\e\E_00.bmp" />
+    <Image Include="data\e\E_L0.bmp" />
+    <Image Include="data\e\E_L1.bmp" />
+    <Image Include="data\e\E_R0.bmp" />
+    <Image Include="data\e\E_R1.bmp" />
     <Image Include="data\map\gm_00.bmp" />
     <Image Include="data\map\gm_01.bmp" />
     <Image Include="data\map\gm_02.bmp" />

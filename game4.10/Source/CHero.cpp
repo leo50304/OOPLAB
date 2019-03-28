@@ -43,6 +43,26 @@ namespace game_framework {
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 	}
 
+	bool CHero::InAttackRange(int eX, int eY) 
+	{
+		if (eY - y <16 && eY - y > -16) {
+			if (faceSide == 0)
+			{
+				return x-eX < 64 && eX < x-32;
+			}
+			else if (faceSide == 1)
+			{
+				return eX - x <64 && x+32 < eX;
+			}
+		}
+		return false;
+	}
+
+	bool CHero::isOnAttack() 
+	{
+		return onAttack;
+	}
+
 	void CHero::LoadBitmap()
 	{
 		standL.LoadBitmap(WWS_L, RGB(255, 255, 255));

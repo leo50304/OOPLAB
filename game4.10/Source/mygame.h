@@ -44,6 +44,7 @@
 //#include "Block.h"
 #include "map.h"
 #include "CHero.h"
+#include "Enemy.h"
 
 namespace game_framework {
 
@@ -106,7 +107,9 @@ namespace game_framework {
 		CMovingBitmap	corner;		// 角落圖
 		//CEraser			eraser;		// 拍子
 		CHero			hero;
-		CMovingBitmap	Enemy;
+		//CMovingBitmap	Enemy;
+		Enemy			enemy;
+		Enemy			enemy2;
 		//CInteger		hits_left;	// 剩下的撞擊數
 		//CBouncingBall   bball;		// 反覆彈跳的球
 	};

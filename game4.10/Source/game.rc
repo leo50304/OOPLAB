@@ -208,7 +208,13 @@ M_1100                  BITMAP                  "..\\data\\map\\mapdata\\1100.bm
 
 M_1101                  BITMAP                  "..\\data\\map\\mapdata\\1101.bmp"
 
-E_01                    BITMAP                  "..\\data\\e\\E_00.bmp"
+E_L0                    BITMAP                  "..\\data\\e\\E_L0.bmp"
+
+E_L1                    BITMAP                  "..\\data\\e\\E_L1.bmp"
+
+E_R0                    BITMAP                  "..\\data\\e\\E_R0.bmp"
+
+E_R1                    BITMAP                  "..\\data\\e\\E_R1.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
