@@ -1,9 +1,0 @@
-hero.onmove判別換地圖
-若換:map的next=地圖編號(利用map的updateMap())
-
-MapBrown的onshow 若發現next != -1 更新map陣列
-
-map:
-新增一個mapList<vector>存放所有map的指標
-新增一個mapofmap[][] 存放map的相對位置(編號)
-新增一個updateMap 利用mapofmap與方向更新next的編號
