@@ -30,6 +30,27 @@ namespace game_framework {
 		isOnLadder = flag;
 	}
 
+	void CHero::BeatBack(bool flag, int direct)
+	{
+		if (invincibleFrameCount == 0) 
+		{
+			invincibleFrameCount = 100;
+			direction = direct;
+			beatBackAy = -3;
+			beatBackAx = -0.4;
+			beatBackYSpeed = -10;
+			beatBackXSpeed = -6;
+			beatBackXSpeed *= direction;
+			beatBackAx *= direction;
+			beatBack = flag;
+		}
+	}
+
+	bool CHero::BeatBack() 
+	{
+		return beatBack;
+	}
+
 	void CHero::Initialize()
 	{
 		const int X_POS = 32 * 2;
@@ -123,18 +144,64 @@ namespace game_framework {
 		attackFrameCount = 0;
 	}
 
+	bool CHero::HitGround(MapBrown* map)
+	{
+		return map->isBlockSolid(x / 32, (y + 31) / 32) || map->isBlockSolid((x + 22) / 32, (y + 31) / 32);
+	}
+
+	bool CHero::HitTop(MapBrown* map)
+	{
+		return map->isBlockSolid(x / 32, (y - 1) / 32) || map->isBlockSolid((x + 22) / 32, (y - 1) / 32);
+	}
+
+	bool CHero::GroundNotSolid(MapBrown* map) 
+	{
+		return !map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid((x + 22) / 32, (y + 32) / 32);
+	}
+
 	void CHero::OnMove(MapBrown* map)
 	{
+
+		invincibleFrameCount = invincibleFrameCount <= 0 ? invincibleFrameCount : invincibleFrameCount - 1;
+		
+		if (beatBack) 
+		{
+			y = (int)(y + beatBackYSpeed);
+			x = (int)(x - beatBackXSpeed );
+
+			if ((direction ==-1 &&  beatBackXSpeed < 0) || ( direction == 1 && beatBackXSpeed > 0))
+			{
+				beatBackXSpeed = 0;
+			}
+			beatBackYSpeed = (beatBackYSpeed - beatBackAy);
+			beatBackXSpeed = (beatBackXSpeed - beatBackAx);
+			if (HitGround(map)) //落地
+			{
+				y = (y / 32) * 32;
+				onJump = false;
+				onDrop = false;
+				beatBack = false;
+			}
+			if (HitTop(map)) //撞到頭
+			{
+				speed = 1;
+				onJump = true;
+				onDrop = true;
+				beatBack = false;
+				y = ((y - 1) / 32) * 32 + 32;
+			}
+		}
 		if (isOnLadder && !isOnLadderSide) 
 		{
 			onAttack = false;
 		}
-		if (attackFrameCount == 10)
+		if (attackFrameCount == 16)
 		{
  			onAttack = false;
 			attackFrameCount = 0;
 		}
-		double ACCELERATE = 0.892;
+		double ACCELERATE = (0.892*0.5);
+		//double ACCELERATE = 12.288;
 		attackFrameCount++;
 		const int STEP_SIZE = 4;
 
@@ -142,7 +209,6 @@ namespace game_framework {
 		moveDAnimation.OnMove();
 		moveUAnimation.OnMove();
 		moveLAnimation.OnMove();
-
 
 		if (onJump)
 		{
@@ -156,13 +222,13 @@ namespace game_framework {
 				speed = (double)speed + ACCELERATE;
 				y += (int)speed;
 			}
-			if (map->isBlockSolid(x / 32, (y + 31) / 32) || map->isBlockSolid((x+22) / 32, (y + 31) / 32)) //落地
+			if (HitGround(map)) //落地
 			{
 				y = (y / 32) * 32;
 				onJump = false;
 				onDrop = false;
 			}
-			if (map->isBlockSolid(x / 32, (y - 1) / 32) || map->isBlockSolid((x + 22) / 32, (y - 1) / 32)) //撞到頭
+			if (HitTop(map)) //撞到頭
 			{
 				speed = 1;
 				onDrop = true;
@@ -175,7 +241,7 @@ namespace game_framework {
 				onDrop = true;
 			}
 		}
-		else if(!isOnLadder && !map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid((x+22) / 32, (y + 32) / 32)) //踩空
+		else if(!isOnLadder && GroundNotSolid(map) && !beatBack) //踩空
 		{
 			int b = map->GetBlock((x + 22) / 32, (y + 32) / 32);
 			speed = 1;
@@ -183,7 +249,7 @@ namespace game_framework {
 			onDrop = true;
 		}
 
-		if (isMovingUp && !onJump)
+		if (isMovingUp && !onJump && !beatBack)
 		{
 			y -= STEP_SIZE;
 			//isMovingDown = false;
@@ -195,7 +261,7 @@ namespace game_framework {
 
 				if (!onJump && !onHold)
 				{
-					speed = 14;
+					speed = 10;
 					onJump = true;
 					onDrop = false;
 					jumpTop = y - 32; //跳躍上限
@@ -208,62 +274,62 @@ namespace game_framework {
 				isOnLadderSide = false;
 			}
 			onHold = true;
-
 		}
-		if (isMovingUp && onJump && !onDrop) 
-		{
-			jumpTop -= 10;
-			if (jumpTop < TopLimit) 
+		if (!beatBack) {
+			if (isMovingUp && onJump && !onDrop)
 			{
-				jumpTop = TopLimit;		
+				jumpTop -= 10;
+				if (jumpTop < TopLimit)
+				{
+					jumpTop = TopLimit;
+				}
 			}
-		}
-		if (isMovingDown)
-		{
-			y += STEP_SIZE;
-			int px = (x + 16) / 32;
-			int py = (y + 31) / 32;
-			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Down", px * 32))
+			if (isMovingDown)
 			{
-				//isMovingDown = false;
-				y -= STEP_SIZE;
+				y += STEP_SIZE;
+				int px = (x + 16) / 32;
+				int py = (y + 31) / 32;
+				if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Down", px * 32))
+				{
+					//isMovingDown = false;
+					y -= STEP_SIZE;
+				}
+				if (isOnLadder)
+				{
+					isOnLadderSide = false;
+				}
 			}
-			if (isOnLadder)
+			if (isMovingLeft)
 			{
-				isOnLadderSide = false;
-			}
-		}
-		if (isMovingLeft)
-		{
-			faceSide = 0;
-			x -= STEP_SIZE;
-			int px = x / 32;
-			int py = y / 32;
-			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Left", px * 32))
-			{
-				x += STEP_SIZE;
-			}
-			if (isOnLadder)
-			{
-				isOnLadderSide = true;
-			}
-		}
-		if (isMovingRight)
-		{
-			faceSide = 1;
-			x += STEP_SIZE;
-			int px = (x + 31) / 32;
-			int py = y / 32;
-			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Right", px * 32))
-			{
+				faceSide = 0;
 				x -= STEP_SIZE;
+				int px = x / 32;
+				int py = y / 32;
+				if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Left", px * 32))
+				{
+					x += STEP_SIZE;
+				}
+				if (isOnLadder)
+				{
+					isOnLadderSide = true;
+				}
 			}
-			if (isOnLadder)
+			if (isMovingRight)
 			{
-				isOnLadderSide = true;
+				faceSide = 1;
+				x += STEP_SIZE;
+				int px = (x + 31) / 32;
+				int py = y / 32;
+				if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Right", px * 32))
+				{
+					x -= STEP_SIZE;
+				}
+				if (isOnLadder)
+				{
+					isOnLadderSide = true;
+				}
 			}
 		}
-
 		if (x < 0)
 		{
 			map->UpdateMap('L');

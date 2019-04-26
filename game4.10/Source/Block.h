@@ -39,7 +39,7 @@ namespace game_framework {
 			block[1]->LoadBitmap(M_001);
 			block[2]->LoadBitmap(M_002);
 			block[3]->LoadBitmap(M_003);
-			block[4]->LoadBitmap(M_004);
+			block[4]->LoadBitmap(M_004); 
 			block[5]->LoadBitmap(M_005);
 		}
 		void PutBlock(int px, int py, int type)

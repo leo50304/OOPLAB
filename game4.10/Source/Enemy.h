@@ -13,12 +13,15 @@ namespace game_framework {
 	class Enemy
 	{
 	public:
-		Enemy();
+		Enemy(int x, int y, int d);
 		int  GetX1();					// 上 x 座標
 		int  GetY1();					// 上 y 座標
 		void Initialize();				// 設定擦子為初始值
 		void LoadBitmap();				// 載入圖形
-		void OnMove(MapBrown* map);     // 移動
+		virtual void OnMove(MapBrown* map);     // 移動
+		virtual void MoveWeapon(MapBrown* map);
+		virtual void OnAttack();
+		virtual void ShowWeapon();
 		//bool HitHeroAction(int type, string pos);
 		void OnShow();      			// 將擦子圖形貼到畫面
 		void SetMovingDown(bool flag);	// 設定是否正在往下移動
@@ -27,14 +30,20 @@ namespace game_framework {
 		void SetMovingUp(bool flag);	// 設定是否正在往上移動
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
 		void Distroy();
+		virtual bool InHitBox(int x, int y);
 		bool IsDistroyed();
+		int getMapLocation() 
+		{
+			return location;
+		}
 		
 	protected:
-
+		int location;
 		int speed;
 		bool onAttack;
 		CAnimation moveRAnimation;
 		CAnimation moveLAnimation;
+		CAnimation weapon;
 		int x, y;					// 擦子左上角座標
 		bool onDrop = false;
 		bool isDistroyed = false;
@@ -43,5 +52,25 @@ namespace game_framework {
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingUp;			// 是否正在往上移動
 	};
+
+	class Frog : public Enemy
+	{
+	public:
+		Frog(int x, int y, int d);
+	};
+
+	class Slime : public Enemy
+	{
+	public:
+		Slime(int x, int y, int d);
+		void LoadBitmap();
+		void OnAttack();
+		void OnMove(MapBrown* map);     // 移動
+		void ShowWeapon();
+		void MoveWeapon(MapBrown* map);
+
+	};
+	
+
 }
 #endif // !Enemy_H

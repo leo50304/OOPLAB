@@ -64,14 +64,18 @@
 
 namespace game_framework {
 
+	//const int MAPS_X = 5;
+	//const int MAPS_Y = 6;
+	//const int MAPS_NUM = 17;
+	const int MAPS_NUM = 4;
+	const int MAPS_X = 3;
+	const int MAPS_Y =2;
+	const int MAP_SIZE_X = 18;
+	const int MAP_SIZE_Y = 13;
+
 
 MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 {
-	const int mapsX = 3;
-	const int mapsY = 2;
-	const int mapSizeX = 18;
-	const int mapSizeY = 13;
-	const int mapsNum = 4;
 
 	mapPosX = 0;
 	mapPosY = 1;
@@ -97,46 +101,57 @@ MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 		}
 	}
 	mapsfile.close();*/
-	int maps[2][3] = {
-		{99,3,99},
-		{0,1,2}
+	//int maps[MAPS_Y][MAPS_X] = {
+	//	{99,99,99,13,99},
+	//	{99,99,99,11,12},
+	//	{99,8,9,10,99},
+	//	{7,6,4,99,99},
+	//	{0,1,2,3,99},
+	//	{99,16,15,14,99},
+	//};
+
+	int maps[MAPS_Y][MAPS_X] = {
+	{99,3,99},
+	{0,1,2}
 	};
 
-	for (int i = 0; i < mapsY; i++) {
-		for (int j = 0; j < mapsX; j++) {
+	for (int i = 0; i < MAPS_Y; i++) {
+		for (int j = 0; j < MAPS_X; j++) {
 			mapOfMap[i][j] = maps[i][j];
 		}
 	}
 
 	fstream file;
 
-	for (int i = 0; i < mapsNum; i++)
+	for (int num = 0; num < MAPS_NUM; num++)
 	{
-		int** ary = new int*[mapSizeY];
-		for (int i = 0; i < mapSizeY; i++)
-			ary[i] = new int[mapSizeX];
+		int** ary = new int*[MAP_SIZE_Y];
+		for (int iy = 0; iy < MAP_SIZE_Y; iy++)
+			ary[iy] = new int[MAP_SIZE_X];
 		std::stringstream s;
-		s << i;
-		string fileName = "./data/map/map" + s.str() + ".txt";
+		s << num;
+		string fileName = "./data/map/map_" + s.str() + ".txt";
 		file.open(fileName, ios::in);
 
-		for (int i = 0; i < mapSizeY; i++)
+		for (int i = 0; i < MAP_SIZE_Y; i++)
 		{
-			for (int j = 0; j < mapSizeX; j++)
+			for (int j = 0; j < MAP_SIZE_X; j++)
 			{
 				file >> ary[i][j];
 			}
 		}
+
 		mapList.push_back(ary);
 
-		file.close();
+		//file.close();
+
 	}
 
 	next = mapOfMap[mapPosY][mapPosX];
 
-	for (int i = 0; i < mapSizeY; i++)
+	for (int i = 0; i < MAP_SIZE_Y; i++)
 	{
-		for (int j = 0; j < mapSizeX; j++)
+		for (int j = 0; j < MAP_SIZE_X; j++)
 		{
 			map[i][j] = mapList[next][i][j];
 		}
@@ -152,17 +167,15 @@ MapBrown ::~MapBrown()
 {
 	for (unsigned int i = 0; i < mapList.size(); ++i)
 	{
-		for (int j = 0; j < 13; ++j) {
+		for (int j = 0; j < MAP_SIZE_Y; ++j) {
 			delete[] mapList[i][j];
 		}
-
 		delete[] mapList[i];
 	}
 	for (unsigned int i = 0; i < sizeof(mapObjects) / sizeof(mapObjects[0]); ++i)
 	{
 		delete mapObjects[i];
 	}
-
 }
 
 void MapBrown::UpdateMap(char nextPos)
@@ -222,7 +235,6 @@ MapObject* MapBrown::getMapObject(int i)
 {
 	return mapObjects[i];
 }
-
 
 void MapBrown::LoadBitMap() 
 {
@@ -398,6 +410,11 @@ void CGameStateRun::OnBeginState()
 	}*/
 	//eraser.Initialize();
 	hero.Initialize();
+	enemies.push_back(new Frog(12*32,7*32,0));
+	enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
+
+	enemies.push_back(new Frog(9*32, 1*32, 3));
+
 	//background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
 	//help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	//hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
@@ -423,17 +440,35 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	background.SetTopLeft(background.Left(),background.Top()+1);*/
 
 	hero.OnMove(&mapBrown);
-	enemy.OnMove(&mapBrown);
-	enemy2.OnMove(&mapBrown);
+	for (unsigned int i = 0; i < enemies.size(); ++i) 
+	{
+		enemies[i]->OnMove(&mapBrown);
+	}
+
+
 	if (hero.isOnAttack()) 
 	{
-		if (hero.InAttackRange(enemy.GetX1(), enemy.GetY1()))
+		for (unsigned int i = 0; i < enemies.size(); ++i)
 		{
-			enemy.Distroy();
+			if (hero.InAttackRange(enemies[i]->GetX1(), enemies[i]->GetY1()))
+			{
+				enemies[i]->Distroy();
+			}
 		}
-		if (hero.InAttackRange(enemy2.GetX1(), enemy2.GetY1()))
+	}
+
+	for (unsigned int i = 0; i < enemies.size(); ++i)
+	{
+		if (!hero.BeatBack() && enemies[i]->InHitBox(hero.GetX1(), hero.GetY1()) && mapBrown.getNext() == enemies[i]->getMapLocation())
 		{
-			enemy2.Distroy();
+			if (hero.GetX1() < enemies[i]->GetX1() ) 
+			{
+				hero.BeatBack(true,-1);
+			}
+			else 
+			{
+				hero.BeatBack(true,1);
+			}
 		}
 	}
 
@@ -455,10 +490,14 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	eraser.LoadBitmap();
 	hero.LoadBitmap();
 	background.LoadBitmap(IDB_BACKGROUND);	*/				// 載入背景的圖形
-	enemy.LoadBitmap();
-	enemy2.LoadBitmapA();
-	enemy.SetXY(32 * 11, 32 * 1);
-	enemy2.SetXY(32 * 9, 32 * 7);
+	//for (unsigned int i = 0; i < enemies.size(); ++i)
+	//{
+	//	enemies[i]->LoadBitmap();
+	//}
+	//enemy.LoadBitmap();
+	//enemy2.LoadBitmapA();
+	//enemy.SetXY(32 * 11, 32 * 7);
+	//enemy2.SetXY(32 * 9, 32 * 1);
 
 	hero.LoadBitmap();
 	mapBrown.LoadBitMap();
@@ -580,13 +619,12 @@ void CGameStateRun::OnShow()
 	//	ball[i].OnShow();				// 貼上第i號球
 	//bball.OnShow();						// 貼上彈跳的球
 	//eraser.OnShow();					// 貼上擦子
-	if (mapBrown.getNext() == 3 && !enemy.IsDistroyed())
+	for (unsigned int i = 0; i < enemies.size(); ++i)
 	{
-		enemy.OnShow();
-	}
-	if (mapBrown.getNext() == 0 && !enemy2.IsDistroyed())
-	{
-		enemy2.OnShow();
+		if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed()) 
+		{
+			enemies[i]->OnShow();
+		}
 	}
 	hero.OnShow();
 	//

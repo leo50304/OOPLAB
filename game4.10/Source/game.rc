@@ -216,6 +216,8 @@ E_R0                    BITMAP                  "..\\data\\e\\E_R0.bmp"
 
 E_R1                    BITMAP                  "..\\data\\e\\E_R1.bmp"
 
+WEAPON_TEST             BITMAP                  "..\\data\\map\\mapdata\\bitmap2.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

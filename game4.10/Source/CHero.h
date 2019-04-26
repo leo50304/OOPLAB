@@ -33,6 +33,8 @@ namespace game_framework {
 		bool InAttackRange(int x, int y);
 		void SetHoldUp(bool flag);
 		bool isOnAttack();
+		void BeatBack(bool flag, int direct);
+		bool BeatBack();
 	protected:
 		CMovingBitmap standL;		// 擦子的動畫
 		CMovingBitmap standR;		// 擦子的動畫
@@ -50,9 +52,15 @@ namespace game_framework {
 		CAnimation moveLAnimation;
 		CAnimation moveUAnimation;
 		CAnimation moveDAnimation;
-		
-
+		bool beatBack = false;
+		double direction;
+		double beatBackAy;
+		double beatBackAx;
+		double beatBackXSpeed;
+		double beatBackYSpeed;
 		int attackFrameCount = 0;
+		int invincibleFrameCount = 0;
+
 		int faceSide = 1;
 		int x, y;					// 擦子左上角座標
 		bool onDrop = false;
@@ -67,6 +75,10 @@ namespace game_framework {
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingUp;			// 是否正在往上移動
+
+		bool HitGround(MapBrown* map);
+		bool HitTop(MapBrown* map);
+		bool GroundNotSolid(MapBrown* map);
 	};
 }
 #endif // !CHERO_H

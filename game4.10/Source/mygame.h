@@ -108,8 +108,9 @@ namespace game_framework {
 		//CEraser			eraser;		// 拍子
 		CHero			hero;
 		//CMovingBitmap	Enemy;
-		Enemy			enemy;
-		Enemy			enemy2;
+		vector<Enemy*> enemies;
+		/*Enemy			enemy;
+		Enemy			enemy2;*/
 		//CInteger		hits_left;	// 剩下的撞擊數
 		//CBouncingBall   bball;		// 反覆彈跳的球
 	};
