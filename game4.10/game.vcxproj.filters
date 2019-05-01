@@ -382,5 +382,44 @@
     <Image Include="data\e\E_R1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\e\bat.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BAT_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SLIME_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SLIME_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SLIME_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_A0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_A1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_L0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_L1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_L2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_R0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_R1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_R2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

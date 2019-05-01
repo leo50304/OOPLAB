@@ -24,7 +24,7 @@ namespace game_framework {
 		int map[13][18];
 		int mapOfMap[2][3];
 		MapObject* mapObjects[12];
-		std::vector<int**> mapList;
+		std::vector<vector<vector<int>>> mapList;
 		const int X, Y;
 		const int MV, MH;
 		int next;

@@ -20,7 +20,7 @@ namespace game_framework {
 		void LoadBitmap();				// 載入圖形
 		virtual void OnMove(MapBrown* map);     // 移動
 		virtual void MoveWeapon(MapBrown* map);
-		virtual void OnAttack();
+		virtual void OnAttack(int x, int y);
 		virtual void ShowWeapon();
 		//bool HitHeroAction(int type, string pos);
 		void OnShow();      			// 將擦子圖形貼到畫面
@@ -30,6 +30,9 @@ namespace game_framework {
 		void SetMovingUp(bool flag);	// 設定是否正在往上移動
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
 		void Distroy();
+		virtual bool InAttackRange(int x, int y);
+		virtual bool InWeaponHitBox(int x, int y);
+		int GetWeaponX1();
 		virtual bool InHitBox(int x, int y);
 		bool IsDistroyed();
 		int getMapLocation() 
@@ -41,22 +44,30 @@ namespace game_framework {
 		int location;
 		int speed;
 		bool onAttack;
+		int directX;
+		int directY;
 		CAnimation moveRAnimation;
 		CAnimation moveLAnimation;
+		CMovingBitmap AtkL;
+		CMovingBitmap AtkR;
 		CAnimation weapon;
-		int x, y;					// 擦子左上角座標
+		int x, y;					
+		int weaponX;
+		int weaponY;
 		bool onDrop = false;
 		bool isDistroyed = false;
-		bool isMovingDown;			// 是否正在往下移動
-		bool isMovingLeft;			// 是否正在往左移動
-		bool isMovingRight;			// 是否正在往右移動
-		bool isMovingUp;			// 是否正在往上移動
+		bool isMovingDown;		
+		bool isMovingLeft;		
+		bool isMovingRight;		
+		bool isMovingUp;
+		bool onAttackAnime = false;
 	};
 
 	class Frog : public Enemy
 	{
 	public:
 		Frog(int x, int y, int d);
+		void LoadBitmap();
 	};
 
 	class Slime : public Enemy
@@ -64,13 +75,43 @@ namespace game_framework {
 	public:
 		Slime(int x, int y, int d);
 		void LoadBitmap();
-		void OnAttack();
+		void OnAttack(int x, int y);
 		void OnMove(MapBrown* map);     // 移動
 		void ShowWeapon();
 		void MoveWeapon(MapBrown* map);
-
+		bool InAttackRange(int x, int y);
+		bool InWeaponHitBox(int x, int y);
 	};
 	
+	class Bat : public Enemy
+	{
+	public:
+		Bat(int x, int y, int d);
+		void LoadBitmap();
+		void OnMove(MapBrown* map);     // 移動
+		bool InHitBox(int x, int y);
 
+	private:
+		int countY;
+	};
+
+	class BowHead : public Enemy
+	{
+	public:
+		BowHead(int x, int y, int d);
+		void LoadBitmap();
+		void OnMove(MapBrown* map);
+		void OnAttack(int x, int y);
+		void ShowWeapon();
+		void MoveWeapon(MapBrown* map);
+		bool InAttackRange(int x, int y);
+		void saveHeroPos(int x, int y);
+		bool InWeaponHitBox(int x, int y);
+	private:
+		double weaponMoveX, weaponMoveY, unit;
+		int weaponState;
+		int countRolling;
+		int heroX, heroY;
+	};
 }
-#endif // !Enemy_H
+#endif

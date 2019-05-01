@@ -128,22 +128,30 @@ MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 		int** ary = new int*[MAP_SIZE_Y];
 		for (int iy = 0; iy < MAP_SIZE_Y; iy++)
 			ary[iy] = new int[MAP_SIZE_X];
+		vector<vector<int>> mapAry;
 		std::stringstream s;
 		s << num;
 		string fileName = "./data/map/map_" + s.str() + ".txt";
 		file.open(fileName, ios::in);
-
+		if (!file) 
+		{
+			throw "file not exist";
+		}
 		for (int i = 0; i < MAP_SIZE_Y; i++)
 		{
+			vector<int> mapColumn;
 			for (int j = 0; j < MAP_SIZE_X; j++)
 			{
-				file >> ary[i][j];
+				int tempBlock;
+				file >> tempBlock;
+				mapColumn.push_back(tempBlock);
 			}
+			mapAry.push_back(mapColumn);
 		}
 
-		mapList.push_back(ary);
+		mapList.push_back(mapAry);
 
-		//file.close();
+		file.close();
 
 	}
 
@@ -165,13 +173,13 @@ int MapBrown::getNext()
 
 MapBrown ::~MapBrown()
 {
-	for (unsigned int i = 0; i < mapList.size(); ++i)
+	/*for (unsigned int i = 0; i < mapList.size(); ++i)
 	{
 		for (int j = 0; j < MAP_SIZE_Y; ++j) {
 			delete[] mapList[i][j];
 		}
 		delete[] mapList[i];
-	}
+	}*/
 	for (unsigned int i = 0; i < sizeof(mapObjects) / sizeof(mapObjects[0]); ++i)
 	{
 		delete mapObjects[i];
@@ -412,7 +420,9 @@ void CGameStateRun::OnBeginState()
 	hero.Initialize();
 	enemies.push_back(new Frog(12*32,7*32,0));
 	enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
-
+	enemies.push_back(new Bat(0 * 32, 1 * 32, 0));
+	enemies.push_back(new Bat(12 * 32, 7 * 32, 0));
+	enemies.push_back(new BowHead(10* 32, 7 * 32, 0));
 	enemies.push_back(new Frog(9*32, 1*32, 3));
 
 	//background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
@@ -443,6 +453,12 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	for (unsigned int i = 0; i < enemies.size(); ++i) 
 	{
 		enemies[i]->OnMove(&mapBrown);
+		BowHead* bowHead = dynamic_cast<BowHead*>(enemies[i]);
+		if (bowHead!=nullptr) 
+		{
+			bowHead->saveHeroPos(hero.GetX1(), hero.GetY1());
+		}
+		enemies[i]->MoveWeapon(&mapBrown);
 	}
 
 
@@ -468,6 +484,29 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			else 
 			{
 				hero.BeatBack(true,1);
+			}
+		}
+	}
+
+	for (unsigned int i = 0; i < enemies.size(); ++i)
+	{
+		if (enemies[i]->InAttackRange(hero.GetX1(), hero.GetY1()) && mapBrown.getNext() == enemies[i]->getMapLocation())
+		{
+			enemies[i]->OnAttack(hero.GetX1(), hero.GetY1());
+		}
+	}
+
+	for (unsigned int i = 0; i < enemies.size(); ++i)
+	{
+		if (!hero.BeatBack() && enemies[i]->InWeaponHitBox(hero.GetX1(), hero.GetY1()) && mapBrown.getNext() == enemies[i]->getMapLocation())
+		{
+			if (hero.GetX1() < enemies[i]->GetWeaponX1())
+			{
+				hero.BeatBack(true, -1);
+			}
+			else
+			{
+				hero.BeatBack(true, 1);
 			}
 		}
 	}
@@ -624,6 +663,7 @@ void CGameStateRun::OnShow()
 		if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed()) 
 		{
 			enemies[i]->OnShow();
+			enemies[i]->ShowWeapon();
 		}
 	}
 	hero.OnShow();

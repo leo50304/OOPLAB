@@ -34,6 +34,7 @@ namespace game_framework {
 	{
 		if (invincibleFrameCount == 0) 
 		{
+
 			invincibleFrameCount = 100;
 			direction = direct;
 			beatBackAy = -3;
@@ -42,6 +43,8 @@ namespace game_framework {
 			beatBackXSpeed = -6;
 			beatBackXSpeed *= direction;
 			beatBackAx *= direction;
+			isOnLadder = false;
+			isOnLadderSide = false;
 			beatBack = flag;
 		}
 	}
@@ -201,7 +204,6 @@ namespace game_framework {
 			attackFrameCount = 0;
 		}
 		double ACCELERATE = (0.892*0.5);
-		//double ACCELERATE = 12.288;
 		attackFrameCount++;
 		const int STEP_SIZE = 4;
 
@@ -243,7 +245,6 @@ namespace game_framework {
 		}
 		else if(!isOnLadder && GroundNotSolid(map) && !beatBack) //½òªÅ
 		{
-			int b = map->GetBlock((x + 22) / 32, (y + 32) / 32);
 			speed = 1;
 			onJump = true;
 			onDrop = true;
@@ -380,6 +381,11 @@ namespace game_framework {
 
 	void CHero::OnShow()
 	{
+		if (invincibleFrameCount % 10 >= 8) 
+		{
+			return;
+		}
+
 		if (onAttack) 
 		{
 			if (faceSide == 0)

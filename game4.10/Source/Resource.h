@@ -94,6 +94,19 @@
 #define E_R0                            225
 #define E_R1                            226
 #define WEAPON_TEST                     227
+#define BAT_0                           228
+#define BAT_1                           229
+#define SLIME_0                         230
+#define SLIME_1                         231
+#define SLIME_2                         232
+#define BH_A0                           233
+#define BH_A1                           234
+#define BH_L0                           235
+#define BH_L1                           236
+#define BH_L2                           237
+#define BH_R0                           238
+#define BH_R1                           239
+#define BH_R2                           240
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -106,7 +119,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        228
+#define _APS_NEXT_RESOURCE_VALUE        241
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101
