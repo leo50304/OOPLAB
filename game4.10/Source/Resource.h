@@ -133,6 +133,30 @@
 #define EYE_W1                          266
 #define EYE_W2                          267
 #define EYE_W3                          268
+#define ORC_0                           269
+#define ORC_1                           270
+#define ORC_2                           271
+#define ORC_3                           272
+#define ORC_4                           273
+#define ORC_5                           274
+#define SKULL_0                         276
+#define SKULL_1                         277
+#define SKULL_2                         278
+#define SKULL_3                         279
+#define SKULL_4                         280
+#define SKULL_5                         281
+#define SKULL_6                         282
+#define SKULL_7                         283
+#define SKULL_W0                        284
+#define SKULL_W1                        285
+#define SKULL_W2                        286
+#define SKULL_W3                        287
+#define SKULL_W4                        288
+#define SKULL_W5                        289
+#define SKULL_W6                        290
+#define SKULL_W7                        291
+#define MBALL_0                         292
+#define MBALL_1                         293
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -145,7 +169,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        269
+#define _APS_NEXT_RESOURCE_VALUE        294
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

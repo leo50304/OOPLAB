@@ -17,7 +17,7 @@ namespace game_framework {
 		int  GetX1();					// 上 x 座標
 		int  GetY1();					// 上 y 座標
 		void Initialize();				// 設定擦子為初始值
-		void LoadBitmap();				// 載入圖形
+		virtual void LoadBitmap() = 0;				// 載入圖形
 		virtual void OnMove(MapBrown* map);     // 移動
 		virtual void MoveWeapon(MapBrown* map);
 		virtual void OnAttack(int x, int y);
@@ -170,6 +170,36 @@ namespace game_framework {
 	private:
 		int countAttack;
 		bool attackSide;
+	};
+
+	class Orc : public Enemy
+	{
+	public:
+		Orc(int x, int y, int d);
+		void LoadBitmap();
+		void OnMove(MapBrown* map);
+		bool InAttackRange(int x, int y);
+
+	private:
+		bool attackSide;
+		int sprintSpeed;
+		int countSprint;
+	};
+
+	class MBall : public Enemy
+	{
+	public:
+		MBall(int x, int y, int d);
+		void LoadBitmap();
+		void OnMove(MapBrown* map);
+		bool InAttackRange(int x, int y);
+
+	private:
+		int initX, initY;
+		int counter;
+		bool onJump, onDrop;
+		int jumpTop;
+		double jumpSpeed;
 	};
 }
 #endif

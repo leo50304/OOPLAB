@@ -499,5 +499,80 @@
     <Image Include="data\e\EYE_W3.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\e\ORC_0 .bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\ORC_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\ORC_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\ORC_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\ORC_4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\ORC_5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\bitmap2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_W0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_W1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_W2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_W3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_W4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_W5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_W6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SKULL_W7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\MBALL_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\MBALL_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

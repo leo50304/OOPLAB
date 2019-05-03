@@ -97,6 +97,7 @@ namespace game_framework {
 			}
 		}
 		mapsfile.close();*/
+
 		int maps[MAPS_Y][MAPS_X] = {
 			{99,99,99,13,99},
 			{99,99,99,11,12},
@@ -390,7 +391,10 @@ namespace game_framework {
 
 	CGameStateRun::~CGameStateRun()
 	{
-		//delete [] ball;
+		for (unsigned int i = 0; i < enemies.size(); ++i) 
+		{
+			delete enemies[i];
+		}
 	}
 
 	void CGameStateRun::OnBeginState()
@@ -405,26 +409,26 @@ namespace game_framework {
 		const int ANIMATION_SPEED = 15;
 
 		hero.Initialize();
+		enemies.push_back(new MBall(10 * 32, 13 * 32, 0));
+		enemies.push_back(new Orc(13 * 32, 7 * 32, 0));
 		enemies.push_back(new Skull(13 * 32, 7 * 32, 0));
+		enemies.push_back(new Eye(13 * 32, 7 * 32, 0));
+		enemies.push_back(new Snake(1 * 32, 6 * 32, 0));
+		enemies.push_back(new Snake(13 * 32, 7 * 32, 0));
+		enemies.push_back(new Frog(12 * 32, 7 * 32, 0));
+		enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
+		enemies.push_back(new Bat(0 * 32, 1 * 32, 0));
+		enemies.push_back(new Bat(12 * 32, 7 * 32, 0));
+		enemies.push_back(new BowHead(10 * 32, 7 * 32, 0));
 
-		//enemies.push_back(new Snake(1 * 32, 6 * 32, 0));
-		//enemies.push_back(new Snake(13 * 32, 7 * 32, 0));
-
-		//enemies.push_back(new Frog(12 * 32, 7 * 32, 0));
-		//enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
-		//enemies.push_back(new Bat(0 * 32, 1 * 32, 0));
-		//enemies.push_back(new Bat(12 * 32, 7 * 32, 0));
-		//enemies.push_back(new BowHead(10 * 32, 7 * 32, 0));
-
-		//enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
-		//enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
-		//enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
-		//enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
-
-		//enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
-		//enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
-		//enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
-		//enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
+		enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
+		enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
+		enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
+		enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
+		enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
+		enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
+		enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
+		enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
 
 		CAudio::Instance()->Play(AUDIO_BGM, false);		// ¼·©ñ WAVE
 

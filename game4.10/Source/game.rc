@@ -296,6 +296,54 @@ EYE_W2                  BITMAP                  "..\\data\\e\\EYE_W2.bmp"
 
 EYE_W3                  BITMAP                  "..\\data\\e\\EYE_W3.bmp"
 
+ORC_0                   BITMAP                  "..\\data\\e\\ORC_0 .bmp"
+
+ORC_1                   BITMAP                  "..\\data\\e\\ORC_1.bmp"
+
+ORC_2                   BITMAP                  "..\\data\\e\\ORC_2.bmp"
+
+ORC_3                   BITMAP                  "..\\data\\e\\ORC_3.bmp"
+
+ORC_4                   BITMAP                  "..\\data\\e\\ORC_4.bmp"
+
+ORC_5                   BITMAP                  "..\\data\\e\\ORC_5.bmp"
+
+SKULL_0                 BITMAP                  "..\\data\\e\\SKULL_0.bmp"
+
+SKULL_1                 BITMAP                  "..\\data\\e\\SKULL_1.bmp"
+
+SKULL_2                 BITMAP                  "..\\data\\e\\SKULL_2.bmp"
+
+SKULL_3                 BITMAP                  "..\\data\\e\\SKULL_3.bmp"
+
+SKULL_4                 BITMAP                  "..\\data\\e\\SKULL_4.bmp"
+
+SKULL_5                 BITMAP                  "..\\data\\e\\SKULL_5.bmp"
+
+SKULL_6                 BITMAP                  "..\\data\\e\\SKULL_6.bmp"
+
+SKULL_7                 BITMAP                  "..\\data\\e\\SKULL_7.bmp"
+
+SKULL_W0                BITMAP                  "..\\data\\e\\SKULL_W0.bmp"
+
+SKULL_W1                BITMAP                  "..\\data\\e\\SKULL_W1.bmp"
+
+SKULL_W2                BITMAP                  "..\\data\\e\\SKULL_W2.bmp"
+
+SKULL_W3                BITMAP                  "..\\data\\e\\SKULL_W3.bmp"
+
+SKULL_W4                BITMAP                  "..\\data\\e\\SKULL_W4.bmp"
+
+SKULL_W5                BITMAP                  "..\\data\\e\\SKULL_W5.bmp"
+
+SKULL_W6                BITMAP                  "..\\data\\e\\SKULL_W6.bmp"
+
+SKULL_W7                BITMAP                  "..\\data\\e\\SKULL_W7.bmp"
+
+MBALL_0                 BITMAP                  "..\\data\\e\\MBALL_0.bmp"
+
+MBALL_1                 BITMAP                  "..\\data\\e\\MBALL_1.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
