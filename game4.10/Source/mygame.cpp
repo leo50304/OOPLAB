@@ -405,23 +405,26 @@ namespace game_framework {
 		const int ANIMATION_SPEED = 15;
 
 		hero.Initialize();
+		enemies.push_back(new Skull(13 * 32, 7 * 32, 0));
 
-		enemies.push_back(new Frog(12 * 32, 7 * 32, 0));
-		enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
-		enemies.push_back(new Bat(0 * 32, 1 * 32, 0));
-		enemies.push_back(new Bat(12 * 32, 7 * 32, 0));
-		enemies.push_back(new BowHead(10 * 32, 7 * 32, 0));
-		enemies.push_back(new Frog(9 * 32, 1 * 32, 3));
+		//enemies.push_back(new Snake(1 * 32, 6 * 32, 0));
+		//enemies.push_back(new Snake(13 * 32, 7 * 32, 0));
 
-		enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
-		enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
-		enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
-		enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
+		//enemies.push_back(new Frog(12 * 32, 7 * 32, 0));
+		//enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
+		//enemies.push_back(new Bat(0 * 32, 1 * 32, 0));
+		//enemies.push_back(new Bat(12 * 32, 7 * 32, 0));
+		//enemies.push_back(new BowHead(10 * 32, 7 * 32, 0));
 
-		enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
-		enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
-		enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
-		enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
+		//enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
+		//enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
+		//enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
+		//enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
+
+		//enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
+		//enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
+		//enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
+		//enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
 
 		CAudio::Instance()->Play(AUDIO_BGM, false);		// ¼·©ñ WAVE
 

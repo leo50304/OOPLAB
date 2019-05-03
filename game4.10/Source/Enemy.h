@@ -121,12 +121,55 @@ namespace game_framework {
 		bool attackSide;
 	};
 
-	//class Snake : public Enemy 
-	//{
-	//public:
-	//	Snake(int x, int y, int d);
-	//	void OnMove(MapBrown* map);
+	class Snake : public Enemy 
+	{
+	public:
+		Snake(int x, int y, int d);
+		void LoadBitmap();
+		void OnMove(MapBrown* map);
+		bool HitTop(MapBrown* map);
+		bool HitGround(MapBrown* map);
 
-	//};
+	private:
+		bool onJump;
+		bool onDrop;
+		int jumpTop;
+		double jumpSpeed;
+	};
+
+	class Skull : public Enemy
+	{
+	public:
+		Skull(int x, int y, int d);
+		void LoadBitmap();
+		void OnMove(MapBrown* map);
+		void OnAttack(int x, int y);
+		void ShowWeapon();
+		void MoveWeapon(MapBrown* map);
+		bool InAttackRange(int x, int y);
+		bool InWeaponHitBox(int x, int y);
+	private:
+		double weaponMoveX, weaponMoveY, unit;
+		int weaponState;
+		bool attackSide;
+		int count;
+	};
+
+	class Eye : public Enemy 
+	{
+	public:
+		Eye(int x, int y, int d);
+		void LoadBitmap();
+		void OnMove(MapBrown* map);
+		void OnAttack(int x, int y);
+		void MoveWeapon(MapBrown* map);
+		bool InAttackRange(int x, int y);
+		void ShowWeapon();
+		bool InWeaponHitBox(int x, int y);
+
+	private:
+		int countAttack;
+		bool attackSide;
+	};
 }
 #endif

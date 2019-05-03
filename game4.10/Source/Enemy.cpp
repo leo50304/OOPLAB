@@ -444,6 +444,14 @@ namespace game_framework {
 		weaponY = GetY1();
 		heroX = x;
 		heroY = y;
+		if (weaponX >= heroX)
+		{
+			attackSide = false;
+		}
+		else
+		{
+			attackSide = true;
+		}
 		directX = (x - GetX1()) / 2;
 
 		directY = (-1) * GetY1();
@@ -488,14 +496,6 @@ namespace game_framework {
 			weaponMoveY += (directY / unit) * 3;
 			if (weaponPositionY <= 0)
 			{
-				if (weaponPositionX >= heroX)
-				{
-					attackSide = false;
-				}
-				else
-				{
-					attackSide = true;
-				}
 				weaponMoveY = -1 * weaponY;
 				weapon.SetDelayCount(3);
 				weapon2.SetDelayCount(3);
@@ -561,16 +561,419 @@ namespace game_framework {
 		return x < weaponPositionX + 32 && x + 32 > weaponPositionX && y < weaponPositionY + 32 && y + 32 > weaponPositionY;
 	}
 
-	//Snake::Snake(int x, int y, int d) :Enemy(x, y, d)
-	//{
-	//	LoadBitmap();
-	//}
+	Snake::Snake(int x, int y, int d) :Enemy(x, y, d)
+	{
+		LoadBitmap();
+		onJump = false;
+		speed = 1;
+	}
 
-	//void Snake::LoadBitmap()
-	//{
-	//	moveLAnimation.AddBitmap(E_L0, RGB(255, 255, 255));
-	//	moveLAnimation.AddBitmap(E_L1, RGB(255, 255, 255));
-	//	moveRAnimation.AddBitmap(E_R0, RGB(255, 255, 255));
-	//	moveRAnimation.AddBitmap(E_R1, RGB(255, 255, 255));
-	//}
+	void Snake::LoadBitmap()
+	{
+		moveLAnimation.AddBitmap(SNAKE_0, RGB(128, 0, 128));
+		moveLAnimation.AddBitmap(SNAKE_1, RGB(128, 0, 128));
+		moveRAnimation.AddBitmap(SNAKE_2, RGB(128, 0, 128));
+		moveRAnimation.AddBitmap(SNAKE_3, RGB(128, 0, 128));
+	}
+
+	bool Snake::HitGround(MapBrown* map)
+	{
+		return (map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid(x / 32, (y + 1) / 32)) || (map->isBlockSolid((x + 31) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 1) / 32));
+	}
+
+	bool Snake::HitTop(MapBrown* map)
+	{
+		return (map->isBlockSolid(x / 32, (y - 1) / 32) && !map->isBlockSolid(x / 32, (y + 16) / 32)) || (map->isBlockSolid((x + 31) / 32, (y - 1) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 16) / 32));
+	}
+
+	void Snake::OnMove(MapBrown* map)
+	{
+		moveRAnimation.OnMove();
+		moveLAnimation.OnMove();
+		if (!onJump)
+		{
+			int randJump = rand() % 250;
+			if (randJump < 3)
+			{
+				onJump = true;
+				speed = 3;
+				jumpTop = y - 32;
+				jumpSpeed = 5;
+				onDrop = false;
+			}
+		}
+
+		double ACCELERATE = (0.892*0.3);
+
+		if (onJump)
+		{
+			if (onJump)
+			{
+				if (!onDrop) //上升
+				{
+					jumpSpeed = (double)jumpSpeed - ACCELERATE;
+					y -= (int)jumpSpeed;
+				}
+				else //下降
+				{
+					jumpSpeed = (double)jumpSpeed + ACCELERATE;
+					if (jumpSpeed > 16)
+					{
+						jumpSpeed = 16;
+					}
+					y += (int)jumpSpeed;
+				}
+				if (HitGround(map)) //落地
+				{
+					y = (y / 32) * 32;
+					onJump = false;
+					onDrop = false;
+					speed = 1;
+				}
+				if (HitTop(map)) //撞到頭
+				{
+					jumpSpeed = 1;
+					onDrop = true;
+					y = ((y - 1) / 32) * 32 + 32;
+				}
+				if (y <= jumpTop && !onDrop)
+				{
+					jumpSpeed = 0;
+					y = jumpTop;
+					onDrop = true;
+				}
+			}
+		}
+		if (isMovingLeft)
+		{
+			x -= speed;
+		}
+		else if (isMovingRight)
+		{
+			x += speed;
+		}
+
+		bool hitSide = false;
+
+		if (map->isBlockSolid(x / 32, y / 32) || map->isBlockSolid((x + 31) / 32, y / 32) || x < 0 || x>32 * 17) //牆壁/邊界
+		{
+			if (onJump)
+			{
+				onDrop = true;
+			}
+			else
+			{
+				hitSide = true;
+			}
+			if (isMovingLeft)
+			{
+				x += speed;
+			}
+			else
+			{
+				x -= speed;
+			}
+		}
+		if (!onJump && (!map->isBlockSolid(x / 32, (y + 32) / 32) || !map->isBlockSolid((x + 31) / 32, (y + 32) / 32))) //踩空
+		{
+			if (isMovingLeft)
+			{
+				x += speed;
+			}
+			else
+			{
+				x -= speed;
+			}
+			hitSide = true;
+		}
+		if (hitSide)
+		{
+			isMovingLeft = !isMovingLeft;
+			isMovingRight = !isMovingRight;
+		}
+	}
+
+	Skull::Skull(int x, int y, int d) : Enemy(x, y, d)
+	{
+		LoadBitmap();
+		weaponState = 0;
+		attackSide = false;
+	}
+	void Skull::LoadBitmap()
+	{
+		moveLAnimation.AddBitmap(BH_L0, RGB(128, 0, 128));
+		moveLAnimation.AddBitmap(BH_L1, RGB(128, 0, 128));
+		moveLAnimation.AddBitmap(BH_L2, RGB(128, 0, 128));
+		moveRAnimation.AddBitmap(BH_R0, RGB(128, 0, 128));
+		moveRAnimation.AddBitmap(BH_R1, RGB(128, 0, 128));
+		moveRAnimation.AddBitmap(BH_R2, RGB(128, 0, 128));
+		AtkL.LoadBitmap(BH_A0, RGB(128, 0, 128));
+		AtkR.LoadBitmap(BH_A1, RGB(128, 0, 128));
+
+		weapon.AddBitmap(BH_W0, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W1, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W2, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W3, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W4, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W5, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W6, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W7, RGB(128, 0, 128));
+
+		weapon2.AddBitmap(BH_W4, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W3, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W2, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W1, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W0, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W7, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W6, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W5, RGB(128, 0, 128));
+	}
+	void Skull::OnMove(MapBrown* map)
+	{
+		if (onAttack)
+		{
+			return;
+		}
+		moveRAnimation.OnMove();
+		moveLAnimation.OnMove();
+		if (isMovingLeft)
+		{
+			x -= speed;
+		}
+		else if (isMovingRight)
+		{
+			x += speed;
+		}
+
+		if (!map->isBlockSolid(x / 32, (y + 32) / 32) || !map->isBlockSolid((x + 22) / 32, (y + 32) / 32) || map->isBlockSolid(x / 32, y / 32) || map->isBlockSolid((x + 22) / 32, y / 32) || x < 0 || x > 32 * 17) //碰到邊緣或邊界
+		{
+			if (isMovingLeft)
+			{
+				x += speed;
+			}
+			else
+			{
+				x -= speed;
+			}
+			isMovingLeft = !isMovingLeft;
+			isMovingRight = !isMovingRight;
+		}
+	}
+
+	void Skull::OnAttack(int x, int y)
+	{
+		if (onAttack)
+		{
+			return;
+		}
+		weapon.Reset();
+		weapon2.Reset();
+		weapon.SetDelayCount(10);
+		weapon2.SetDelayCount(10);
+		onAttackAnime = true;
+		onAttack = true;
+		weaponX = GetX1();
+		weaponY = GetY1();
+		if (weaponX >= x)
+		{
+			attackSide = false;
+		}
+		else
+		{
+			attackSide = true;
+		}
+		directX = x - GetX1();
+		directY = y - GetY1();
+		weaponState = 0;
+		weaponMoveX = 0;
+		weaponMoveY = 0;
+		count = 0;
+	}
+	void Skull::ShowWeapon()
+	{
+		if (!onAttack)
+		{
+			return;
+		}
+		if (count > 50)
+		{
+			if (attackSide == false)
+			{
+				weapon.SetTopLeft((int)(weaponX + weaponMoveX), (int)(weaponY + weaponMoveY));
+				weapon.OnShow();
+			}
+			else
+			{
+				weapon2.SetTopLeft((int)(weaponX + weaponMoveX), (int)(weaponY + weaponMoveY));
+				weapon2.OnShow();
+			}
+		}
+	}
+	void Skull::MoveWeapon(MapBrown* Map)
+	{
+		if (!onAttack)
+		{
+			return;
+		}
+		if (count > 50)
+		{
+			weapon.OnMove();
+			int weaponPositionX = (int)(weaponX + weaponMoveX);
+			int weaponPositionY = (int)(weaponY + weaponMoveY);
+			unit = sqrt(directX*directX + directY * directY);
+
+			if (weaponState == 0)
+			{
+				weaponMoveX += (directX / unit) * 3;
+				weaponMoveY += (directY / unit) * 3;
+
+				if (weaponPositionX < 0 || weaponPositionX > 18 * 32 || weaponPositionY < 0 || weaponPositionY > 32 * 13)
+				{
+					onAttack = false;
+					onAttackAnime = false;
+					weaponMoveX = -100;
+					weaponMoveY = -100;
+					weaponX = -100;
+					weaponY = -100;
+				}
+			}
+		}
+		else
+		{
+			count++;
+		}
+	}
+	bool Skull::InAttackRange(int x, int y)
+	{
+		int randAttack = rand() % 250;
+		return !isDistroyed && !onAttack && randAttack < 4;
+	}
+	bool Skull::InWeaponHitBox(int x, int y)
+	{
+		int weaponPositionX = (int)(weaponX + weaponMoveX);
+		int weaponPositionY = (int)(weaponY + weaponMoveY);
+		return x < weaponPositionX + 32 && x + 32 > weaponPositionX && y < weaponPositionY + 32 && y + 32 > weaponPositionY;
+	}
+
+
+	Eye::Eye(int x, int y, int d) :Enemy(x, y, d)
+	{
+		LoadBitmap();
+	}
+
+	void Eye::LoadBitmap()
+	{
+		moveLAnimation.AddBitmap(EYE_0, RGB(128, 0, 128));
+		moveLAnimation.AddBitmap(EYE_1, RGB(128, 0, 128));
+
+		moveRAnimation.AddBitmap(EYE_2, RGB(128, 0, 128));
+		moveRAnimation.AddBitmap(EYE_3, RGB(128, 0, 128));
+
+		AtkL.LoadBitmap(EYE_4, RGB(128, 0, 128));
+		AtkR.LoadBitmap(EYE_5, RGB(128, 0, 128));
+
+		weapon.AddBitmap(EYE_W1, RGB(128, 0, 128));
+		weapon.AddBitmap(EYE_W2, RGB(128, 0, 128));
+		weapon.AddBitmap(EYE_W3, RGB(128, 0, 128));
+	}
+
+	void Eye::OnMove(MapBrown* map)
+	{
+		if (onAttack)
+		{
+			return;
+		}
+
+		moveRAnimation.OnMove();
+		moveLAnimation.OnMove();
+
+		if (isMovingLeft)
+		{
+			x -= speed;
+		}
+		else if (isMovingRight)
+		{
+			x += speed;
+		}
+
+		if (!map->isBlockSolid(x / 32, (y + 32) / 32) || !map->isBlockSolid((x + 22) / 32, (y + 32) / 32) || map->isBlockSolid(x / 32, y / 32) || map->isBlockSolid((x + 22) / 32, y / 32) || x < 0 || x>32 * 17) //碰到邊緣或邊界
+		{
+			if (isMovingLeft)
+			{
+				x += speed;
+			}
+			else
+			{
+				x -= speed;
+			}
+			isMovingLeft = !isMovingLeft;
+			isMovingRight = !isMovingRight;
+		}
+	}
+	void Eye::OnAttack(int x, int y)
+	{
+		countAttack = rand() % 100;
+		onAttack = true;
+		weapon.Reset();
+		weaponX = GetX1();
+		weaponY = GetY1();
+
+		if (x <= GetX1())
+		{
+			directX = -1;
+			weaponX -= 32;
+			attackSide = false;
+		}
+		else
+		{
+			directX = 1;
+			weaponX += 32;
+
+			attackSide = true;
+		}
+	}
+	void Eye::MoveWeapon(MapBrown* map)
+	{
+		countAttack--;
+		if (countAttack > 0) 
+		{
+			return;
+		}
+		weapon.OnMove();
+
+		weaponX += directX * 10;
+
+		if (weaponX < 0 || weaponX > 18 * 32)
+		{
+			onAttack = false;
+			weaponX = -100;
+			weaponY = -100;
+		}
+	}
+	bool Eye::InAttackRange(int x, int y)
+	{
+
+		if (onAttack) 
+		{
+			return false;
+		}
+		if ((isMovingLeft && x < GetX1()) || (isMovingRight && x > GetX1()))
+		{
+			return (y + 31) > GetY1() && y < GetY1() + 32;
+		}
+		return false;
+	}
+	void Eye::ShowWeapon()
+	{
+		if (!onAttack || countAttack > 0)
+		{
+			return;
+		}
+		weapon.SetTopLeft(weaponX, weaponY);
+		weapon.OnShow();
+	}
+	bool Eye::InWeaponHitBox(int x, int y)
+	{
+		return false;
+	}
 }

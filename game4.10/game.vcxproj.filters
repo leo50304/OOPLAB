@@ -469,5 +469,35 @@
     <Image Include="data\e\SNAKE_4.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\e\SNAKE_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\EYE_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\EYE_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\EYE_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\EYE_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\EYE_4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\EYE_5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\EYE_W1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\EYE_W2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\EYE_W3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

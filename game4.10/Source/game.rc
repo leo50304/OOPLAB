@@ -268,13 +268,33 @@ SLIME_W2                BITMAP                  "..\\data\\e\\SLIME_W2.bmp"
 
 SLIME_W3                BITMAP                  "..\\data\\e\\SLIME_W3.bmp"
 
-IDB_BITMAP2             BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\SNAKE_1.bmp"
+SNAKE_0                 BITMAP                  "..\\data\\e\\SNAKE_0.bmp"
 
-IDB_BITMAP3             BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\SNAKE_2.bmp"
+SNAKE_1                 BITMAP                  "..\\data\\e\\SNAKE_1.bmp"
 
-IDB_BITMAP4             BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\SNAKE_3.bmp"
+SNAKE_2                 BITMAP                  "..\\data\\e\\SNAKE_2.bmp"
 
-IDB_BITMAP5             BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\SNAKE_4.bmp"
+SNAKE_3                 BITMAP                  "..\\data\\e\\SNAKE_3.bmp"
+
+SNAKE_4                 BITMAP                  "..\\data\\e\\SNAKE_4.bmp"
+
+EYE_0                   BITMAP                  "..\\data\\e\\EYE_0.bmp"
+
+EYE_1                   BITMAP                  "..\\data\\e\\EYE_1.bmp"
+
+EYE_2                   BITMAP                  "..\\data\\e\\EYE_2.bmp"
+
+EYE_3                   BITMAP                  "..\\data\\e\\EYE_3.bmp"
+
+EYE_4                   BITMAP                  "..\\data\\e\\EYE_4.bmp"
+
+EYE_5                   BITMAP                  "..\\data\\e\\EYE_5.bmp"
+
+EYE_W1                  BITMAP                  "..\\data\\e\\EYE_W1.bmp"
+
+EYE_W2                  BITMAP                  "..\\data\\e\\EYE_W2.bmp"
+
+EYE_W3                  BITMAP                  "..\\data\\e\\EYE_W3.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
