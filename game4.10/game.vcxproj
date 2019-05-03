@@ -381,6 +381,10 @@
     <Image Include="data\e\SLIME_W1.bmp" />
     <Image Include="data\e\SLIME_W2.bmp" />
     <Image Include="data\e\SLIME_W3.bmp" />
+    <Image Include="data\e\SNAKE_1.bmp" />
+    <Image Include="data\e\SNAKE_2.bmp" />
+    <Image Include="data\e\SNAKE_3.bmp" />
+    <Image Include="data\e\SNAKE_4.bmp" />
     <Image Include="data\map\gm_00.bmp" />
     <Image Include="data\map\gm_01.bmp" />
     <Image Include="data\map\gm_02.bmp" />

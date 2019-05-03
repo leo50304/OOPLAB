@@ -44,14 +44,14 @@ namespace game_framework {
 		speed = 1;
 	}
 
-	void Enemy::hit(int d) 
+	void Enemy::hit(int d)
 	{
 		hp -= d;
 	}
 
 	void Enemy::Distroy()
 	{
-		if (hp == 0) 
+		if (hp == 0)
 		{
 			isDistroyed = true;
 		}
@@ -272,11 +272,11 @@ namespace game_framework {
 				weaponState = 0;
 			}
 		}
-		if (!onAttack) 
+		if (!onAttack)
 		{
 			return;
 		}
-		if (weaponState == 0) 
+		if (weaponState == 0)
 		{
 			weapon.SetTopLeft(weaponX, weaponY);
 			weapon.OnShow();
@@ -285,7 +285,7 @@ namespace game_framework {
 
 	void Slime::MoveWeapon(MapBrown* map)
 	{
-		if (weaponState == 1) 
+		if (weaponState == 1)
 		{
 			weapon2.OnMove();
 		}
@@ -308,7 +308,7 @@ namespace game_framework {
 	bool Slime::InAttackRange(int x, int y)
 	{
 		int randAttack = rand() % 200;
-		return !isDistroyed && !onAttack && weaponState!=1 && randAttack < 4;
+		return !isDistroyed && !onAttack && weaponState != 1 && randAttack < 4;
 	}
 
 	Bat::Bat(int x, int y, int d) :Enemy(x, y, d)
@@ -447,12 +447,11 @@ namespace game_framework {
 		directX = (x - GetX1()) / 2;
 
 		directY = (-1) * GetY1();
-		unit = sqrt(directX*directX + directY * directY);
+		unit = sqrt(directX * directX + directY * directY);
 		countRolling = 0;
 		weaponState = 0;
 		weaponMoveX = 0;
 		weaponMoveY = 0;
-
 	}
 	void BowHead::ShowWeapon()
 	{
@@ -561,4 +560,17 @@ namespace game_framework {
 		int weaponPositionY = (int)(weaponY + weaponMoveY);
 		return x < weaponPositionX + 32 && x + 32 > weaponPositionX && y < weaponPositionY + 32 && y + 32 > weaponPositionY;
 	}
+
+	//Snake::Snake(int x, int y, int d) :Enemy(x, y, d)
+	//{
+	//	LoadBitmap();
+	//}
+
+	//void Snake::LoadBitmap()
+	//{
+	//	moveLAnimation.AddBitmap(E_L0, RGB(255, 255, 255));
+	//	moveLAnimation.AddBitmap(E_L1, RGB(255, 255, 255));
+	//	moveRAnimation.AddBitmap(E_R0, RGB(255, 255, 255));
+	//	moveRAnimation.AddBitmap(E_R1, RGB(255, 255, 255));
+	//}
 }

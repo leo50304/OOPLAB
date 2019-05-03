@@ -120,5 +120,13 @@ namespace game_framework {
 		int heroX, heroY;
 		bool attackSide;
 	};
+
+	//class Snake : public Enemy 
+	//{
+	//public:
+	//	Snake(int x, int y, int d);
+	//	void OnMove(MapBrown* map);
+
+	//};
 }
 #endif

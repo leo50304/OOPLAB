@@ -165,14 +165,14 @@ namespace game_framework {
 
 	bool CHero::HitGround(MapBrown* map)
 	{
-		return map->isBlockSolid(x / 32, (y + 32) / 32) || map->isBlockSolid((x + 31) / 32, (y + 32) / 32);
-		//return (map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid(x / 32, (y + 1) / 32)) || (map->isBlockSolid((x + 31) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 1) / 32));
+		//return map->isBlockSolid(x / 32, (y + 32) / 32) || map->isBlockSolid((x + 31) / 32, (y + 32) / 32);
+		return (map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid(x / 32, (y + 1) / 32)) || (map->isBlockSolid((x + 31) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 1) / 32));
 	}
 
 	bool CHero::HitTop(MapBrown* map)
 	{
-		return  map->isBlockSolid(x / 32, (y - 1) / 32) || map->isBlockSolid((x + 31) / 32, (y - 1) / 32);
-		//return (map->isBlockSolid(x / 32, (y - 1) / 32) && !map->isBlockSolid(x / 32, (y + 16) / 32)) || (map->isBlockSolid((x + 31) / 32, (y - 1) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 16) / 32));
+		//return  map->isBlockSolid(x / 32, (y - 1) / 32) || map->isBlockSolid((x + 31) / 32, (y - 1) / 32);
+		return (map->isBlockSolid(x / 32, (y - 1) / 32) && !map->isBlockSolid(x / 32, (y + 16) / 32)) || (map->isBlockSolid((x + 31) / 32, (y - 1) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 16) / 32));
 	}
 
 	bool CHero::GroundNotSolid(MapBrown* map)

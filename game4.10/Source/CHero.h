@@ -14,18 +14,17 @@ namespace game_framework {
 	{
 	public:
 		CHero();
-		int  GetX1();					// 上 x 座標
-		int  GetY1();					// 上 y 座標
-		void Initialize();				// 設定擦子為初始值
-		void LoadBitmap();				// 載入圖形
-		void OnMove(MapBrown* map);     // 移動
-		//bool HitHeroAction(int type, string pos);
-		void OnShow();      			// 將擦子圖形貼到畫面
-		void SetMovingDown(bool flag);	// 設定是否正在往下移動
-		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
-		void SetMovingRight(bool flag); // 設定是否正在往右移動
-		void SetMovingUp(bool flag);	// 設定是否正在往上移動
-		void SetXY(int nx, int ny);		// 設定擦子左上角座標
+		int  GetX1();
+		int  GetY1();
+		void Initialize();
+		void LoadBitmap();
+		void OnMove(MapBrown* map);
+		void OnShow(); 
+		void SetMovingDown(bool flag);
+		void SetMovingLeft(bool flag);
+		void SetMovingRight(bool flag);
+		void SetMovingUp(bool flag);
+		void SetXY(int nx, int ny);
 		bool IsOnLadder();
 		void Drop();
 		void SetOnLadder(bool flag);
@@ -39,8 +38,8 @@ namespace game_framework {
 		int getDamage();
 
 	protected:
-		CMovingBitmap standL;		// 擦子的動畫
-		CMovingBitmap standR;		// 擦子的動畫
+		CMovingBitmap standL;
+		CMovingBitmap standR;
 		CMovingBitmap stayOnLadder;
 		CMovingBitmap jumpL;
 		CMovingBitmap jumpR;
