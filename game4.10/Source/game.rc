@@ -218,31 +218,55 @@ E_R1                    BITMAP                  "..\\data\\e\\E_R1.bmp"
 
 WEAPON_TEST             BITMAP                  "..\\data\\map\\mapdata\\bitmap2.bmp"
 
-BAT_0                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\bat.bmp"
+BAT_0                   BITMAP                  "..\\data\\e\\bat.bmp"
 
-BAT_1                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\BAT_0.bmp"
+BAT_1                   BITMAP                  "..\\data\\e\\BAT_0.bmp"
 
-SLIME_0                 BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\SLIME_0.bmp"
+SLIME_0                 BITMAP                  "..\\data\\e\\SLIME_0.bmp"
 
-SLIME_1                 BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\SLIME_1.bmp"
+SLIME_1                 BITMAP                  "..\\data\\e\\SLIME_1.bmp"
 
-SLIME_2                 BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\SLIME_2.bmp"
+SLIME_2                 BITMAP                  "..\\data\\e\\SLIME_2.bmp"
 
-BH_A0                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\BH_A0.bmp"
+BH_A0                   BITMAP                  "..\\data\\e\\BH_A0.bmp"
 
-BH_A1                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\BH_A1.bmp"
+BH_A1                   BITMAP                  "..\\data\\e\\BH_A1.bmp"
 
-BH_L0                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\BH_L0.bmp"
+BH_L0                   BITMAP                  "..\\data\\e\\BH_L0.bmp"
 
-BH_L1                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\BH_L1.bmp"
+BH_L1                   BITMAP                  "..\\data\\e\\BH_L1.bmp"
 
-BH_L2                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\BH_L2.bmp"
+BH_L2                   BITMAP                  "..\\data\\e\\BH_L2.bmp"
 
-BH_R0                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\BH_R0.bmp"
+BH_R0                   BITMAP                  "..\\data\\e\\BH_R0.bmp"
 
-BH_R1                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\BH_R1.bmp"
+BH_R1                   BITMAP                  "..\\data\\e\\BH_R1.bmp"
 
-BH_R2                   BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\BH_R2.bmp"
+BH_R2                   BITMAP                  "..\\data\\e\\BH_R2.bmp"
+
+BH_W0                   BITMAP                  "..\\data\\e\\BH_W0.bmp"
+
+BH_W1                   BITMAP                  "..\\data\\e\\BH_W1.bmp"
+
+BH_W2                   BITMAP                  "..\\data\\e\\BH_W2.bmp"
+
+BH_W3                   BITMAP                  "..\\data\\e\\BH_W3.bmp"
+
+BH_W4                   BITMAP                  "..\\data\\e\\BH_W4.bmp"
+
+BH_W5                   BITMAP                  "..\\data\\e\\BH_W5.bmp"
+
+BH_W6                   BITMAP                  "..\\data\\e\\BH_W6.bmp"
+
+BH_W7                   BITMAP                  "..\\data\\e\\BH_W7.bmp"
+
+SLIME_W0                BITMAP                  "..\\data\\e\\SLIME_W0.bmp"
+
+SLIME_W1                BITMAP                  "..\\data\\e\\SLIME_W1.bmp"
+
+SLIME_W2                BITMAP                  "..\\data\\e\\SLIME_W2.bmp"
+
+SLIME_W3                BITMAP                  "..\\data\\e\\SLIME_W3.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

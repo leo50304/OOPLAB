@@ -421,5 +421,41 @@
     <Image Include="data\e\BH_R2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\e\BH_W0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_W1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_W2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_W3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_W4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_W5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_W6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\BH_W7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SLIME_W0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SLIME_W1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SLIME_W2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\SLIME_W3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

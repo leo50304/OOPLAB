@@ -32,24 +32,25 @@ namespace game_framework {
 
 	void CHero::BeatBack(bool flag, int direct)
 	{
-		if (invincibleFrameCount == 0) 
+		if (invincibleFrameCount == 0)
 		{
-
 			invincibleFrameCount = 100;
 			direction = direct;
 			beatBackAy = -3;
 			beatBackAx = -0.4;
 			beatBackYSpeed = -10;
-			beatBackXSpeed = -6;
+			beatBackXSpeed = -8;
 			beatBackXSpeed *= direction;
 			beatBackAx *= direction;
 			isOnLadder = false;
 			isOnLadderSide = false;
+			onJump = false;
+			onDrop = false;
 			beatBack = flag;
 		}
 	}
 
-	bool CHero::BeatBack() 
+	bool CHero::BeatBack()
 	{
 		return beatBack;
 	}
@@ -67,22 +68,36 @@ namespace game_framework {
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 	}
 
-	bool CHero::InAttackRange(int eX, int eY) 
+	void CHero::setHitValid(bool flag)
 	{
+		hitValid = flag;
+	}
+
+	int CHero::getDamage()
+	{
+		return damage;
+	}
+
+	bool CHero::InAttackRange(int eX, int eY)
+	{
+		if (!hitValid)
+		{
+			return false;
+		}
 		if (eY - y <16 && eY - y > -16) {
 			if (faceSide == 0)
 			{
-				return x-eX < 64 && eX < x-32;
+				return x - eX < 64 && eX < x - 32;
 			}
 			else if (faceSide == 1)
 			{
-				return eX - x <64 && x+32 < eX;
+				return eX - x < 64 && x + 32 < eX;
 			}
 		}
 		return false;
 	}
 
-	bool CHero::isOnAttack() 
+	bool CHero::isOnAttack()
 	{
 		return onAttack;
 	}
@@ -137,42 +152,55 @@ namespace game_framework {
 		onHold = flag;
 	}
 
-	void CHero::SetAttack(bool flag) 
+	void CHero::SetAttack(bool flag)
 	{
-		if (flag == true && onAttack) 
+		if (flag == true && onAttack)
 		{
 			return;
 		}
 		onAttack = flag;
+		hitValid = flag;
 		attackFrameCount = 0;
 	}
 
 	bool CHero::HitGround(MapBrown* map)
 	{
-		return map->isBlockSolid(x / 32, (y + 31) / 32) || map->isBlockSolid((x + 22) / 32, (y + 31) / 32);
+		return map->isBlockSolid(x / 32, (y + 32) / 32) || map->isBlockSolid((x + 31) / 32, (y + 32) / 32);
+		//return (map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid(x / 32, (y + 1) / 32)) || (map->isBlockSolid((x + 31) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 1) / 32));
 	}
 
 	bool CHero::HitTop(MapBrown* map)
 	{
-		return map->isBlockSolid(x / 32, (y - 1) / 32) || map->isBlockSolid((x + 22) / 32, (y - 1) / 32);
+		return  map->isBlockSolid(x / 32, (y - 1) / 32) || map->isBlockSolid((x + 31) / 32, (y - 1) / 32);
+		//return (map->isBlockSolid(x / 32, (y - 1) / 32) && !map->isBlockSolid(x / 32, (y + 16) / 32)) || (map->isBlockSolid((x + 31) / 32, (y - 1) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 16) / 32));
 	}
 
-	bool CHero::GroundNotSolid(MapBrown* map) 
+	bool CHero::GroundNotSolid(MapBrown* map)
 	{
-		return !map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid((x + 22) / 32, (y + 32) / 32);
+		return !map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 32) / 32);
 	}
 
 	void CHero::OnMove(MapBrown* map)
 	{
 
 		invincibleFrameCount = invincibleFrameCount <= 0 ? invincibleFrameCount : invincibleFrameCount - 1;
-		
-		if (beatBack) 
+
+		if (beatBack)
 		{
 			y = (int)(y + beatBackYSpeed);
-			x = (int)(x - beatBackXSpeed );
+			x = (int)(x - beatBackXSpeed);
 
-			if ((direction ==-1 &&  beatBackXSpeed < 0) || ( direction == 1 && beatBackXSpeed > 0))
+			isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+			if (direction == -1)
+			{
+				isMovingLeft = true;
+			}
+			else if (direction == 1)
+			{
+				isMovingRight = true;
+			}
+
+			if ((direction == -1 && beatBackXSpeed < 0) || (direction == 1 && beatBackXSpeed > 0))
 			{
 				beatBackXSpeed = 0;
 			}
@@ -184,6 +212,7 @@ namespace game_framework {
 				onJump = false;
 				onDrop = false;
 				beatBack = false;
+				isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 			}
 			if (HitTop(map)) //撞到頭
 			{
@@ -191,16 +220,17 @@ namespace game_framework {
 				onJump = true;
 				onDrop = true;
 				beatBack = false;
+				isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 				y = ((y - 1) / 32) * 32 + 32;
 			}
 		}
-		if (isOnLadder && !isOnLadderSide) 
+		if (isOnLadder && !isOnLadderSide)
 		{
 			onAttack = false;
 		}
 		if (attackFrameCount == 16)
 		{
- 			onAttack = false;
+			onAttack = false;
 			attackFrameCount = 0;
 		}
 		double ACCELERATE = (0.892*0.5);
@@ -222,6 +252,10 @@ namespace game_framework {
 			else //下降
 			{
 				speed = (double)speed + ACCELERATE;
+				if (speed > 16)
+				{
+					speed = 16;
+				}
 				y += (int)speed;
 			}
 			if (HitGround(map)) //落地
@@ -243,7 +277,7 @@ namespace game_framework {
 				onDrop = true;
 			}
 		}
-		else if(!isOnLadder && GroundNotSolid(map) && !beatBack) //踩空
+		else if (!isOnLadder && GroundNotSolid(map) && !beatBack) //踩空
 		{
 			speed = 1;
 			onJump = true;
@@ -276,82 +310,113 @@ namespace game_framework {
 			}
 			onHold = true;
 		}
-		if (!beatBack) {
-			if (isMovingUp && onJump && !onDrop)
+		if (isMovingUp && onJump && !onDrop)
+		{
+			jumpTop -= 10;
+			if (jumpTop < TopLimit)
 			{
-				jumpTop -= 10;
-				if (jumpTop < TopLimit)
-				{
-					jumpTop = TopLimit;
-				}
-			}
-			if (isMovingDown)
-			{
-				y += STEP_SIZE;
-				int px = (x + 16) / 32;
-				int py = (y + 31) / 32;
-				if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Down", px * 32))
-				{
-					//isMovingDown = false;
-					y -= STEP_SIZE;
-				}
-				if (isOnLadder)
-				{
-					isOnLadderSide = false;
-				}
-			}
-			if (isMovingLeft)
-			{
-				faceSide = 0;
-				x -= STEP_SIZE;
-				int px = x / 32;
-				int py = y / 32;
-				if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Left", px * 32))
-				{
-					x += STEP_SIZE;
-				}
-				if (isOnLadder)
-				{
-					isOnLadderSide = true;
-				}
-			}
-			if (isMovingRight)
-			{
-				faceSide = 1;
-				x += STEP_SIZE;
-				int px = (x + 31) / 32;
-				int py = y / 32;
-				if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Right", px * 32))
-				{
-					x -= STEP_SIZE;
-				}
-				if (isOnLadder)
-				{
-					isOnLadderSide = true;
-				}
+				jumpTop = TopLimit;
 			}
 		}
+		if (isMovingDown)
+		{
+			y += STEP_SIZE;
+			int px = (x + 16) / 32;
+			int py = (y + 31) / 32;
+			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Down", px * 32))
+			{
+				//isMovingDown = false;
+				y -= STEP_SIZE;
+			}
+			if (isOnLadder)
+			{
+				isOnLadderSide = false;
+			}
+		}
+		if (isMovingLeft)
+		{
+			faceSide = 0;
+			x -= STEP_SIZE;
+			if (beatBack == true)
+			{
+				x += STEP_SIZE;
+			}
+			int px = x / 32;
+			int py = y / 32;
+			int py2 = (y + 31) / 32;
+			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Left", px * 32) || !map->getMapObject(map->GetBlock(px, py2))->HitHeroAction(x, y, isOnLadder, "Left", px * 32))
+			{
+				//x += STEP_SIZE;
+				x = ((x + 31) / 32) * 32;
+			}
+			if (isOnLadder)
+			{
+				isOnLadderSide = true;
+			}
+		}
+		if (isMovingRight)
+		{
+			faceSide = 1;
+			x += STEP_SIZE;
+			if (beatBack == true)
+			{
+				x -= STEP_SIZE;
+			}
+			int px = (x + 31) / 32;
+			int py = y / 32;
+			int py2 = (y + 31) / 32;
+			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Right", px * 32) || !map->getMapObject(map->GetBlock(px, py2))->HitHeroAction(x, y, isOnLadder, "Right", px * 32))
+			{
+				//x -= STEP_SIZE;
+				x = (x / 32) * 32;
+			}
+			if (isOnLadder)
+			{
+				isOnLadderSide = true;
+			}
+		}
+
+		bool changeFlag = false;
 		if (x < 0)
 		{
 			map->UpdateMap('L');
-			x = 32*18-32;
+			x = 32 * 18 - 32;
+			if (map->getNext() == 7)
+			{
+				x = 32 * 6;
+				y = 32 * 1;
+			}
 		}
-		else if (x > 32*18-32)
+		else if (x > 32 * 18 - 32)
 		{
 			map->UpdateMap('R');
 			x = 0;
+			if (map->getNext() == 7)
+			{
+				x = 32 * 6;
+				y = 32 * 1;
+			}
 		}
 		else if (y < 0)
 		{
 			map->UpdateMap('U');
-			y = 32*13-32;
+			y = 32 * 13 - 32;
+			if (map->getNext() == 7)
+			{
+				x = 32 * 6;
+				y = 32 * 1;
+			}
 		}
-		else if (y > 32 * 13 -32)
+		else if (y > 32 * 13 - 32)
 		{
 			map->UpdateMap('D');
 			y = 0;
+			if (map->getNext() == 7)
+			{
+				x = 32 * 9;
+				y = 32 * 1;
+			}
 		}
-
 	}
 
 	void CHero::SetMovingDown(bool flag)
@@ -381,29 +446,29 @@ namespace game_framework {
 
 	void CHero::OnShow()
 	{
-		if (invincibleFrameCount % 10 >= 8) 
+		if (invincibleFrameCount % 10 >= 8)
 		{
 			return;
 		}
 
-		if (onAttack) 
+		if (onAttack)
 		{
 			if (faceSide == 0)
 			{
 				attackL.SetTopLeft(x, y);
 				attackL.ShowBitmap();
-				swordL.SetTopLeft(x-31,y+2);
+				swordL.SetTopLeft(x - 31, y + 2);
 				swordL.ShowBitmap();
 			}
 			else if (faceSide == 1)
 			{
 				attackR.SetTopLeft(x, y);
 				attackR.ShowBitmap();
-				swordR.SetTopLeft(x + 31, y+2);
+				swordR.SetTopLeft(x + 31, y + 2);
 				swordR.ShowBitmap();
 			}
 		}
-		else if (onJump) 
+		else if (onJump)
 		{
 			if (faceSide == 0)
 			{

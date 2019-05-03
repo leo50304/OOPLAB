@@ -15,6 +15,7 @@ namespace game_framework {
 	Enemy::Enemy(int x, int y, int d)
 	{
 		Initialize();
+		hp = 1;
 		SetXY(x, y);
 		location = d;
 		onAttack = false;
@@ -43,9 +44,17 @@ namespace game_framework {
 		speed = 1;
 	}
 
+	void Enemy::hit(int d) 
+	{
+		hp -= d;
+	}
+
 	void Enemy::Distroy()
 	{
-		isDistroyed = true;
+		if (hp == 0) 
+		{
+			isDistroyed = true;
+		}
 	}
 
 	int Enemy::GetWeaponX1()
@@ -198,7 +207,13 @@ namespace game_framework {
 		moveRAnimation.AddBitmap(SLIME_1, RGB(128, 0, 128));
 		moveRAnimation.AddBitmap(SLIME_2, RGB(128, 0, 128));
 
-		weapon.AddBitmap(WEAPON_TEST, RGB(255, 255, 255));
+		weapon.AddBitmap(SLIME_W0, RGB(128, 0, 128));
+
+		weapon2.AddBitmap(SLIME_W1, RGB(128, 0, 128));
+		weapon2.AddBitmap(SLIME_W2, RGB(128, 0, 128));
+		weapon2.AddBitmap(SLIME_W3, RGB(128, 0, 128));
+		weapon2.AddBitmap(SLIME_W3, RGB(128, 0, 128));
+
 	}
 
 	void Slime::OnMove(MapBrown* map)
@@ -233,6 +248,8 @@ namespace game_framework {
 	void Slime::OnAttack(int x, int y)
 	{
 		onAttack = true;
+		weaponState = 0;
+		weapon.Reset();
 		weaponX = GetX1();
 		weaponY = GetY1();
 		directX = 0;
@@ -241,21 +258,37 @@ namespace game_framework {
 
 	bool Slime::InWeaponHitBox(int x, int y)
 	{
-		return x < weaponX + 32 && x + 32 > weaponX && y < weaponY + 32 && y + 32 > weaponY;
+		return onAttack && x < weaponX + 32 && x + 32 > weaponX && y < weaponY + 32 && y + 32 > weaponY;
 	}
 
 	void Slime::ShowWeapon()
 	{
-		if (!onAttack)
+		if (weaponState == 1)
+		{
+			weapon2.SetTopLeft(weaponX, weaponY);
+			weapon2.OnShow();
+			if (weapon2.IsFinalBitmap())
+			{
+				weaponState = 0;
+			}
+		}
+		if (!onAttack) 
 		{
 			return;
 		}
-		weapon.SetTopLeft(weaponX, weaponY);
-		weapon.OnShow();
+		if (weaponState == 0) 
+		{
+			weapon.SetTopLeft(weaponX, weaponY);
+			weapon.OnShow();
+		}
 	};
 
 	void Slime::MoveWeapon(MapBrown* map)
 	{
+		if (weaponState == 1) 
+		{
+			weapon2.OnMove();
+		}
 		if (!onAttack)
 		{
 			return;
@@ -263,18 +296,19 @@ namespace game_framework {
 		weapon.OnMove();
 		weaponX += directX * 3;
 		weaponY += directY * 3;
-		if (map->isBlockSolid(weaponX / 32, (weaponY + 1) / 32))
+		if (map->isBlockSolid(weaponX / 32, (weaponY + 31) / 32))
 		{
+			weaponY = (weaponY / 32) * 32;
+			weaponState = 1;
 			onAttack = false;
-			weaponX = -100;
-			weaponY = -100;
+			weapon2.Reset();
 		}
 	};
 
 	bool Slime::InAttackRange(int x, int y)
 	{
 		int randAttack = rand() % 200;
-		return !isDistroyed && !onAttack && randAttack < 4;
+		return !isDistroyed && !onAttack && weaponState!=1 && randAttack < 4;
 	}
 
 	Bat::Bat(int x, int y, int d) :Enemy(x, y, d)
@@ -322,10 +356,12 @@ namespace game_framework {
 	BowHead::BowHead(int x, int y, int d) :Enemy(x, y, d)
 	{
 		LoadBitmap();
+		hp = 2;
 		countRolling = 0;
 		weaponState = 0;
 		heroX = x;
 		heroY = y;
+		attackSide = false;
 	}
 
 	void BowHead::LoadBitmap()
@@ -339,7 +375,24 @@ namespace game_framework {
 		AtkL.LoadBitmap(BH_A0, RGB(128, 0, 128));
 		AtkR.LoadBitmap(BH_A1, RGB(128, 0, 128));
 
-		weapon.AddBitmap(WEAPON_TEST, RGB(255, 255, 255));
+		weapon.AddBitmap(BH_W0, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W1, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W2, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W3, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W4, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W5, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W6, RGB(128, 0, 128));
+		weapon.AddBitmap(BH_W7, RGB(128, 0, 128));
+
+		weapon2.AddBitmap(BH_W4, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W3, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W2, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W1, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W0, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W7, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W6, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W5, RGB(128, 0, 128));
+
 	}
 
 	void BowHead::OnMove(MapBrown* map)
@@ -381,6 +434,10 @@ namespace game_framework {
 		{
 			return;
 		}
+		weapon.Reset();
+		weapon2.Reset();
+		weapon.SetDelayCount(10);
+		weapon2.SetDelayCount(10);
 		onAttackAnime = true;
 		onAttack = true;
 		weaponX = GetX1();
@@ -403,8 +460,16 @@ namespace game_framework {
 		{
 			return;
 		}
-		weapon.SetTopLeft((int)(weaponX + weaponMoveX), (int)(weaponY + weaponMoveY));
-		weapon.OnShow();
+		if (attackSide == false)
+		{
+			weapon.SetTopLeft((int)(weaponX + weaponMoveX), (int)(weaponY + weaponMoveY));
+			weapon.OnShow();
+		}
+		else
+		{
+			weapon2.SetTopLeft((int)(weaponX + weaponMoveX), (int)(weaponY + weaponMoveY));
+			weapon2.OnShow();
+		}
 	}
 
 	void BowHead::MoveWeapon(MapBrown* map)
@@ -414,6 +479,7 @@ namespace game_framework {
 			return;
 		}
 		weapon.OnMove();
+		weapon2.OnMove();
 		int weaponPositionX = (int)(weaponX + weaponMoveX);
 		int weaponPositionY = (int)(weaponY + weaponMoveY);
 
@@ -423,12 +489,30 @@ namespace game_framework {
 			weaponMoveY += (directY / unit) * 3;
 			if (weaponPositionY <= 0)
 			{
+				if (weaponPositionX >= heroX)
+				{
+					attackSide = false;
+				}
+				else
+				{
+					attackSide = true;
+				}
 				weaponMoveY = -1 * weaponY;
+				weapon.SetDelayCount(3);
+				weapon2.SetDelayCount(3);
 				weaponState = 1;
 			}
 		}
 		else if (weaponState == 1)
 		{
+			if (weaponPositionX >= heroX)
+			{
+				attackSide = false;
+			}
+			else
+			{
+				attackSide = true;
+			}
 			if (countRolling >= 90)
 			{
 				countRolling = 0;

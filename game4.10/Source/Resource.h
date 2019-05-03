@@ -107,6 +107,18 @@
 #define BH_R0                           238
 #define BH_R1                           239
 #define BH_R2                           240
+#define BH_W0                           241
+#define BH_W1                           242
+#define BH_W2                           243
+#define BH_W3                           244
+#define BH_W4                           245
+#define BH_W5                           246
+#define BH_W6                           247
+#define BH_W7                           248
+#define SLIME_W0                        249
+#define SLIME_W1                        250
+#define SLIME_W2                        251
+#define SLIME_W3                        252
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -119,7 +131,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        241
+#define _APS_NEXT_RESOURCE_VALUE        253
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

@@ -35,6 +35,9 @@ namespace game_framework {
 		bool isOnAttack();
 		void BeatBack(bool flag, int direct);
 		bool BeatBack();
+		void setHitValid(bool flag);
+		int getDamage();
+
 	protected:
 		CMovingBitmap standL;		// 擦子的動畫
 		CMovingBitmap standR;		// 擦子的動畫
@@ -46,6 +49,7 @@ namespace game_framework {
 		CMovingBitmap attackL;
 		CMovingBitmap attackR;
 
+		bool hitValid = false;
 		double speed;
 		bool onAttack;
 		CAnimation moveRAnimation;
@@ -60,6 +64,8 @@ namespace game_framework {
 		double beatBackYSpeed;
 		int attackFrameCount = 0;
 		int invincibleFrameCount = 0;
+		
+		int damage = 1;
 
 		int faceSide = 1;
 		int x, y;					// 擦子左上角座標

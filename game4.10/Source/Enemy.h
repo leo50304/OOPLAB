@@ -30,35 +30,39 @@ namespace game_framework {
 		void SetMovingUp(bool flag);	// 設定是否正在往上移動
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
 		void Distroy();
+		void hit(int d);
 		virtual bool InAttackRange(int x, int y);
 		virtual bool InWeaponHitBox(int x, int y);
 		int GetWeaponX1();
 		virtual bool InHitBox(int x, int y);
 		bool IsDistroyed();
-		int getMapLocation() 
+		int getMapLocation()
 		{
 			return location;
 		}
-		
+
 	protected:
 		int location;
 		int speed;
 		bool onAttack;
 		int directX;
 		int directY;
+		int hp;
 		CAnimation moveRAnimation;
 		CAnimation moveLAnimation;
 		CMovingBitmap AtkL;
 		CMovingBitmap AtkR;
 		CAnimation weapon;
-		int x, y;					
+		CAnimation weapon2;
+
+		int x, y;
 		int weaponX;
 		int weaponY;
 		bool onDrop = false;
 		bool isDistroyed = false;
-		bool isMovingDown;		
-		bool isMovingLeft;		
-		bool isMovingRight;		
+		bool isMovingDown;
+		bool isMovingLeft;
+		bool isMovingRight;
 		bool isMovingUp;
 		bool onAttackAnime = false;
 	};
@@ -81,8 +85,10 @@ namespace game_framework {
 		void MoveWeapon(MapBrown* map);
 		bool InAttackRange(int x, int y);
 		bool InWeaponHitBox(int x, int y);
+	private:
+		int weaponState;
 	};
-	
+
 	class Bat : public Enemy
 	{
 	public:
@@ -112,6 +118,7 @@ namespace game_framework {
 		int weaponState;
 		int countRolling;
 		int heroX, heroY;
+		bool attackSide;
 	};
 }
 #endif

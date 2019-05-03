@@ -22,8 +22,9 @@ namespace game_framework {
 
 	protected:
 		int map[13][18];
-		int mapOfMap[2][3];
-		MapObject* mapObjects[12];
+		int mapOfMap[6][5];
+		//MapObject* mapObjects[12];
+		vector<MapObject*> mapObjects;
 		std::vector<vector<vector<int>>> mapList;
 		const int X, Y;
 		const int MV, MH;
