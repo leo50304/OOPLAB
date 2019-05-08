@@ -574,5 +574,140 @@
     <Image Include="data\e\MBALL_1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\attack\attackBladeLeft1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackBladeLeft2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackBladeLeft3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackBladeRight1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackBladeRight2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackBladeRight3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackBurstLeft1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackBurstLeft2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackBurstLeft3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackBurstRight1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackBurstRight2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackBurstRight3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackFireLeft1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackFireLeft2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackFireLeft3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackFireRight1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackFireRight2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackFireRight3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackthunderH0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackthunderH1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackthunderH2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackthunderH3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackthunderH5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackThunderHit1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackThunderHit2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackthunderV0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackthunderV1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackthunderV2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackthunderV3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackthunderV4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackWaterLeft1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackWaterLeft2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackWaterLeft3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackWaterRight1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackWaterRight2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\attackWaterRight3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\bladeLeft.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\bladeRight.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\burstLeft.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\burstRight.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\fireLeft.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\fireRight.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\waterLeft.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\waterRight.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\attack\wave.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

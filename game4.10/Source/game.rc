@@ -344,6 +344,98 @@ MBALL_0                 BITMAP                  "..\\data\\e\\MBALL_0.bmp"
 
 MBALL_1                 BITMAP                  "..\\data\\e\\MBALL_1.bmp"
 
+IDB_BITMAP2             BITMAP                  "..\\data\\e\\bitmap2.bmp"
+
+IDB_BITMAP3             BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBladeLeft1.bmp"
+
+IDB_BITMAP4             BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBladeLeft2.bmp"
+
+IDB_BITMAP5             BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBladeLeft3.bmp"
+
+IDB_BITMAP6             BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBladeRight1.bmp"
+
+IDB_BITMAP7             BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBladeRight2.bmp"
+
+IDB_BITMAP8             BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBladeRight3.bmp"
+
+IDB_BITMAP9             BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBurstLeft1.bmp"
+
+attack_burst_left2      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBurstLeft2.bmp"
+
+attack_burst_left3      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBurstLeft3.bmp"
+
+attack_burst_right1     BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBurstRight1.bmp"
+
+IDB_BITMAP13            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBurstRight2.bmp"
+
+IDB_BITMAP14            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackBurstRight3.bmp"
+
+IDB_BITMAP15            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackFireLeft1.bmp"
+
+IDB_BITMAP16            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackFireLeft2.bmp"
+
+IDB_BITMAP17            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackFireLeft3.bmp"
+
+IDB_BITMAP18            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackFireRight1.bmp"
+
+IDB_BITMAP19            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackFireRight2.bmp"
+
+IDB_BITMAP20            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackFireRight3.bmp"
+
+attack_thunder_H_0      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackthunderH0.bmp"
+
+attack_thunder_H_1      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackthunderH1.bmp"
+
+attack_thunder_H_2      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackthunderH2.bmp"
+
+attack_thunder_H_3      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackthunderH3.bmp"
+
+attack_thunder_H_5      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackthunderH5.bmp"
+
+attack_thunder_hit_1    BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackThunderHit1.bmp"
+
+attack_thunder_hit_2    BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackThunderHit2.bmp"
+
+attack_thunder_V_0      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackthunderV0.bmp"
+
+attack_thunder_V_1      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackthunderV1.bmp"
+
+attack_thunder_V_2      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackthunderV2.bmp"
+
+attack_thunder_V_3      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackthunderV3.bmp"
+
+attack_thunder_V_4      BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackthunderV4.bmp"
+
+IDB_BITMAP33            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackWaterLeft1.bmp"
+
+IDB_BITMAP34            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackWaterLeft2.bmp"
+
+IDB_BITMAP35            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackWaterLeft3.bmp"
+
+IDB_BITMAP36            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackWaterRight1.bmp"
+
+IDB_BITMAP37            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackWaterRight2.bmp"
+
+IDB_BITMAP38            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\attackWaterRight3.bmp"
+
+IDB_BITMAP39            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\bladeLeft.bmp"
+
+IDB_BITMAP40            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\bladeRight.bmp"
+
+IDB_BITMAP41            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\burstLeft.bmp"
+
+IDB_BITMAP42            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\burstRight.bmp"
+
+IDB_BITMAP43            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\fireLeft.bmp"
+
+IDB_BITMAP44            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\fireRight.bmp"
+
+IDB_BITMAP45            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\waterLeft.bmp"
+
+IDB_BITMAP46            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\waterRight.bmp"
+
+IDB_BITMAP47            BITMAP                  "D:\\Downloads\\OOPLAB-master (1)\\OOPLAB-master\\OOPLAB\\game4.10\\data\\attack\\wave.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
