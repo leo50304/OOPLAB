@@ -270,7 +270,7 @@ namespace game_framework {
 				onDrop = true;
 				y = ((y - 1) / 32) * 32 + 32;
 			}
-			if (y <= jumpTop && !onDrop)
+			if (y <= jumpTop && !onDrop && onJump)
 			{
 				speed = 0;
 				y = jumpTop;
