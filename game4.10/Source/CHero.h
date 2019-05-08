@@ -28,14 +28,23 @@ namespace game_framework {
 		bool IsOnLadder();
 		void Drop();
 		void SetOnLadder(bool flag);
+
 		void SetAttack(bool flag);
+
 		bool InAttackRange(int x, int y);
+		bool InFireRange(int x, int y);
 		void SetHoldUp(bool flag);
+
 		bool isOnAttack();
+
 		void BeatBack(bool flag, int direct);
 		bool BeatBack();
 		void setHitValid(bool flag);
 		int getDamage();
+
+		void SetFire(bool flag);
+		bool isOnFire();
+		bool isOnBook();
 
 	protected:
 		CMovingBitmap standL;
@@ -47,10 +56,19 @@ namespace game_framework {
 		CMovingBitmap swordR;
 		CMovingBitmap attackL;
 		CMovingBitmap attackR;
+		CMovingBitmap FBookL;
+		CMovingBitmap FBookR;
+		CAnimation FireL;
+		CAnimation FireR;
 
 		bool hitValid = false;
 		double speed;
 		bool onAttack;
+		bool onFire;
+		bool onBook;
+		int FireX;
+		int FireY;
+		bool FireSide;
 		CAnimation moveRAnimation;
 		CAnimation moveLAnimation;
 		CAnimation moveUAnimation;
@@ -62,6 +80,8 @@ namespace game_framework {
 		double beatBackXSpeed;
 		double beatBackYSpeed;
 		int attackFrameCount = 0;
+		int fireFrameCount = 0;
+		int bookFrameCount = 0;
 		int invincibleFrameCount = 0;
 		
 		int damage = 1;

@@ -465,6 +465,20 @@ namespace game_framework {
 				}
 			}
 		}
+		if (hero.isOnFire())
+		{
+			for (unsigned int i = 0; i < enemies.size(); ++i)
+			{
+				if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed())
+				{
+					if (hero.InFireRange(enemies[i]->GetX1(), enemies[i]->GetY1()))
+					{
+						enemies[i]->hit(hero.getDamage());
+						enemies[i]->Distroy();
+					}
+				}
+			}
+		}
 
 		for (unsigned int i = 0; i < enemies.size(); ++i)
 		{
@@ -565,6 +579,7 @@ namespace game_framework {
 		const char KEY_RIGHT = 0x27; // keyboard¥k½bÀY
 		const char KEY_DOWN = 0x28; // keyboard¤U½bÀY
 		const char KEY_SPACE = 0x20;
+		const char KEY_F = 70;
 		if (nChar == KEY_LEFT) {
 			hero.SetMovingLeft(true);
 		}
@@ -577,8 +592,11 @@ namespace game_framework {
 		if (nChar == KEY_DOWN) {
 			hero.SetMovingDown(true);
 		}
+		//if (nChar == KEY_SPACE) {
+		//	hero.SetAttack(true);
+		//}
 		if (nChar == KEY_SPACE) {
-			hero.SetAttack(true);
+			hero.SetFire(true);
 		}
 	}
 

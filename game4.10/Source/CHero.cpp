@@ -64,6 +64,8 @@ namespace game_framework {
 		isOnLadder = false;
 		onDrop = false;
 		onAttack = false;
+		onFire = false;
+		onBook = false;
 		previousBlock = 0;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 	}
@@ -84,7 +86,8 @@ namespace game_framework {
 		{
 			return false;
 		}
-		if (eY - y <16 && eY - y > -16) {
+		if (eY - y <16 && eY - y > -16) 
+		{
 			if (faceSide == 0)
 			{
 				return x - eX < 64 && eX < x - 32;
@@ -96,10 +99,22 @@ namespace game_framework {
 		}
 		return false;
 	}
+	bool CHero::InFireRange(int eX, int eY)
+	{
+		return eX < FireX + 32 && eX + 32 > FireX && eY < FireY + 32 && eY + 32 > FireY;
+	}
 
 	bool CHero::isOnAttack()
 	{
 		return onAttack;
+	}
+	bool CHero::isOnFire()
+	{
+		return onFire;
+	}
+	bool CHero::isOnBook()
+	{
+		return onBook;
 	}
 
 	void CHero::LoadBitmap()
@@ -113,7 +128,14 @@ namespace game_framework {
 		swordR.LoadBitmap(MWW_R, RGB(255, 255, 255));
 		attackL.LoadBitmap(WWA_L, RGB(255, 255, 255));
 		attackR.LoadBitmap(WWA_R, RGB(255, 255, 255));
-
+		FBookL.LoadBitmap(IDB_BITMAP43, RGB(128, 0, 128));
+		FBookR.LoadBitmap(IDB_BITMAP44, RGB(128, 0, 128));
+		FireL.AddBitmap(IDB_BITMAP15, RGB(128, 0, 128));
+		FireL.AddBitmap(IDB_BITMAP16, RGB(128, 0, 128));
+		FireL.AddBitmap(IDB_BITMAP17, RGB(128, 0, 128));
+		FireR.AddBitmap(IDB_BITMAP18, RGB(128, 0, 128));
+		FireR.AddBitmap(IDB_BITMAP19, RGB(128, 0, 128));
+		FireR.AddBitmap(IDB_BITMAP20, RGB(128, 0, 128));
 		stayOnLadder.LoadBitmap(WWL_2, RGB(255, 255, 255));
 
 		moveRAnimation.AddBitmap(WWR_R1, RGB(255, 255, 255));
@@ -162,6 +184,22 @@ namespace game_framework {
 		hitValid = flag;
 		attackFrameCount = 0;
 	}
+
+	void CHero::SetFire(bool flag)
+	{
+		if (flag == true && onFire)
+		{
+			return;
+		}
+		FireX = x;
+		FireY = y;
+		onFire = flag;
+		onBook = flag;
+		FireSide = faceSide;
+		fireFrameCount = 0;
+		bookFrameCount = 0;
+	}
+
 
 	bool CHero::HitGround(MapBrown* map)
 	{
@@ -227,14 +265,27 @@ namespace game_framework {
 		if (isOnLadder && !isOnLadderSide)
 		{
 			onAttack = false;
+			onFire = false;
 		}
 		if (attackFrameCount == 16)
 		{
 			onAttack = false;
 			attackFrameCount = 0;
 		}
+		if (bookFrameCount == 16)
+		{
+			onBook = false;
+			bookFrameCount = 0;
+		}
+		if (fireFrameCount == 50)
+		{
+			onFire = false;
+			fireFrameCount = 0;
+		}
 		double ACCELERATE = (0.892*0.5);
 		attackFrameCount++;
+		fireFrameCount++;
+		bookFrameCount++;
 		const int STEP_SIZE = 4;
 
 		moveRAnimation.OnMove();
@@ -417,6 +468,22 @@ namespace game_framework {
 				y = 32 * 1;
 			}
 		}
+		if (onFire)
+		{
+			if (FireSide == 0)
+			{
+				FireX -= 8;
+			}
+			else if (FireSide == 1)
+				{
+				FireX += 8;
+				}
+			if (FireX >= 18 * 32 - 24 || FireX <= 0 - 8 )
+			{
+				FireX = -100;
+				onFire = false;
+			}
+		}
 	}
 
 	void CHero::SetMovingDown(bool flag)
@@ -466,6 +533,37 @@ namespace game_framework {
 				attackR.ShowBitmap();
 				swordR.SetTopLeft(x + 31, y + 2);
 				swordR.ShowBitmap();
+			}
+		}
+
+		if (onFire)
+		{
+			if (FireSide == 0)
+			{
+				FireL.SetTopLeft(FireX, FireY);
+				FireL.OnShow();
+			}
+			else if (FireSide == 1)
+			{
+				FireR.SetTopLeft(FireX, FireY);
+				FireR.OnShow();
+			}
+		}
+		if (onBook)
+		{
+			if (faceSide == 0)
+			{
+				FBookL.SetTopLeft(x - 16, y + 2);
+				FBookL.ShowBitmap();
+				attackL.SetTopLeft(x, y);
+				attackL.ShowBitmap();
+			}
+			if (faceSide == 1)
+			{
+				FBookR.SetTopLeft(x + 16, y + 2);
+				FBookR.ShowBitmap();
+				attackR.SetTopLeft(x, y);
+				attackR.ShowBitmap();
 			}
 		}
 		else if (onJump)
