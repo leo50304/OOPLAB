@@ -409,17 +409,44 @@ namespace game_framework {
 		const int ANIMATION_SPEED = 15;
 
 		hero.Initialize();
-		enemies.push_back(new MBall(10 * 32, 13 * 32, 0));
-		enemies.push_back(new Orc(13 * 32, 7 * 32, 0));
-		enemies.push_back(new Skull(13 * 32, 7 * 32, 0));
-		enemies.push_back(new Eye(13 * 32, 7 * 32, 0));
-		enemies.push_back(new Snake(1 * 32, 6 * 32, 0));
-		enemies.push_back(new Snake(13 * 32, 7 * 32, 0));
-		enemies.push_back(new Frog(12 * 32, 7 * 32, 0));
 		enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
-		enemies.push_back(new Bat(0 * 32, 1 * 32, 0));
-		enemies.push_back(new Bat(12 * 32, 7 * 32, 0));
+		enemies.push_back(new Slime(1 * 32, 1 * 32, 0));
+		enemies.push_back(new Slime(2 * 32, 8 * 32, 0));
 		enemies.push_back(new BowHead(10 * 32, 7 * 32, 0));
+		enemies.push_back(new Snake(6 * 32, 11 * 32, 0));
+
+		enemies.push_back(new MBall(12 * 32, 13 * 32, 1));
+		enemies.push_back(new MBall(9 * 32, 13 * 32, 1));
+		enemies.push_back(new MBall(6 * 32, 12 * 32, 1));
+
+		enemies.push_back(new Orc(13 * 32, 11 * 32, 2));
+		enemies.push_back(new Orc(11 * 32, 6 * 32, 2));
+		enemies.push_back(new Orc(7 * 32, 2 * 32, 2));
+
+		enemies.push_back(new Skull(13 * 32, 8 * 32, 3));
+		enemies.push_back(new Skull(14 * 32, 2 * 32, 3));
+
+		enemies.push_back(new Eye(13 * 32, 8 * 32, 14));
+		enemies.push_back(new Eye(13 * 32, 11 * 32, 14));
+
+		enemies.push_back(new Frog(14 * 32, 11 * 32, 15));
+		enemies.push_back(new Frog(2 * 32, 3 * 32, 15));
+		enemies.push_back(new Frog(6 * 32, 7 * 32, 15));
+
+		enemies.push_back(new Frog(13 * 32, 10 * 32, 16));
+		enemies.push_back(new Frog(2 * 32, 5 * 32, 16));
+		enemies.push_back(new Frog(2 * 32, 11 * 32, 16));
+		
+		enemies.push_back(new Bat(0 * 32, 1 * 32, 5));
+		enemies.push_back(new Bat(0 * 32, 6 * 32, 5));
+		enemies.push_back(new Bat(15 * 32, 10 * 32, 5));
+
+		enemies.push_back(new Bat(12 * 32, 7 * 32, 4));
+		enemies.push_back(new BowHead(3 * 32, 11 * 32, 4));
+		enemies.push_back(new BowHead(6 * 32, 11 * 32, 4));
+
+		enemies.push_back(new BowHead(6 * 32, 11 * 32, 6));
+		enemies.push_back(new BowHead(6 * 32, 4 * 32, 6));
 
 		enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
 		enemies.push_back(new BowHead(2 * 32, 2 * 32, 7));
@@ -592,10 +619,10 @@ namespace game_framework {
 		if (nChar == KEY_DOWN) {
 			hero.SetMovingDown(true);
 		}
-		//if (nChar == KEY_SPACE) {
-		//	hero.SetAttack(true);
-		//}
 		if (nChar == KEY_SPACE) {
+			hero.SetAttack(true);
+		}
+		if (nChar == KEY_F) {
 			hero.SetFire(true);
 		}
 	}
