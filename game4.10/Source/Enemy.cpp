@@ -51,7 +51,7 @@ namespace game_framework {
 
 	void Enemy::Distroy()
 	{
-		if (hp == 0)
+		if (hp <= 0)
 		{
 			isDistroyed = true;
 		}

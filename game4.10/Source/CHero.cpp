@@ -116,6 +116,15 @@ namespace game_framework {
 	{
 		return onBook;
 	}
+	bool CHero::isOnThunder()
+	{
+		return onThunder;
+	}
+
+	void CHero::SetThunder(bool flag)
+	{
+		onThunder = flag;
+	}
 
 	void CHero::LoadBitmap()
 	{
@@ -518,24 +527,6 @@ namespace game_framework {
 			return;
 		}
 
-		if (onAttack)
-		{
-			if (faceSide == 0)
-			{
-				attackL.SetTopLeft(x, y);
-				attackL.ShowBitmap();
-				swordL.SetTopLeft(x - 31, y + 2);
-				swordL.ShowBitmap();
-			}
-			else if (faceSide == 1)
-			{
-				attackR.SetTopLeft(x, y);
-				attackR.ShowBitmap();
-				swordR.SetTopLeft(x + 31, y + 2);
-				swordR.ShowBitmap();
-			}
-		}
-
 		if (onFire)
 		{
 			if (FireSide == 0)
@@ -566,6 +557,25 @@ namespace game_framework {
 				attackR.ShowBitmap();
 			}
 		}
+
+		else if (onAttack)
+		{
+			if (faceSide == 0)
+			{
+				attackL.SetTopLeft(x, y);
+				attackL.ShowBitmap();
+				swordL.SetTopLeft(x - 31, y + 2);
+				swordL.ShowBitmap();
+			}
+			else if (faceSide == 1)
+			{
+				attackR.SetTopLeft(x, y);
+				attackR.ShowBitmap();
+				swordR.SetTopLeft(x + 31, y + 2);
+				swordR.ShowBitmap();
+			}
+		}
+
 		else if (onJump)
 		{
 			if (faceSide == 0)

@@ -45,6 +45,7 @@
 #include "map.h"
 #include "CHero.h"
 #include "Enemy.h"
+#include "thunder.h"
 
 namespace game_framework {
 
@@ -102,6 +103,7 @@ namespace game_framework {
 		//const int		NUMBALLS;	// 球的總數
 		//CMovingBitmap	background;	// 背景圖
 		MapBrown		mapBrown;
+		Thunder			thunder;
 		//CMovingBitmap	help;		// 說明圖
 		//CBall			*ball;		// 球的陣列
 		CMovingBitmap	corner;		// 角落圖

@@ -46,6 +46,9 @@ namespace game_framework {
 		bool isOnFire();
 		bool isOnBook();
 
+		bool isOnThunder();
+		void SetThunder(bool flag);
+
 	protected:
 		CMovingBitmap standL;
 		CMovingBitmap standR;
@@ -66,6 +69,7 @@ namespace game_framework {
 		bool onAttack;
 		bool onFire;
 		bool onBook;
+		bool onThunder = false;
 		int FireX;
 		int FireY;
 		bool FireSide;

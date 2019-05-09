@@ -409,6 +409,7 @@ namespace game_framework {
 		const int ANIMATION_SPEED = 15;
 
 		hero.Initialize();
+		thunder.initialize();
 		enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
 		enemies.push_back(new Slime(1 * 32, 1 * 32, 0));
 		enemies.push_back(new Slime(2 * 32, 8 * 32, 0));
@@ -500,11 +501,17 @@ namespace game_framework {
 				{
 					if (hero.InFireRange(enemies[i]->GetX1(), enemies[i]->GetY1()))
 					{
+						hero.setHitValid(false);
 						enemies[i]->hit(hero.getDamage());
 						enemies[i]->Distroy();
 					}
 				}
 			}
+		}
+
+		if (hero.isOnThunder())
+		{
+			thunder.OnMove(enemies, mapBrown.getNext());
 		}
 
 		for (unsigned int i = 0; i < enemies.size(); ++i)
@@ -607,6 +614,7 @@ namespace game_framework {
 		const char KEY_DOWN = 0x28; // keyboard¤U½bÀY
 		const char KEY_SPACE = 0x20;
 		const char KEY_F = 70;
+		const char KEY_T = 84;
 		if (nChar == KEY_LEFT) {
 			hero.SetMovingLeft(true);
 		}
@@ -624,6 +632,12 @@ namespace game_framework {
 		}
 		if (nChar == KEY_F) {
 			hero.SetFire(true);
+		}
+		if (nChar == KEY_T)
+		{
+			hero.SetThunder(true);
+			thunder.initState();
+			thunder.OnPrepare();
 		}
 	}
 
@@ -694,5 +708,6 @@ namespace game_framework {
 			}
 		}
 		hero.OnShow();
+		thunder.OnShow();
 	}
 }
