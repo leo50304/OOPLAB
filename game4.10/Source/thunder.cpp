@@ -56,7 +56,6 @@ namespace game_framework {
 		t.x = rand() % 13;
 		t.length = 1;
 		t.growth = true;
-		thunders.push_back(t);
 		frameCount = 0;
 	}
 
