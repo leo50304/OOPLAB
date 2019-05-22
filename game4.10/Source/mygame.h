@@ -84,6 +84,10 @@ namespace game_framework {
 	private:
 		CMovingBitmap logo;								// csieªºlogo
 		CMovingBitmap logoBackground;								// csieªºlogo
+		CMovingBitmap titleNew;
+		CMovingBitmap titleFrame;
+		int currentSelect;
+		int titleOffset;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

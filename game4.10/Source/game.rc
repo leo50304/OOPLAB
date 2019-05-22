@@ -440,6 +440,17 @@ MENU_0                  BITMAP                  "..\\data\\gxt_00.bmp"
 
 MENU_1                  BITMAP                  "..\\data\\gxt_01.bmp"
 
+TITLE_NEW               BITMAP                  "..\\data\\start-game.bmp"
+
+TITLE_FRAME             BITMAP                  "..\\data\\gxt_02.bmp"
+
+TITLE_CONTINUE          BITMAP                  "..\\data\\continueGame.bmp"
+
+TITLE_EXIT              BITMAP                  "..\\data\\end-game.bmp"
+
+TITLE_LEADERBOARD       BITMAP                  "..\\data\\ledder-board.bmp"
+
+TITLE_SETTING           BITMAP                  "..\\data\\setting.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

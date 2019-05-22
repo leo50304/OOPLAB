@@ -721,5 +721,14 @@
     <Image Include="data\gxt_01.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\start-game.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gs_03.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gxt_02.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

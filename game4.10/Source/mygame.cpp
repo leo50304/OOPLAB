@@ -283,6 +283,10 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
+		currentSelect = 0;
+		titleOffset = 32;
+		titleFrame.LoadBitmap(TITLE_FRAME, RGB(128, 0, 128));
+		titleNew.LoadBitmap(TITLE_NEW, RGB(128, 0, 128));
 		logo.LoadBitmap(MENU_0, RGB(128, 0, 128));
 		logoBackground.LoadBitmap(MENU_1, RGB(128, 0, 128));
 		CAudio::Instance()->Play(TITLE_BGM, false);		// 撥放 WAVE
@@ -326,6 +330,14 @@ namespace game_framework {
 		logoBackground.ShowBitmap();
 		logo.SetTopLeft((SIZE_X - logo.Width()) / 2, SIZE_Y / 8);
 		logo.ShowBitmap();
+
+		titleFrame.SetTopLeft(270-32, 245 + titleOffset * currentSelect);
+		titleFrame.ShowBitmap();
+		titleNew.SetTopLeft(270,240);
+		titleNew.ShowBitmap();
+		titleNew.SetTopLeft(270, 245 + titleOffset * 1);
+
+		titleNew.ShowBitmap();
 
 		//
 		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好

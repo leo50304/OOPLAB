@@ -239,6 +239,13 @@
 #define wave                            339
 #define MENU_0                          340
 #define MENU_1                          341
+#define TITLE_NEW                       348
+#define TITLE_FRAME                     350
+#define TITLE_CONTINUE                  351
+#define TITLE_EXIT                      352
+#define TITLE_LEADERBOARD               353
+#define IDB_BITMAP21                    354
+#define TITLE_SETTING                   354
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -251,7 +258,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        342
+#define _APS_NEXT_RESOURCE_VALUE        355
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

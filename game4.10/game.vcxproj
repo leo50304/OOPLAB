@@ -467,8 +467,10 @@
     <Image Include="data\e\SNAKE_2.bmp" />
     <Image Include="data\e\SNAKE_3.bmp" />
     <Image Include="data\e\SNAKE_4.bmp" />
+    <Image Include="data\gs_03.bmp" />
     <Image Include="data\gxt_00.bmp" />
     <Image Include="data\gxt_01.bmp" />
+    <Image Include="data\gxt_02.bmp" />
     <Image Include="data\map\gm_00.bmp" />
     <Image Include="data\map\gm_01.bmp" />
     <Image Include="data\map\gm_02.bmp" />
@@ -502,6 +504,7 @@
     <Image Include="data\map\mapdata\900.bmp" />
     <Image Include="data\map\mapdata\901.bmp" />
     <Image Include="data\map\mapdata\bitmap2.bmp" />
+    <Image Include="data\start-game.bmp" />
     <Image Include="res\bitmap4.bmp" />
     <Image Include="res\bitmap5.bmp" />
     <Image Include="res\bmp00001.bmp" />
