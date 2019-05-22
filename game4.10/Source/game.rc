@@ -436,9 +436,9 @@ IDB_BITMAP46            BITMAP                  "..\\data\\attack\\waterRight.bm
 
 IDB_BITMAP47            BITMAP                  "..\\data\\attack\\wave.bmp"
 
-MENU_0                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\gxt_00.bmp"
+MENU_0                  BITMAP                  "..\\data\\gxt_00.bmp"
 
-MENU_1                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\gxt_01.bmp"
+MENU_1                  BITMAP                  "..\\data\\gxt_01.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
