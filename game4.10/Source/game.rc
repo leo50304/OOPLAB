@@ -346,41 +346,41 @@ MBALL_1                 BITMAP                  "..\\data\\e\\MBALL_1.bmp"
 
 IDB_BITMAP2             BITMAP                  "..\\data\\e\\bitmap2.bmp"
 
-IDB_BITMAP3             BITMAP                  "..\\data\\attack\\attackBladeLeft1.bmp"
+attack_blade_left_1     BITMAP                  "..\\data\\attack\\attackBladeLeft1.bmp"
 
-IDB_BITMAP4             BITMAP                  "..\\data\\attack\\attackBladeLeft2.bmp"
+attack_blade_left_2     BITMAP                  "..\\data\\attack\\attackBladeLeft2.bmp"
 
-IDB_BITMAP5             BITMAP                  "..\\data\\attack\\attackBladeLeft3.bmp"
+attack_blade_left_3     BITMAP                  "..\\data\\attack\\attackBladeLeft3.bmp"
 
-IDB_BITMAP6             BITMAP                  "..\\data\\attack\\attackBladeRight1.bmp"
+attack_blade_right_1    BITMAP                  "..\\data\\attack\\attackBladeRight1.bmp"
 
-IDB_BITMAP7             BITMAP                  "..\\data\\attack\\attackBladeRight2.bmp"
+attack_blade_right_2    BITMAP                  "..\\data\\attack\\attackBladeRight2.bmp"
 
-IDB_BITMAP8             BITMAP                  "..\\data\\attack\\attackBladeRight3.bmp"
+attack_blade_right_3    BITMAP                  "..\\data\\attack\\attackBladeRight3.bmp"
 
-IDB_BITMAP9             BITMAP                  "..\\data\\attack\\attackBurstLeft1.bmp"
+attack_burst_left_1     BITMAP                  "..\\data\\attack\\attackBurstLeft1.bmp"
 
-attack_burst_left2      BITMAP                  "..\\data\\attack\\attackBurstLeft2.bmp"
+attack_burst_left_2     BITMAP                  "..\\data\\attack\\attackBurstLeft2.bmp"
 
-attack_burst_left3      BITMAP                  "..\\data\\attack\\attackBurstLeft3.bmp"
+attack_burst_left_3     BITMAP                  "..\\data\\attack\\attackBurstLeft3.bmp"
 
-attack_burst_right1     BITMAP                  "..\\data\\attack\\attackBurstRight1.bmp"
+attack_burst_right_1    BITMAP                  "..\\data\\attack\\attackBurstRight1.bmp"
 
-IDB_BITMAP13            BITMAP                  "..\\data\\attack\\attackBurstRight2.bmp"
+attack_burst_right_2    BITMAP                  "..\\data\\attack\\attackBurstRight2.bmp"
 
-IDB_BITMAP14            BITMAP                  "..\\data\\attack\\attackBurstRight3.bmp"
+attack_burst_right_3    BITMAP                  "..\\data\\attack\\attackBurstRight3.bmp"
 
-IDB_BITMAP15            BITMAP                  "..\\data\\attack\\attackFireLeft1.bmp"
+attack_fire_left_1      BITMAP                  "..\\data\\attack\\attackFireLeft1.bmp"
 
-IDB_BITMAP16            BITMAP                  "..\\data\\attack\\attackFireLeft2.bmp"
+attack_fire_left_2      BITMAP                  "..\\data\\attack\\attackFireLeft2.bmp"
 
-IDB_BITMAP17            BITMAP                  "..\\data\\attack\\attackFireLeft3.bmp"
+attack_fire_left_3      BITMAP                  "..\\data\\attack\\attackFireLeft3.bmp"
 
-IDB_BITMAP18            BITMAP                  "..\\data\\attack\\attackFireRight1.bmp"
+attack_fire_right_1     BITMAP                  "..\\data\\attack\\attackFireRight1.bmp"
 
-IDB_BITMAP19            BITMAP                  "..\\data\\attack\\attackFireRight2.bmp"
+attack_fire_right_2     BITMAP                  "..\\data\\attack\\attackFireRight2.bmp"
 
-IDB_BITMAP20            BITMAP                  "..\\data\\attack\\attackFireRight3.bmp"
+attack_fire_right_3     BITMAP                  "..\\data\\attack\\attackFireRight3.bmp"
 
 attack_thunder_H_0      BITMAP                  "..\\data\\attack\\attackthunderH0.bmp"
 
@@ -406,35 +406,35 @@ attack_thunder_V_3      BITMAP                  "..\\data\\attack\\attackthunder
 
 attack_thunder_V_4      BITMAP                  "..\\data\\attack\\attackthunderV4.bmp"
 
-IDB_BITMAP33            BITMAP                  "..\\data\\attack\\attackWaterLeft1.bmp"
+attack_water_left_1     BITMAP                  "..\\data\\attack\\attackWaterLeft1.bmp"
 
-IDB_BITMAP34            BITMAP                  "..\\data\\attack\\attackWaterLeft2.bmp"
+attack_water_left_2     BITMAP                  "..\\data\\attack\\attackWaterLeft2.bmp"
 
-IDB_BITMAP35            BITMAP                  "..\\data\\attack\\attackWaterLeft3.bmp"
+attack_water_left_3     BITMAP                  "..\\data\\attack\\attackWaterLeft3.bmp"
 
-IDB_BITMAP36            BITMAP                  "..\\data\\attack\\attackWaterRight1.bmp"
+attack_water_right_1    BITMAP                  "..\\data\\attack\\attackWaterRight1.bmp"
 
-IDB_BITMAP37            BITMAP                  "..\\data\\attack\\attackWaterRight2.bmp"
+attack_water_right_2    BITMAP                  "..\\data\\attack\\attackWaterRight2.bmp"
 
-IDB_BITMAP38            BITMAP                  "..\\data\\attack\\attackWaterRight3.bmp"
+attack_water_right_3    BITMAP                  "..\\data\\attack\\attackWaterRight3.bmp"
 
-IDB_BITMAP39            BITMAP                  "..\\data\\attack\\bladeLeft.bmp"
+blade_left              BITMAP                  "..\\data\\attack\\bladeLeft.bmp"
 
-IDB_BITMAP40            BITMAP                  "..\\data\\attack\\bladeRight.bmp"
+blade_right             BITMAP                  "..\\data\\attack\\bladeRight.bmp"
 
-IDB_BITMAP41            BITMAP                  "..\\data\\attack\\burstLeft.bmp"
+burst_left              BITMAP                  "..\\data\\attack\\burstLeft.bmp"
 
-IDB_BITMAP42            BITMAP                  "..\\data\\attack\\burstRight.bmp"
+burst_right             BITMAP                  "..\\data\\attack\\burstRight.bmp"
 
-IDB_BITMAP43            BITMAP                  "..\\data\\attack\\fireLeft.bmp"
+fire_left               BITMAP                  "..\\data\\attack\\fireLeft.bmp"
 
-IDB_BITMAP44            BITMAP                  "..\\data\\attack\\fireRight.bmp"
+fire_right              BITMAP                  "..\\data\\attack\\fireRight.bmp"
 
-IDB_BITMAP45            BITMAP                  "..\\data\\attack\\waterLeft.bmp"
+water_left              BITMAP                  "..\\data\\attack\\waterLeft.bmp"
 
-IDB_BITMAP46            BITMAP                  "..\\data\\attack\\waterRight.bmp"
+water_right             BITMAP                  "..\\data\\attack\\waterRight.bmp"
 
-IDB_BITMAP47            BITMAP                  "..\\data\\attack\\wave.bmp"
+wave                    BITMAP                  "..\\data\\attack\\wave.bmp"
 
 MENU_0                  BITMAP                  "..\\data\\gxt_00.bmp"
 

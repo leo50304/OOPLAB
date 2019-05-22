@@ -140,12 +140,12 @@ namespace game_framework {
 		attackR.LoadBitmap(WWA_R, RGB(255, 255, 255));
 		FBookL.LoadBitmap(IDB_BITMAP43, RGB(128, 0, 128));
 		FBookR.LoadBitmap(IDB_BITMAP44, RGB(128, 0, 128));
-		FireL.AddBitmap(IDB_BITMAP15, RGB(128, 0, 128));
-		FireL.AddBitmap(IDB_BITMAP16, RGB(128, 0, 128));
-		FireL.AddBitmap(IDB_BITMAP17, RGB(128, 0, 128));
-		FireR.AddBitmap(IDB_BITMAP18, RGB(128, 0, 128));
-		FireR.AddBitmap(IDB_BITMAP19, RGB(128, 0, 128));
-		FireR.AddBitmap(IDB_BITMAP20, RGB(128, 0, 128));
+		FireL.AddBitmap(attack_fire_left_1, RGB(128, 0, 128));
+		FireL.AddBitmap(attack_fire_left_2, RGB(128, 0, 128));
+		FireL.AddBitmap(attack_fire_left_3, RGB(128, 0, 128));
+		FireR.AddBitmap(attack_fire_right_1, RGB(128, 0, 128));
+		FireR.AddBitmap(attack_fire_right_2, RGB(128, 0, 128));
+		FireR.AddBitmap(attack_fire_right_3, RGB(128, 0, 128));
 		stayOnLadder.LoadBitmap(WWL_2, RGB(255, 255, 255));
 
 		moveRAnimation.AddBitmap(WWR_R1, RGB(255, 255, 255));
