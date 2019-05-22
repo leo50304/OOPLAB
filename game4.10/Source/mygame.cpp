@@ -287,6 +287,10 @@ namespace game_framework {
 		titleOffset = 32;
 		titleFrame.LoadBitmap(TITLE_FRAME, RGB(128, 0, 128));
 		titleNew.LoadBitmap(TITLE_NEW, RGB(128, 0, 128));
+		titleContinue.LoadBitmap(TITLE_CONTINUE, RGB(128, 0, 128));
+		titleLeaderboard.LoadBitmap(TITLE_LEADERBOARD, RGB(128, 0, 128));
+		titleSetting.LoadBitmap(TITLE_SETTING, RGB(128, 0, 128));
+		titleExit.LoadBitmap(TITLE_EXIT, RGB(128, 0, 128));
 		logo.LoadBitmap(MENU_0, RGB(128, 0, 128));
 		logoBackground.LoadBitmap(MENU_1, RGB(128, 0, 128));
 		CAudio::Instance()->Play(TITLE_BGM, false);		// 撥放 WAVE
@@ -307,10 +311,37 @@ namespace game_framework {
 	{
 		const char KEY_ESC = 27;
 		const char KEY_SPACE = ' ';
+		const char KEY_UP = 0x26; // keyboard上箭頭
+		const char KEY_DOWN = 0x28; // keyboard上箭頭
+
 		if (nChar == KEY_SPACE) 
 		{
-			CAudio::Instance()->Stop(TITLE_BGM);	
-			GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
+			if (currentSelect == 0) 
+			{
+				CAudio::Instance()->Stop(TITLE_BGM);	
+				GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
+			}
+			else if (currentSelect == 4) 
+			{
+				CAudio::Instance()->Stop(TITLE_BGM);
+				GotoGameState(GAME_STATE_OVER);
+			}
+		}
+		else if (nChar == KEY_UP) 
+		{
+			currentSelect--;
+			if (currentSelect < 0) 
+			{
+				currentSelect = 4;
+			}
+		}
+		else if (nChar == KEY_DOWN)
+		{
+			currentSelect++;
+			if (currentSelect >4)
+			{
+				currentSelect = 0;
+			}
 		}
 		else if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
 			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
@@ -335,9 +366,14 @@ namespace game_framework {
 		titleFrame.ShowBitmap();
 		titleNew.SetTopLeft(270,240);
 		titleNew.ShowBitmap();
-		titleNew.SetTopLeft(270, 245 + titleOffset * 1);
-
-		titleNew.ShowBitmap();
+		titleContinue.SetTopLeft(270, 240 + titleOffset * 1);
+		titleContinue.ShowBitmap();
+		titleLeaderboard.SetTopLeft(270, 240 + titleOffset * 2);
+		titleLeaderboard.ShowBitmap();
+		titleSetting.SetTopLeft(270, 240 + titleOffset * 3); 
+		titleSetting.ShowBitmap();
+		titleExit.SetTopLeft(270, 240 + titleOffset * 4); 
+		titleExit.ShowBitmap();
 
 		//
 		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好

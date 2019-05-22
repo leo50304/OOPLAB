@@ -85,7 +85,13 @@ namespace game_framework {
 		CMovingBitmap logo;								// csieªºlogo
 		CMovingBitmap logoBackground;								// csieªºlogo
 		CMovingBitmap titleNew;
+		CMovingBitmap titleContinue;
+		CMovingBitmap titleLeaderboard;
+		CMovingBitmap titleSetting;
+		CMovingBitmap titleExit;
+
 		CMovingBitmap titleFrame;
+
 		int currentSelect;
 		int titleOffset;
 	};
