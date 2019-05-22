@@ -7,6 +7,7 @@
 #include "CHero.h"
 #include "Block.h"
 #include "map.h"
+#include "mygame.h"
 
 namespace game_framework {
 
@@ -192,6 +193,10 @@ namespace game_framework {
 		onAttack = flag;
 		hitValid = flag;
 		attackFrameCount = 0;
+		if (flag) 
+		{
+			CAudio::Instance()->Play(ATK_EF, false);		// 撥放 WAVE
+		}
 	}
 
 	void CHero::SetFire(bool flag)
@@ -207,6 +212,10 @@ namespace game_framework {
 		FireSide = faceSide;
 		fireFrameCount = 0;
 		bookFrameCount = 0;
+		if (onFire) 
+		{
+			CAudio::Instance()->Play(FIRE_ATK_EF, false);		// 撥放 WAVE
+		}
 	}
 
 
@@ -323,6 +332,7 @@ namespace game_framework {
 				y = (y / 32) * 32;
 				onJump = false;
 				onDrop = false;
+				CAudio::Instance()->Play(DROP_EF, false);		// 撥放 WAVE
 			}
 			if (HitTop(map)) //撞到頭
 			{
@@ -356,6 +366,7 @@ namespace game_framework {
 
 				if (!onJump && !onHold)
 				{
+					CAudio::Instance()->Play(JUMP_EF, false);		// 撥放 WAVE
 					speed = 10;
 					onJump = true;
 					onDrop = false;

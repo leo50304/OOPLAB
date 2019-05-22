@@ -715,5 +715,11 @@
     <Image Include="data\attack\wave.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\gxt_00.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gxt_01.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

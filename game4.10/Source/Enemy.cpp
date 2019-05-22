@@ -822,6 +822,7 @@ namespace game_framework {
 		{
 			onAttackAnime = false;
 			weapon.OnMove();
+			weapon2.OnMove();
 			int weaponPositionX = (int)(weaponX + weaponMoveX);
 			int weaponPositionY = (int)(weaponY + weaponMoveY);
 			unit = sqrt(directX*directX + directY * directY);

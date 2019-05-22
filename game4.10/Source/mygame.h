@@ -37,6 +37,8 @@
  *      2. Replace the demonstration of animation as a new bouncing ball.
  *      3. Use ShowInitProgress(percent) to display loading progress.
 */
+#ifndef MY_GAME_H
+#define MY_GAME_H
 
 //#include "CEraser.h"
 //#include "CBall.h"
@@ -55,9 +57,14 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	enum AUDIO_ID {				// 定義各種音效的編號
-		//AUDIO_DING,				// 0
-		AUDIO_BGM,				// 1
-		//AUDIO_NTUT				// 2
+		TITLE_BGM,
+		AUDIO_BGM,
+		JUMP_EF,
+		DROP_EF,
+		ATK_EF,
+		FIRE_ATK_EF,
+		SLIME_ATK_EF,
+		HIT_HERO
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -76,6 +83,7 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap logo;								// csie的logo
+		CMovingBitmap logoBackground;								// csie的logo
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -135,3 +143,4 @@ namespace game_framework {
 	};
 
 }
+#endif // !MY_GAME_H
