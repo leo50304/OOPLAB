@@ -138,8 +138,8 @@ namespace game_framework {
 		swordR.LoadBitmap(MWW_R, RGB(255, 255, 255));
 		attackL.LoadBitmap(WWA_L, RGB(255, 255, 255));
 		attackR.LoadBitmap(WWA_R, RGB(255, 255, 255));
-		FBookL.LoadBitmap(IDB_BITMAP43, RGB(128, 0, 128));
-		FBookR.LoadBitmap(IDB_BITMAP44, RGB(128, 0, 128));
+		FBookL.LoadBitmap(fire_right, RGB(128, 0, 128));
+		FBookR.LoadBitmap(fire_left, RGB(128, 0, 128));
 		FireL.AddBitmap(attack_fire_left_1, RGB(128, 0, 128));
 		FireL.AddBitmap(attack_fire_left_2, RGB(128, 0, 128));
 		FireL.AddBitmap(attack_fire_left_3, RGB(128, 0, 128));
@@ -493,10 +493,12 @@ namespace game_framework {
 			if (FireSide == 0)
 			{
 				FireX -= 8;
+				FireL.OnMove();
 			}
 			else if (FireSide == 1)
 				{
 				FireX += 8;
+				FireR.OnMove();
 				}
 			if (FireX >= 18 * 32 - 24 || FireX <= 0 - 8 )
 			{
