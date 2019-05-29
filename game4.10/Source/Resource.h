@@ -246,6 +246,19 @@
 #define TITLE_LEADERBOARD               353
 #define IDB_BITMAP21                    354
 #define TITLE_SETTING                   354
+#define STATE_EXP                       355
+#define STATE_GOLD                      356
+#define STATE_LIFE                      357
+#define STATE_LV                        358
+#define STATE_NAME                      359
+#define EVENT_FRAME                     361
+#define ITEM_LOGO                       362
+#define ITEM_FRAME                      363
+#define BAR_EXP                         364
+#define BAR_HP                          365
+#define STATUS_FRAME                    366
+#define IDB_BITMAP10                    367
+#define STATUS_BLOCKER                  367
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -258,7 +271,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        355
+#define _APS_NEXT_RESOURCE_VALUE        368
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

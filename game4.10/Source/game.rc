@@ -452,6 +452,31 @@ TITLE_LEADERBOARD       BITMAP                  "..\\data\\ledder-board.bmp"
 
 TITLE_SETTING           BITMAP                  "..\\data\\setting.bmp"
 
+STATE_EXP               BITMAP                  "..\\data\\exp.bmp"
+
+STATE_GOLD              BITMAP                  "..\\data\\gold.bmp"
+
+STATE_LIFE              BITMAP                  "..\\data\\life.bmp"
+
+STATE_LV                BITMAP                  "..\\data\\lv.bmp"
+
+STATE_NAME              BITMAP                  "..\\data\\name.bmp"
+
+EVENT_FRAME             BITMAP                  "..\\data\\event-frame.bmp"
+
+ITEM_LOGO               BITMAP                  "..\\data\\gx_06.bmp"
+
+ITEM_FRAME              BITMAP                  "..\\data\\gx_11.bmp"
+
+BAR_EXP                 BITMAP                  "..\\data\\exp-bar.bmp"
+
+BAR_HP                  BITMAP                  "..\\data\\hp-bar.bmp"
+
+STATUS_FRAME            BITMAP                  "..\\data\\gx_b_00.bmp"
+
+STATUS_BLOCKER          BITMAP                  "..\\data\\blocker.bmp"
+
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Cursor

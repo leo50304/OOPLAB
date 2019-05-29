@@ -41,11 +41,14 @@ namespace game_framework {
 		bool BeatBack();
 		void setHitValid(bool flag);
 		int getDamage();
-
+		int getHP();
+		int getMaxExp();
+		int getExp();
+		int getLevel();
 		void SetFire(bool flag);
 		bool isOnFire();
 		bool isOnBook();
-
+		void addExp(int n);
 		bool isOnThunder();
 		void SetThunder(bool flag);
 
@@ -90,6 +93,10 @@ namespace game_framework {
 		
 		int damage = 1;
 
+		int level = 1;
+		int hp;
+		int exp = 0;
+		int maxExp = 10;
 		int faceSide = 1;
 		int x, y;					// À¿¤l¥ª¤W¨¤®y¼Ð
 		bool onDrop = false;

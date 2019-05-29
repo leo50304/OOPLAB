@@ -42,6 +42,11 @@ namespace game_framework {
 
 	}
 
+	void Thunder::stop() 
+	{
+		finish = true;
+	}
+
 	void Thunder::initState() 
 	{
 		thunders.clear();
@@ -116,6 +121,7 @@ namespace game_framework {
 	{
 		return false;
 	}
+
 	void Thunder::OnMove(vector<Enemy*> &enemies, int d)
 	{
 		if (finish)

@@ -35,6 +35,7 @@ namespace game_framework {
 	{
 		if (invincibleFrameCount == 0)
 		{
+			hp -= 1;
 			invincibleFrameCount = 100;
 			direction = direct;
 			beatBackAy = -3;
@@ -67,6 +68,7 @@ namespace game_framework {
 		onAttack = false;
 		onFire = false;
 		onBook = false;
+		hp = 16;
 		previousBlock = 0;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 	}
@@ -87,7 +89,7 @@ namespace game_framework {
 		{
 			return false;
 		}
-		if (eY - y <16 && eY - y > -16) 
+		if (eY - y <16 && eY - y > -16)
 		{
 			if (faceSide == 0)
 			{
@@ -127,6 +129,39 @@ namespace game_framework {
 		onThunder = flag;
 	}
 
+	int CHero::getHP()
+	{
+		return hp;
+	}
+
+	void CHero::addExp(int n)
+	{
+		exp += n;
+		if (exp >= maxExp)
+		{
+			int dif = exp - maxExp;
+			exp = 0;
+			level++;
+			maxExp = int(maxExp * 1.1 + 0.5);
+			addExp(dif);
+		}
+	}
+
+	int CHero::getLevel()
+	{
+		return level;
+	}
+
+	int CHero::getMaxExp()
+	{
+		return maxExp;
+	}
+
+	int CHero::getExp()
+	{
+		return exp;
+	}
+
 	void CHero::LoadBitmap()
 	{
 		standL.LoadBitmap(WWS_L, RGB(255, 255, 255));
@@ -162,11 +197,9 @@ namespace game_framework {
 		moveUAnimation.AddBitmap(WWL_2, RGB(255, 255, 255));
 		moveUAnimation.AddBitmap(WWL_3, RGB(255, 255, 255));
 
-
 		moveDAnimation.AddBitmap(WWL_1, RGB(255, 255, 255));
 		moveDAnimation.AddBitmap(WWL_2, RGB(255, 255, 255));
 		moveDAnimation.AddBitmap(WWL_3, RGB(255, 255, 255));
-
 	}
 
 	bool CHero::IsOnLadder()
@@ -193,7 +226,7 @@ namespace game_framework {
 		onAttack = flag;
 		hitValid = flag;
 		attackFrameCount = 0;
-		if (flag) 
+		if (flag)
 		{
 			CAudio::Instance()->Play(ATK_EF, false);		// ¼·©ñ WAVE
 		}
@@ -212,7 +245,7 @@ namespace game_framework {
 		FireSide = faceSide;
 		fireFrameCount = 0;
 		bookFrameCount = 0;
-		if (onFire) 
+		if (onFire)
 		{
 			CAudio::Instance()->Play(FIRE_ATK_EF, false);		// ¼·©ñ WAVE
 		}
@@ -495,10 +528,10 @@ namespace game_framework {
 				FireX -= 8;
 			}
 			else if (FireSide == 1)
-				{
+			{
 				FireX += 8;
-				}
-			if (FireX >= 18 * 32 - 24 || FireX <= 0 - 8 )
+			}
+			if (FireX >= 18 * 32 - 24 || FireX <= 0 - 8)
 			{
 				FireX = -100;
 				onFire = false;

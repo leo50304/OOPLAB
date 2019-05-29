@@ -30,6 +30,7 @@ namespace game_framework {
 		void SetMovingUp(bool flag);	// 設定是否正在往上移動
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
 		void Distroy();
+		virtual int getExp();
 		void hit(int d);
 		virtual bool InAttackRange(int x, int y);
 		virtual bool InWeaponHitBox(int x, int y);
@@ -42,6 +43,8 @@ namespace game_framework {
 		}
 
 	protected:
+		bool lootable = false;
+		int exp = 2;
 		int location;
 		int speed;
 		bool onAttack;

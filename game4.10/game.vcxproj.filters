@@ -730,5 +730,56 @@
     <Image Include="data\gxt_02.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\exp.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gold.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\life.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\lv.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\name.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\continueGame.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\end-game.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ledder-board.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\setting.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gx_10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\event-frame.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gx_06.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gx_11.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\exp-bar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\hp-bar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gx_b_00.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\blocker.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

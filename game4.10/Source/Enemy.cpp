@@ -49,10 +49,21 @@ namespace game_framework {
 		hp -= d;
 	}
 
+	int Enemy::getExp() 
+	{
+		if (lootable) 
+		{
+			lootable = false;
+			return exp;
+		}
+		return 0;
+	}
+
 	void Enemy::Distroy()
 	{
 		if (hp <= 0)
 		{
+			lootable = true;
 			isDistroyed = true;
 		}
 	}
@@ -381,8 +392,8 @@ namespace game_framework {
 
 		weapon2.AddBitmap(BH_W4, RGB(128, 0, 128));
 		weapon2.AddBitmap(BH_W3, RGB(128, 0, 128));
-		weapon2.AddBitmap(BH_W2, RGB(128, 0, 128));
 		weapon2.AddBitmap(BH_W1, RGB(128, 0, 128));
+		weapon2.AddBitmap(BH_W2, RGB(128, 0, 128));
 		weapon2.AddBitmap(BH_W0, RGB(128, 0, 128));
 		weapon2.AddBitmap(BH_W7, RGB(128, 0, 128));
 		weapon2.AddBitmap(BH_W6, RGB(128, 0, 128));

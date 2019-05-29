@@ -15,6 +15,7 @@ namespace game_framework {
 		void initState();
 		void OnShow();
 		bool InHitBox();
+		void stop();
 		void OnMove(vector<Enemy*> &enemies, int d);
 		void OnPrepare();
 		void OnAttack();
