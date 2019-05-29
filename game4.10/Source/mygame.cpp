@@ -477,6 +477,11 @@ namespace game_framework {
 
 		hero.Initialize();
 		thunder.initialize();
+		items.clear();
+		items.push_back(new SmallBlood(32*4,32*11,0));
+		hero.addItem(new SmallBlood());
+
+		enemies.clear();
 		enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
 		enemies.push_back(new Slime(1 * 32, 1 * 32, 0));
 		enemies.push_back(new Slime(2 * 32, 8 * 32, 0));
@@ -594,7 +599,7 @@ namespace game_framework {
 		{
 			if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed())
 			{
-				if (!hero.BeatBack() && enemies[i]->InHitBox(hero.GetX1(), hero.GetY1()) && mapBrown.getNext() == enemies[i]->getMapLocation())
+				if (!hero.isInvincible() && enemies[i]->InHitBox(hero.GetX1(), hero.GetY1()) && mapBrown.getNext() == enemies[i]->getMapLocation())
 				{
 					CAudio::Instance()->Play(HIT_HERO, false);
 					if (hero.GetX1() < enemies[i]->GetX1())
@@ -641,6 +646,14 @@ namespace game_framework {
 		for (unsigned int i = 0; i < enemies.size(); ++i)
 		{
 			hero.addExp(enemies[i]->getExp());
+		}
+
+		for (unsigned int i = 0; i < items.size(); ++i)
+		{
+			if (items[i]->getMap() == mapBrown.getNext())
+			{
+				items[i]->MoveIcon();
+			}
 		}
 
 		if (hero.getHP() <= 0) 
@@ -845,5 +858,14 @@ namespace game_framework {
 		states[4].SetTopLeft(392, 446);
 		states[4].ShowBitmap();
 
+		hero.showItemList();
+
+		for (unsigned int i = 0; i < items.size(); ++i) 
+		{
+			if (items[i]->getMap() == mapBrown.getNext()) 
+			{
+				items[i]->ShowIcon();
+			}
+		}
 	}
 }

@@ -3,12 +3,15 @@
 
 #include "stdafx.h"
 #include "map.h"
+#include <vector>
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class提供可以用鍵盤或滑鼠控制的擦子
 	// 看懂就可以改寫成自己的程式了
 	/////////////////////////////////////////////////////////////////////////////
+
+	class Item;
 
 	class CHero
 	{
@@ -27,6 +30,7 @@ namespace game_framework {
 		void SetXY(int nx, int ny);
 		bool IsOnLadder();
 		void Drop();
+		void addHp(int num);
 		void SetOnLadder(bool flag);
 
 		void SetAttack(bool flag);
@@ -34,7 +38,7 @@ namespace game_framework {
 		bool InAttackRange(int x, int y);
 		bool InFireRange(int x, int y);
 		void SetHoldUp(bool flag);
-
+		bool isInvincible();
 		bool isOnAttack();
 
 		void BeatBack(bool flag, int direct);
@@ -51,8 +55,13 @@ namespace game_framework {
 		void addExp(int n);
 		bool isOnThunder();
 		void SetThunder(bool flag);
+		void addItem(Item* item);
+		void useItem();
+		void showItemList();
 
 	protected:
+		vector<Item*> items;
+
 		CMovingBitmap standL;
 		CMovingBitmap standR;
 		CMovingBitmap stayOnLadder;
@@ -81,6 +90,7 @@ namespace game_framework {
 		CAnimation moveLAnimation;
 		CAnimation moveUAnimation;
 		CAnimation moveDAnimation;
+
 		bool beatBack = false;
 		double direction;
 		double beatBackAy;

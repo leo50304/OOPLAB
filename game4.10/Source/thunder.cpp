@@ -18,6 +18,7 @@ namespace game_framework {
 	{
 		srand((unsigned int)time(NULL));
 	}
+
 	void Thunder::initialize()
 	{
 		initState();

@@ -476,6 +476,12 @@ STATUS_FRAME            BITMAP                  "..\\data\\gx_b_00.bmp"
 
 STATUS_BLOCKER          BITMAP                  "..\\data\\blocker.bmp"
 
+SMALL_BLOOD_1           BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\small_blood_0.bmp"
+
+SMALL_BLOOD_2           BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\small_blood_1.bmp"
+
+SMALL_BLOOD_3           BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\small_blood_2.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -11,14 +11,14 @@ namespace game_framework {
 	class MapObject
 	{
 	public:
-		~MapObject() 
+		~MapObject()
 		{
-			for (unsigned int i = 0; i < block.size(); ++i) 
+			for (unsigned int i = 0; i < block.size(); ++i)
 			{
 				delete block[i];
 			}
 		}
-		virtual bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px) {return false; }; //return true if can move
+		virtual bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px) { return false; }; //return true if can move
 		virtual void LoadBitMap() {};
 		virtual bool IsSolid() { return true; };
 		virtual void PutBlock(int px, int py, int type) {};
@@ -31,7 +31,7 @@ namespace game_framework {
 	public:
 		void LoadBitMap()
 		{
-			for (int i = 0; i < 6; ++i) 
+			for (int i = 0; i < 6; ++i)
 			{
 				block.push_back(new CMovingBitmap());
 			}
@@ -39,17 +39,17 @@ namespace game_framework {
 			block[1]->LoadBitmap(M_001);
 			block[2]->LoadBitmap(M_002);
 			block[3]->LoadBitmap(M_003);
-			block[4]->LoadBitmap(M_004); 
+			block[4]->LoadBitmap(M_004);
 			block[5]->LoadBitmap(M_005);
 		}
 		void PutBlock(int px, int py, int type)
 		{
-			if (type%100 >= 6)
+			if (type % 100 >= 6)
 				type = 0;
 			block[type % 100]->SetTopLeft(px, py);
 			block[type % 100]->ShowBitmap();
 		}
-		bool IsSolid() 
+		bool IsSolid()
 		{
 			return false;
 		}
@@ -101,7 +101,7 @@ namespace game_framework {
 		}
 		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px)
 		{
-			if (pos == "Down") 
+			if (pos == "Down")
 			{
 				isOnLadder = false;
 			}
@@ -136,8 +136,10 @@ namespace game_framework {
 			{
 				return !isOnLadder;
 			}
-			else if (pos == "Up") 
+			else if (pos == "Up")
 			{
+				isOnLadder = true;
+				x = px;
 				return true;
 			}
 			else if (pos == "Down")
@@ -146,7 +148,7 @@ namespace game_framework {
 				{
 					return true;
 				}
-				else if (px - x<=8 && px - x>=-8)
+				else if (px - x <= 8 && px - x >= -8)
 				{
 					x = px;
 					isOnLadder = true;
@@ -180,27 +182,27 @@ namespace game_framework {
 		}
 		bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px)
 		{
-			if (pos == "Left") 
+			if (pos == "Left")
 			{
 				return !isOnLadder;
 			}
-			else if (pos == "Right") 
+			else if (pos == "Right")
 			{
 				return !isOnLadder;
 			}
-			else if(pos == "Up" || pos == "Down")
+			else if (pos == "Up" || pos == "Down")
 			{
 				if (isOnLadder)
 				{
 					return true;
 				}
-				else if (px-x<=8 && px-x>=-8)
+				else if (px - x <= 8 && px - x >= -8)
 				{
 					x = px;
 					isOnLadder = true;
 					return true;
 				}
-				else 
+				else
 				{
 					return false;
 				}
@@ -223,7 +225,7 @@ namespace game_framework {
 		}
 		void PutBlock(int px, int py, int type)
 		{
-			block[type%100]->SetTopLeft(px, py);
+			block[type % 100]->SetTopLeft(px, py);
 			block[type % 100]->ShowBitmap();
 		}
 		bool IsSolid()

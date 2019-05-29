@@ -9,7 +9,9 @@
 #include "map.h"
 #include "mygame.h"
 
+
 namespace game_framework {
+
 
 	CHero::CHero()
 	{
@@ -24,6 +26,16 @@ namespace game_framework {
 	int CHero::GetY1()
 	{
 		return y;
+	}
+
+	void CHero::useItem() 
+	{
+	
+	}
+
+	void CHero::addHp(int num)
+	{
+		hp += num;
 	}
 
 	void CHero::SetOnLadder(bool flag)
@@ -49,6 +61,23 @@ namespace game_framework {
 			onJump = false;
 			onDrop = false;
 			beatBack = flag;
+		}
+	}
+
+	void CHero::showItemList() 
+	{
+		for (unsigned int i = 0; i < items.size(); ++i) 
+		{
+			items[i]->setXY(591-8, 1+32*i);
+			items[i]->ShowIcon();
+		}
+	}
+
+	void CHero::addItem(Item* item)
+	{
+		if (items.size() < 13) 
+		{
+			items.push_back(item);
 		}
 	}
 
@@ -269,10 +298,23 @@ namespace game_framework {
 		return !map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 32) / 32);
 	}
 
+	bool CHero::isInvincible()
+	{
+		return invincibleFrameCount >0;
+	}
+
 	void CHero::OnMove(MapBrown* map)
 	{
 
-		invincibleFrameCount = invincibleFrameCount <= 0 ? invincibleFrameCount : invincibleFrameCount - 1;
+		for (unsigned int i = 0; i < items.size(); ++i)
+		{
+			items[i]->MoveIcon();
+		}
+
+		if (invincibleFrameCount > 0) 
+		{
+			invincibleFrameCount--;
+		}
 
 		if (beatBack)
 		{

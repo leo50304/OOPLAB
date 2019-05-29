@@ -132,6 +132,9 @@
     <ClCompile Include="Source\thunder.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\item.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -174,6 +177,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\thunder.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\item.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
@@ -779,6 +785,18 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="data\blocker.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item\gi_00.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item\small_blood_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item\small_blood_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item\small_blood_2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

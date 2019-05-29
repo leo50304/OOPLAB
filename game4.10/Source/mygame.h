@@ -48,6 +48,7 @@
 #include "CHero.h"
 #include "Enemy.h"
 #include "thunder.h"
+#include "item.h"
 
 namespace game_framework {
 
@@ -131,7 +132,7 @@ namespace game_framework {
 		CMovingBitmap states[5];
 		CMovingBitmap hpBar;
 		CMovingBitmap expBar;
-
+		vector<Item*> items;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
