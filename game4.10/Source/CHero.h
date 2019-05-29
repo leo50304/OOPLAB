@@ -64,6 +64,7 @@ namespace game_framework {
 		CMovingBitmap attackR;
 		CMovingBitmap FBookL;
 		CMovingBitmap FBookR;
+		
 		CAnimation FireL;
 		CAnimation FireR;
 

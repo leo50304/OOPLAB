@@ -1041,7 +1041,7 @@ namespace game_framework {
 		}
 		else
 		{
-			int randSprint = rand() % 250;
+			int randSprint = rand() % 100;
 			if (randSprint < 6)
 			{
 				onAttackAnime = false;

@@ -526,10 +526,12 @@ namespace game_framework {
 			if (FireSide == 0)
 			{
 				FireX -= 8;
+				FireL.OnMove();
 			}
 			else if (FireSide == 1)
 			{
 				FireX += 8;
+				FireR.OnMove();
 			}
 			if (FireX >= 18 * 32 - 24 || FireX <= 0 - 8)
 			{
