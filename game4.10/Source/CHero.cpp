@@ -173,8 +173,8 @@ namespace game_framework {
 		swordR.LoadBitmap(MWW_R, RGB(255, 255, 255));
 		attackL.LoadBitmap(WWA_L, RGB(255, 255, 255));
 		attackR.LoadBitmap(WWA_R, RGB(255, 255, 255));
-		FBookL.LoadBitmap(IDB_BITMAP43, RGB(128, 0, 128));
-		FBookR.LoadBitmap(IDB_BITMAP44, RGB(128, 0, 128));
+		FBookL.LoadBitmap(fire_right, RGB(128, 0, 128));
+		FBookR.LoadBitmap(fire_left, RGB(128, 0, 128));
 		FireL.AddBitmap(attack_fire_left_1, RGB(128, 0, 128));
 		FireL.AddBitmap(attack_fire_left_2, RGB(128, 0, 128));
 		FireL.AddBitmap(attack_fire_left_3, RGB(128, 0, 128));
