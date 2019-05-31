@@ -482,6 +482,16 @@ SMALL_BLOOD_2           BITMAP                  "C:\\Users\\LEO\\Desktop\\legend
 
 SMALL_BLOOD_3           BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\small_blood_2.bmp"
 
+SELECTED_ITEM_FRAME     BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\gx_b_04.bmp"
+
+GOLD_0                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\gold_0.bmp"
+
+GOLD_1                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\gold_1.bmp"
+
+GOLD_2                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\gold_2.bmp"
+
+GOLD_3                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\gold_3.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

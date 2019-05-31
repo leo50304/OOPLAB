@@ -22,8 +22,12 @@ namespace game_framework {
 		X1 = -100;
 		Y1 = -100;
 		map = -1;
-		offSetX = 0;
-		offSetY = 0;
+		resetOffset();
+	}
+
+	bool Item::InHitBox(int x, int y)
+	{
+		return  x < X1 + 22 && x + 22 > X1 && y < Y1 + 28 && y + 28 > Y1;
 	}
 
 	int Item::getMap() 
@@ -36,15 +40,21 @@ namespace game_framework {
 		icon.OnMove();
 	}
 
+	void Item::resetOffset() 
+	{
+		offSetX = 0;
+		offSetY = 0;
+	}
+
 	void Item::setXY(int x, int y)
 	{
 		X1 = x;
 		Y1 = y;
 	}
 
-	void Item::ShowRemainingTime() 
+	void Item::ShowRemainingUse() 
 	{
-		if (RemainingTime == -1)
+		if (RemainingUse == -1)
 		{
 			return;
 		}
@@ -55,7 +65,7 @@ namespace game_framework {
 		pDC->SetBkColor(RGB(0, 0, 0));
 		pDC->SetTextColor(RGB(255, 255, 0));
 		char Levelbuffer[4];
-		snprintf(Levelbuffer, 10, "%d", RemainingTime);
+		snprintf(Levelbuffer, 10, "%d", RemainingUse);
 		pDC->TextOut(X1+36, Y1+10, Levelbuffer);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
@@ -65,7 +75,7 @@ namespace game_framework {
 	{
 		icon.SetTopLeft(X1+ offSetX, Y1+ offSetY);
 		icon.OnShow();
-		ShowRemainingTime();
+		ShowRemainingUse();
 	}
 
 	SmallBlood::SmallBlood(int x, int y, int d) :Item(x, y, d) 
@@ -88,10 +98,13 @@ namespace game_framework {
 
 	void SmallBlood::LoadBitMap()
 	{
-		icon.AddBitmap(SMALL_BLOOD_1, RGB(128,0,128));
+		icon.AddBitmap(SMALL_BLOOD_1, RGB(128, 0, 128));
 		icon.AddBitmap(SMALL_BLOOD_2, RGB(128, 0, 128));
 		icon.AddBitmap(SMALL_BLOOD_3, RGB(128, 0, 128));
 	}
 
-
+	bool SmallBlood::InHitBox(int x, int y)
+	{
+		return  x < X1 + 22 && x + 22 > X1 && y < Y1 + 28 && y + 28 > Y1;
+	}
 }

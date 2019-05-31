@@ -464,6 +464,11 @@ namespace game_framework {
 		}
 	}
 
+	void CGameStateRun::SetCTRL(bool flag)
+	{
+		onCTRL = flag;
+	}
+
 	void CGameStateRun::OnBeginState()
 	{
 		const int BALL_GAP = 90;
@@ -478,7 +483,7 @@ namespace game_framework {
 		hero.Initialize();
 		thunder.initialize();
 		items.clear();
-		items.push_back(new SmallBlood(32*4,32*11,0));
+		items.push_back(new SmallBlood(32 * 4, 32 * 11, 0));
 		hero.addItem(new SmallBlood());
 
 		enemies.clear();
@@ -656,7 +661,21 @@ namespace game_framework {
 			}
 		}
 
-		if (hero.getHP() <= 0) 
+		for (unsigned int i = 0; i < items.size(); ++i)
+		{
+			if (items[i]->InHitBox(hero.GetX1(), hero.GetY1()) && mapBrown.getNext() == items[i]->getMap())
+			{
+				if (hero.ItemMax())
+				{
+					break;
+				}
+				hero.addItem(items[i]);
+				items.erase(items.begin() + i);
+				break;
+			}
+		}
+
+		if (hero.getHP() <= 0)
 		{
 			CAudio::Instance()->Stop(TITLE_BGM);
 			GotoGameState(GAME_STATE_OVER);
@@ -677,6 +696,7 @@ namespace game_framework {
 		hero.LoadBitmap();
 		mapBrown.LoadBitMap();
 		itemFrame.LoadBitmap(ITEM_FRAME, RGB(128, 0, 128));
+		selectedItemFrame.LoadBitmap(SELECTED_ITEM_FRAME, RGB(128, 0, 128));
 		eventFrame.LoadBitmap(EVENT_FRAME, RGB(128, 0, 128));
 		statusBlocker.LoadBitmap(STATUS_BLOCKER, RGB(128, 0, 128));
 		states[0].LoadBitmap(STATE_NAME, RGB(128, 0, 128));
@@ -710,8 +730,14 @@ namespace game_framework {
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
 		const char KEY_SPACE = 0x20;
+		const char KEY_CTRL = 0x11;
+		const char KEY_E = 69;
 		const char KEY_F = 70;
 		const char KEY_T = 84;
+		if (nChar == KEY_CTRL)
+		{
+			this->SetCTRL(true);
+		}
 		if (nChar == KEY_LEFT) {
 			hero.SetMovingLeft(true);
 		}
@@ -719,13 +745,30 @@ namespace game_framework {
 			hero.SetMovingRight(true);
 		}
 		if (nChar == KEY_UP) {
-			hero.SetMovingUp(true);
+			if (this->onCTRL)
+			{
+				hero.moveCurrentItem(-1);
+			}
+			else
+			{
+				hero.SetMovingUp(true);
+			}
 		}
 		if (nChar == KEY_DOWN) {
-			hero.SetMovingDown(true);
+			if (this->onCTRL)
+			{
+				hero.moveCurrentItem(1);
+			}
+			else
+			{
+				hero.SetMovingDown(true);
+			}
 		}
 		if (nChar == KEY_SPACE) {
 			hero.SetAttack(true);
+		}
+		if (nChar == KEY_E) {
+			hero.useItem();
 		}
 		if (nChar == KEY_F) {
 			hero.SetFire(true);
@@ -744,6 +787,12 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
+		const char KEY_CTRL = 0x11;
+
+		if (nChar == KEY_CTRL)
+		{
+			this->SetCTRL(true);
+		}
 		if (nChar == KEY_LEFT) {
 			hero.SetMovingLeft(false);
 		}
@@ -807,10 +856,15 @@ namespace game_framework {
 		}
 		hero.OnShow();
 		thunder.OnShow();
+
+		selectedItemFrame.SetTopLeft(1+32 * 18, 1 + hero.getCurrentItem() * 32);
+		selectedItemFrame.ShowBitmap();
+
 		eventFrame.SetTopLeft(0, 416 - 25);
 		eventFrame.ShowBitmap();
 		itemLogo.SetTopLeft(32 * 18 + 3, 417);
 		itemLogo.ShowBitmap();
+
 		itemFrame.SetTopLeft(32 * 18, 0);
 		itemFrame.ShowBitmap();
 		//
@@ -818,7 +872,7 @@ namespace game_framework {
 		states[3].SetTopLeft(279, 446);
 		states[3].ShowBitmap();
 		float expRatio = (float)hero.getExp() / (float)hero.getMaxExp();
-		expBar.SetTopLeft(279 - 104 + 2 + (int)(104* expRatio + 0.5), 446 + 18);
+		expBar.SetTopLeft(279 - 104 + 2 + (int)(104 * expRatio + 0.5), 446 + 18);
 		expBar.ShowBitmap();
 		statusFrame.SetTopLeft(279, 446 + 18);
 		statusFrame.ShowBitmap();
@@ -850,7 +904,11 @@ namespace game_framework {
 		pDC->SetTextColor(RGB(255, 255, 0));
 		char Levelbuffer[4];
 		snprintf(Levelbuffer, 10, "%d", hero.getLevel());
-		pDC->TextOut(127, 446+14, Levelbuffer);
+		pDC->TextOut(127, 446 + 14, Levelbuffer);
+		char goldBuffer[4];
+		snprintf(goldBuffer, 10, "%d", hero.getGold());
+		pDC->TextOut(392+18, 446 + 14, goldBuffer);
+
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 		//
@@ -860,9 +918,9 @@ namespace game_framework {
 
 		hero.showItemList();
 
-		for (unsigned int i = 0; i < items.size(); ++i) 
+		for (unsigned int i = 0; i < items.size(); ++i)
 		{
-			if (items[i]->getMap() == mapBrown.getNext()) 
+			if (items[i]->getMap() == mapBrown.getNext())
 			{
 				items[i]->ShowIcon();
 			}

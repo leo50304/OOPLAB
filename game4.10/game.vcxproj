@@ -484,6 +484,7 @@
     <Image Include="data\gx_10.bmp" />
     <Image Include="data\gx_11.bmp" />
     <Image Include="data\gx_b_00.bmp" />
+    <Image Include="data\gx_b_04.bmp" />
     <Image Include="data\hp-bar.bmp" />
     <Image Include="data\item\gi_00.bmp" />
     <Image Include="data\item\small_blood_0.bmp" />

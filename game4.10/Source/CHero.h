@@ -56,12 +56,18 @@ namespace game_framework {
 		bool isOnThunder();
 		void SetThunder(bool flag);
 		void addItem(Item* item);
+		bool ItemMax();
 		void useItem();
+		int getGold();
+		void changeGold(int i);
+		int getCurrentItem();
 		void showItemList();
+		void moveCurrentItem(int i);
 
 	protected:
 		vector<Item*> items;
-
+		vector<Item*> usedItem;
+		int currentItem = 0;
 		CMovingBitmap standL;
 		CMovingBitmap standR;
 		CMovingBitmap stayOnLadder;
@@ -77,6 +83,7 @@ namespace game_framework {
 		CAnimation FireL;
 		CAnimation FireR;
 
+		bool onCTRL = false;
 		bool hitValid = false;
 		double speed;
 		bool onAttack;
@@ -104,6 +111,7 @@ namespace game_framework {
 		
 		int damage = 1;
 
+		int gold = 3;
 		int level = 1;
 		int hp;
 		int exp = 0;

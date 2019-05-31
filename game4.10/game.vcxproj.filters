@@ -799,5 +799,8 @@
     <Image Include="data\item\small_blood_2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\gx_b_04.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

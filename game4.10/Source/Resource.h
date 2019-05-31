@@ -226,8 +226,13 @@
 #define STATUS_BLOCKER                  367
 #define SMALL_BLOOD_1                   372
 #define SMALL_BLOOD_2                   373
-#define IDB_BITMAP5                     374
 #define SMALL_BLOOD_3                   374
+#define SELECTED_ITEM_FRAME             375
+#define GOLD_0                          376
+#define GOLD_1                          377
+#define GOLD_2                          378
+#define IDB_BITMAP6                     379
+#define GOLD_3                          379
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -240,7 +245,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        375
+#define _APS_NEXT_RESOURCE_VALUE        380
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

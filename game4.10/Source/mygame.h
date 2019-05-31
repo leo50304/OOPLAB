@@ -115,6 +115,7 @@ namespace game_framework {
 		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作 
 		void OnRButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		void OnRButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
+		void SetCTRL(bool flag);
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
@@ -126,6 +127,7 @@ namespace game_framework {
 		vector<Enemy*> enemies;
 		CMovingBitmap eventFrame;
 		CMovingBitmap itemFrame;
+		CMovingBitmap selectedItemFrame;
 		CMovingBitmap statusFrame;
 		CMovingBitmap statusBlocker;
 		CMovingBitmap itemLogo;
@@ -133,6 +135,7 @@ namespace game_framework {
 		CMovingBitmap hpBar;
 		CMovingBitmap expBar;
 		vector<Item*> items;
+		bool onCTRL = false;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

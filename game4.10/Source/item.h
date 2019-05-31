@@ -15,12 +15,14 @@ namespace game_framework {
 		virtual void LoadBitMap() = 0;
 		void ShowIcon();
 		void MoveIcon();
-		void ShowRemainingTime();
+		virtual bool InHitBox(int x, int y);
+		void ShowRemainingUse();
 		void setXY(int x, int y);
 		int getMap();
+		void resetOffset();
 		CAnimation icon;
 	protected:
-		int RemainingTime = -1;
+		int RemainingUse = -1;
 		int map = -1;
 		int X1, Y1;
 		int offSetX, offSetY;
@@ -33,6 +35,7 @@ namespace game_framework {
 		SmallBlood();
 		void use(CHero* hero);
 		void LoadBitMap();
+		bool InHitBox(int x, int y);
 	};
 
 }

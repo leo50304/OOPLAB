@@ -28,9 +28,27 @@ namespace game_framework {
 		return y;
 	}
 
-	void CHero::useItem() 
+	void CHero::useItem()
 	{
-	
+		if (items.size() == 0)
+		{
+			return;
+		}
+		usedItem.push_back(items[currentItem]);
+		items.erase(items.begin() + currentItem);
+		if (currentItem > (signed)(items.size()) - 1)
+		{
+			currentItem = (signed)(items.size()) - 1;
+		}
+	}
+
+	int CHero::getGold() 
+	{
+		return gold;
+	}
+	void CHero::changeGold(int i) 
+	{
+		gold += i;
 	}
 
 	void CHero::addHp(int num)
@@ -64,19 +82,29 @@ namespace game_framework {
 		}
 	}
 
-	void CHero::showItemList() 
+	void CHero::showItemList()
 	{
-		for (unsigned int i = 0; i < items.size(); ++i) 
+		for (unsigned int i = 0; i < items.size(); ++i)
 		{
-			items[i]->setXY(591-8, 1+32*i);
+			items[i]->setXY(591 - 8, 1 + 32 * i);
 			items[i]->ShowIcon();
 		}
 	}
 
+	int CHero::getCurrentItem()
+	{
+		if (items.size() == 0)
+		{
+			return 100;
+		}
+		return currentItem;
+	}
+
 	void CHero::addItem(Item* item)
 	{
-		if (items.size() < 13) 
+		if (items.size() < 13)
 		{
+			item->resetOffset();
 			items.push_back(item);
 		}
 	}
@@ -84,6 +112,11 @@ namespace game_framework {
 	bool CHero::BeatBack()
 	{
 		return beatBack;
+	}
+
+	bool CHero::ItemMax()
+	{
+		return items.size() >= 13;
 	}
 
 	void CHero::Initialize()
@@ -300,7 +333,7 @@ namespace game_framework {
 
 	bool CHero::isInvincible()
 	{
-		return invincibleFrameCount >0;
+		return invincibleFrameCount > 0;
 	}
 
 	void CHero::OnMove(MapBrown* map)
@@ -311,7 +344,7 @@ namespace game_framework {
 			items[i]->MoveIcon();
 		}
 
-		if (invincibleFrameCount > 0) 
+		if (invincibleFrameCount > 0)
 		{
 			invincibleFrameCount--;
 		}
@@ -601,6 +634,19 @@ namespace game_framework {
 	void CHero::SetMovingUp(bool flag)
 	{
 		isMovingUp = flag;
+	}
+
+	void CHero::moveCurrentItem(int i)
+	{
+		currentItem += i;
+		if (currentItem > signed(items.size()) - 1)
+		{
+			currentItem = 0;
+		}
+		else if (currentItem < 0)
+		{
+			currentItem = items.size() - 1;
+		}
 	}
 
 	void CHero::SetXY(int nx, int ny)
