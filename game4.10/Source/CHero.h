@@ -17,6 +17,7 @@ namespace game_framework {
 	{
 	public:
 		CHero();
+		~CHero();
 		int  GetX1();
 		int  GetY1();
 		void Initialize();
@@ -31,6 +32,7 @@ namespace game_framework {
 		bool IsOnLadder();
 		void Drop();
 		void addHp(int num);
+		void addMaxHp(int num);
 		void SetOnLadder(bool flag);
 
 		void SetAttack(bool flag);
@@ -46,8 +48,10 @@ namespace game_framework {
 		void setHitValid(bool flag);
 		int getDamage();
 		int getHP();
+		int getMaxHP();
 		int getMaxExp();
 		int getExp();
+		void addLevel();
 		int getLevel();
 		void SetFire(bool flag);
 		bool isOnFire();
@@ -63,6 +67,8 @@ namespace game_framework {
 		int getCurrentItem();
 		void showItemList();
 		void moveCurrentItem(int i);
+		void setWin(bool flag);
+		bool FinishGame();
 
 	protected:
 		vector<Item*> items;
@@ -99,6 +105,8 @@ namespace game_framework {
 		CAnimation moveDAnimation;
 
 		bool beatBack = false;
+		bool canWin = false;
+		bool onFinishGame = false;
 		double direction;
 		double beatBackAy;
 		double beatBackAx;
@@ -114,6 +122,7 @@ namespace game_framework {
 		int gold = 3;
 		int level = 1;
 		int hp;
+		int maxHP;
 		int exp = 0;
 		int maxExp = 10;
 		int faceSide = 1;

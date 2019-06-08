@@ -12,10 +12,22 @@
 
 namespace game_framework {
 
-
 	CHero::CHero()
 	{
 		Initialize();
+	}
+
+	CHero::~CHero()
+	{
+		for (unsigned int i = 0; i < items.size(); ++i)
+		{
+			delete items[i];
+		}
+
+		for (unsigned int i = 0; i < usedItem.size(); ++i)
+		{
+			delete usedItem[i];
+		}
 	}
 
 	int CHero::GetX1()
@@ -35,6 +47,7 @@ namespace game_framework {
 			return;
 		}
 		usedItem.push_back(items[currentItem]);
+		items[currentItem]->use(this);
 		items.erase(items.begin() + currentItem);
 		if (currentItem > (signed)(items.size()) - 1)
 		{
@@ -54,6 +67,23 @@ namespace game_framework {
 	void CHero::addHp(int num)
 	{
 		hp += num;
+		if (hp > maxHP) 
+		{
+			hp = maxHP;
+		}
+	}
+
+	void CHero::addMaxHp(int num)
+	{
+		maxHP += num;
+		if (maxHP <1)
+		{
+			maxHP = 1;
+		}
+		if (hp > maxHP) 
+		{
+			hp = maxHP;
+		}
 	}
 
 	void CHero::SetOnLadder(bool flag)
@@ -131,8 +161,42 @@ namespace game_framework {
 		onFire = false;
 		onBook = false;
 		hp = 16;
+		maxHP = 16;
 		previousBlock = 0;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+
+
+		onCTRL = false;
+		hitValid = false;
+		onThunder = false;
+		beatBack = false;
+		canWin = false;
+		onFinishGame = false;
+		attackFrameCount = 0;
+		fireFrameCount = 0;
+		bookFrameCount = 0;
+		invincibleFrameCount = 0;
+		damage = 1;
+		gold = 3;
+		level = 1;
+		exp = 0;
+		maxExp = 10;
+		faceSide = 1;
+		onDrop = false;
+		onJump = false;
+		onHold = false;
+		for (unsigned int i = 0; i < items.size(); ++i)
+		{
+			delete items[i];
+		}
+
+		for (unsigned int i = 0; i < usedItem.size(); ++i)
+		{
+			delete usedItem[i];
+		}
+		items.clear();
+		usedItem.clear();
+
 	}
 
 	void CHero::setHitValid(bool flag)
@@ -203,15 +267,28 @@ namespace game_framework {
 		{
 			int dif = exp - maxExp;
 			exp = 0;
-			level++;
-			maxExp = int(maxExp * 1.1 + 0.5);
+			addLevel();
 			addExp(dif);
 		}
+	}
+
+	void CHero::addLevel() 
+	{
+		level++;
+		maxExp = int(maxExp * 1.1 + 0.5);
+		maxHP += 5;
+		hp += 5;
+		damage += 5;
 	}
 
 	int CHero::getLevel()
 	{
 		return level;
+	}
+
+	int CHero::getMaxHP()
+	{
+		return maxHP;
 	}
 
 	int CHero::getMaxExp()
@@ -596,6 +673,10 @@ namespace game_framework {
 				y = 32 * 1;
 			}
 		}
+		if (map->getNext() == 7 && canWin)
+		{
+			onFinishGame = true;
+		}
 		if (onFire)
 		{
 			if (FireSide == 0)
@@ -636,8 +717,19 @@ namespace game_framework {
 		isMovingUp = flag;
 	}
 
+	void CHero::setWin(bool flag) 
+	{
+		canWin = flag;
+	}
+
+	bool CHero::FinishGame() 
+	{
+		return onFinishGame;
+	}
+
 	void CHero::moveCurrentItem(int i)
 	{
+		int preItem = currentItem;
 		currentItem += i;
 		if (currentItem > signed(items.size()) - 1)
 		{
@@ -646,6 +738,11 @@ namespace game_framework {
 		else if (currentItem < 0)
 		{
 			currentItem = items.size() - 1;
+		}
+		if (preItem != currentItem)
+		{
+			items[preItem]->RemoveSelect(this);
+			items[currentItem]->OnSelect(this);
 		}
 	}
 

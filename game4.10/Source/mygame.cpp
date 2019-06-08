@@ -69,13 +69,12 @@ namespace game_framework {
 	const int MAPS_Y = 6;
 	const int MAP_SIZE_X = 18;
 	const int MAP_SIZE_Y = 13;
-
+	bool isWin;
+	bool onStart;
+	clock_t t1, t2;
 
 	MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 	{
-
-		mapPosX = 0;
-		mapPosY = 4;
 		mapObjects.push_back(new Blank());
 		mapObjects.push_back(new Grass());
 		mapObjects.push_back(new Bone());
@@ -145,7 +144,15 @@ namespace game_framework {
 			file.close();
 
 		}
+		initMap();
 
+	}
+
+	void MapBrown::initMap() 
+	{
+
+		mapPosX = 0;
+		mapPosY = 4;
 		next = mapOfMap[mapPosY][mapPosX];
 
 		for (int i = 0; i < MAP_SIZE_Y; i++)
@@ -285,9 +292,11 @@ namespace game_framework {
 		//
 		currentSelect = 0;
 		titleOffset = 32;
+		menuState = 0;
+		countFlash = 60;
 		titleFrame.LoadBitmap(TITLE_FRAME, RGB(128, 0, 128));
 		titleNew.LoadBitmap(TITLE_NEW, RGB(128, 0, 128));
-		titleContinue.LoadBitmap(TITLE_CONTINUE, RGB(128, 0, 128));
+		titleHelp.LoadBitmap(TITLE_HELP, RGB(128, 0, 128));
 		titleLeaderboard.LoadBitmap(TITLE_LEADERBOARD, RGB(128, 0, 128));
 		titleSetting.LoadBitmap(TITLE_SETTING, RGB(128, 0, 128));
 		titleExit.LoadBitmap(TITLE_EXIT, RGB(128, 0, 128));
@@ -304,7 +313,7 @@ namespace game_framework {
 
 	void CGameStateInit::OnBeginState()
 	{
-
+		onStart = true;
 	}
 
 	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -314,12 +323,29 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_DOWN = 0x28; // keyboard上箭頭
 
+		if (menuState == 1 && nChar == KEY_SPACE)
+		{
+			menuState = 0;
+			return;
+		}
+
 		if (nChar == KEY_SPACE)
 		{
 			if (currentSelect == 0)
 			{
 				CAudio::Instance()->Stop(TITLE_BGM);
+				t1 = clock();
+				onStart = false;
 				GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
+			}
+			else if (currentSelect == 1)
+			{
+				menuState = 1;
+			}
+			else if (currentSelect == 2)
+			{
+				isWin = true;
+				GotoGameState(GAME_STATE_OVER);	
 			}
 			else if (currentSelect == 4)
 			{
@@ -357,40 +383,54 @@ namespace game_framework {
 		//
 		// 貼上logo
 		//
+
 		logoBackground.SetTopLeft(320, 240);
 		logoBackground.ShowBitmap();
 		logo.SetTopLeft((SIZE_X - logo.Width()) / 2, SIZE_Y / 8);
 		logo.ShowBitmap();
 
-		titleFrame.SetTopLeft(270 - 32, 245 + titleOffset * currentSelect);
-		titleFrame.ShowBitmap();
-		titleNew.SetTopLeft(270, 240);
-		titleNew.ShowBitmap();
-		titleContinue.SetTopLeft(270, 240 + titleOffset * 1);
-		titleContinue.ShowBitmap();
-		titleLeaderboard.SetTopLeft(270, 240 + titleOffset * 2);
-		titleLeaderboard.ShowBitmap();
-		titleSetting.SetTopLeft(270, 240 + titleOffset * 3);
-		titleSetting.ShowBitmap();
-		titleExit.SetTopLeft(270, 240 + titleOffset * 4);
-		titleExit.ShowBitmap();
+		if (menuState == 0)
+		{
+			titleFrame.SetTopLeft(270 - 32, 245 + titleOffset * currentSelect);
+			titleFrame.ShowBitmap();
+			titleNew.SetTopLeft(270, 240);
+			titleNew.ShowBitmap();
+			titleHelp.SetTopLeft(270, 240 + titleOffset * 1);
+			titleHelp.ShowBitmap();
+			titleLeaderboard.SetTopLeft(270, 240 + titleOffset * 2);
+			titleLeaderboard.ShowBitmap();
+			titleSetting.SetTopLeft(270, 240 + titleOffset * 3);
+			titleSetting.ShowBitmap();
+			titleExit.SetTopLeft(270, 240 + titleOffset * 4);
+			titleExit.ShowBitmap();
+		}
+		else if (menuState == 1)
+		{
+			countFlash--;
+			if (countFlash <= 0)
+			{
+				countFlash = 60;
+			}
+			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CFont f, *fp;
+			f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+			fp = pDC->SelectObject(&f);					// 選用 font f
+			pDC->SetBkColor(RGB(0, 0, 0));
+			pDC->SetTextColor(RGB(255, 200, 69));
+			pDC->TextOut(155, 230, "打倒魔王取得傳說之石，逃脫洞窟");
+			pDC->TextOut(125, 20+255, "E:           使用道具          CTRL+上下: 選擇道具");
+			pDC->TextOut(125, 20+280, "SPACE: 攻擊                   上: 跳躍 / 爬梯子");
+			pDC->TextOut(125, 20+305, "F:           火球                   下: 爬梯子");
+			pDC->TextOut(125, 20+330, "T:           雷怒九天           左右: 移動");
+			if (countFlash > 30) 
+			{
+				pDC->TextOut(237, 420, "空白鍵返回目錄");
+			}
 
-		//
-		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
-		//
-		//CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-		//CFont f, *fp;
-		//f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-		//fp = pDC->SelectObject(&f);					// 選用 font f
-		//pDC->SetBkColor(RGB(0, 0, 0));
-		//pDC->SetTextColor(RGB(255, 255, 0));
-		//pDC->TextOut(185, 230, "Please press SPACE to begin.");
-		//pDC->TextOut(5, 395, "Press Ctrl-F to switch in between window mode and full screen mode.");
-		//if (ENABLE_GAME_PAUSE)
-		//	pDC->TextOut(5, 425, "Press Ctrl-Q to pause the Game.");
-		//pDC->TextOut(5, 455, "Press Alt-F4 or ESC to Quit.");
-		//pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		//CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+
+			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -404,6 +444,11 @@ namespace game_framework {
 
 	void CGameStateOver::OnMove()
 	{
+		countFlash--;
+		if (countFlash <= 0)
+		{
+			countFlash = 60;
+		}
 		counter--;
 		if (counter < 0)
 			GotoGameState(GAME_STATE_INIT);
@@ -411,7 +456,56 @@ namespace game_framework {
 
 	void CGameStateOver::OnBeginState()
 	{
-		counter = 30 * 5; // 5 seconds
+		counter = 600;
+		t2 = clock();
+		if (isWin)
+		{
+			fstream file;
+			string fileName = "./data/leaderboard.txt";
+			file.open(fileName, ios::in);
+			if (!file)
+			{
+				throw "file not exist";
+			}
+			for (int i = 0; i < 6; ++i)
+			{
+				int time;
+				file >> time;
+				scores.push_back(time);
+			}
+			file.close();
+
+			state = 1;
+			if (!onStart) 
+			{
+				int t = (int)((t2 - t1) / (double)(CLOCKS_PER_SEC));
+				scorePos = -1;
+				for (int i = 0; i < 6; ++i)
+				{
+					if (t < scores[i])
+					{
+						scores.insert(scores.begin() + i, t);
+						scorePos = i;
+						countFlash = 60;
+						break;
+					}
+				}
+				scores.erase(scores.begin() + 6, scores.end());
+				ofstream myfile("./data/leaderboard.txt");
+				if (myfile.is_open())
+				{
+					for (int i = 0; i < 6; ++i)
+					{
+						myfile << scores[i] << '\n';
+					}
+					myfile.close();
+				}
+			}
+		}
+		else
+		{
+			state = 0;
+		}
 	}
 
 	void CGameStateOver::OnInit()
@@ -420,7 +514,7 @@ namespace game_framework {
 		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
 		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
 		//
-		ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
+		//ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
 		//
 		// 開始載入資料
 		//
@@ -428,22 +522,86 @@ namespace game_framework {
 		//
 		// 最終進度為100%
 		//
-		ShowInitProgress(100);
+		//ShowInitProgress(100);
+		highScore.LoadBitmap(HIGH_SCORE, RGB(106, 3, 12));
+		highScoreFrame.LoadBitmap(HIGH_SCORE_FRAME, RGB(130, 0, 128));
+		leaderboardBg.LoadBitmap(LEADER_BOARD_BG);
 	}
 
 	void CGameStateOver::OnShow()
 	{
-		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-		CFont f, *fp;
-		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-		fp = pDC->SelectObject(&f);					// 選用 font f
-		pDC->SetBkColor(RGB(0, 0, 0));
-		pDC->SetTextColor(RGB(255, 255, 0));
-		char str[80];								// Demo 數字對字串的轉換
-		sprintf(str, "Game Over ! (%d)", counter / 30);
-		pDC->TextOut(240, 210, str);
-		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		if (state == 1)
+		{
+			leaderboardBg.SetTopLeft(0, 0);
+			leaderboardBg.ShowBitmap();
+			highScoreFrame.SetTopLeft(0, 0);
+			highScoreFrame.ShowBitmap();
+
+			highScore.SetTopLeft(147, 32);
+			highScore.ShowBitmap();
+
+			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CFont f, *fp;
+			f.CreatePointFont(280, "Times New Roman");	// 產生 font f; 160表示16 point的字
+			fp = pDC->SelectObject(&f);					// 選用 font f
+			pDC->SetBkMode(TRANSPARENT);
+			pDC->SetTextColor(RGB(255, 200, 69));
+
+			if (!(scorePos == 0 && countFlash < 30))
+			{
+				pDC->TextOut(32 * 3, 5 + 32 * 4 + 0, "ＴＯＰ");
+			}
+			if (!(scorePos == 1 && countFlash < 30))
+			{
+				pDC->TextOut(32 * 3, 5 + 32 * 5 + 22, "２ｎｄ");
+			}
+			if (!(scorePos == 2 && countFlash < 30))
+			{
+				pDC->TextOut(32 * 3, 5 + 32 * 6 + 44, "３ｒｄ");
+			}
+			if (!(scorePos == 3 && countFlash < 30))
+			{
+				pDC->TextOut(32 * 3, 5 + 32 * 7 + 66, "４ｔｈ");
+			}
+			if (!(scorePos == 4 && countFlash < 30))
+			{
+				pDC->TextOut(32 * 3, 5 + 32 * 8 + 88, "５ｔｈ");
+			}
+			if (!(scorePos == 5 && countFlash < 30))
+			{
+				pDC->TextOut(32 * 3, 5 + 32 * 9 + 110, "６ｔｈ");
+			}
+
+			for (int i = 0; i < 6; ++i)
+			{
+				char timeStr[80];
+				int t = scores[i];
+				sprintf(timeStr, "%d : %d", int(t / 60), t % 60);
+				if (!(scorePos == i && countFlash < 30))
+				{
+					pDC->TextOut(32 * 8, 5 + 32 * (4 + i) + 22 * i, timeStr);
+				}
+			}
+
+			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+
+			return;
+		}
+		else if (state == 0)
+		{
+			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CFont f, *fp;
+			f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+			fp = pDC->SelectObject(&f);					// 選用 font f
+			pDC->SetBkColor(RGB(0, 0, 0));
+			pDC->SetTextColor(RGB(255, 255, 0));
+			char str[80];								// Demo 數字對字串的轉換
+			sprintf(str, "Game Over ! (%d)", counter / 30);
+			pDC->TextOut(240, 210, str);
+			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -461,6 +619,10 @@ namespace game_framework {
 		for (unsigned int i = 0; i < enemies.size(); ++i)
 		{
 			delete enemies[i];
+		}
+		for (unsigned int i = 0; i < items.size(); ++i)
+		{
+			delete items[i];
 		}
 	}
 
@@ -480,12 +642,24 @@ namespace game_framework {
 		const int BACKGROUND_X = 60;
 		const int ANIMATION_SPEED = 15;
 
+		mapBrown.initMap();
 		hero.Initialize();
 		thunder.initialize();
+
+		for (unsigned int i = 0; i < items.size(); ++i)
+		{
+			delete items[i];
+		}
 		items.clear();
 		items.push_back(new SmallBlood(32 * 4, 32 * 11, 0));
+		items.push_back(new Gold(32 * 5, 32 * 11, 0));
+
 		hero.addItem(new SmallBlood());
 
+		for (unsigned int i = 0; i < enemies.size(); ++i)
+		{
+			delete enemies[i];
+		}
 		enemies.clear();
 		enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
 		enemies.push_back(new Slime(1 * 32, 1 * 32, 0));
@@ -548,6 +722,11 @@ namespace game_framework {
 
 		hero.OnMove(&mapBrown);
 
+		for (unsigned int i = 0; i < items.size(); ++i)
+		{
+
+			items[i]->OnMove(&mapBrown);
+		}
 
 		if (hero.isOnAttack())
 		{
@@ -650,6 +829,29 @@ namespace game_framework {
 
 		for (unsigned int i = 0; i < enemies.size(); ++i)
 		{
+			if (enemies[i]->getLoot1())
+			{
+				items.push_back(new Gold(enemies[i]->GetX1(), enemies[i]->GetY1(), mapBrown.getNext()));
+			}
+
+			int item2X = enemies[i]->GetX1() + 16;
+			switch (enemies[i]->getLoot2())
+			{
+			case 0:
+				items.push_back(new Gold(item2X, enemies[i]->GetY1(), mapBrown.getNext()));
+				break;
+			case 1:
+				items.push_back(new SmallBlood(item2X, enemies[i]->GetY1(), mapBrown.getNext()));
+				break;
+			case 2:
+				items.push_back(new BigBlood(item2X, enemies[i]->GetY1(), mapBrown.getNext()));
+				break;
+			case 3:
+				items.push_back(new Ring(item2X, enemies[i]->GetY1(), mapBrown.getNext()));
+				break;
+			default:
+				break;
+			}
 			hero.addExp(enemies[i]->getExp());
 		}
 
@@ -669,14 +871,30 @@ namespace game_framework {
 				{
 					break;
 				}
-				hero.addItem(items[i]);
+				if (items[i]->pickUp(&hero)) //可以收到道具欄
+				{
+					hero.addItem(items[i]);
+				}
+				else
+				{
+					delete items[i];
+				}
 				items.erase(items.begin() + i);
+
 				break;
 			}
 		}
 
+		if (hero.FinishGame())
+		{
+			isWin = true;
+			CAudio::Instance()->Stop(TITLE_BGM);
+			GotoGameState(GAME_STATE_OVER);
+		}
+
 		if (hero.getHP() <= 0)
 		{
+			isWin = false;
 			CAudio::Instance()->Stop(TITLE_BGM);
 			GotoGameState(GAME_STATE_OVER);
 		}
@@ -692,32 +910,36 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
+		if (!loaded) 
+		{
+			thunder.LoadBitmap();
+			hero.LoadBitmap();
+			mapBrown.LoadBitMap();
+			itemFrame.LoadBitmap(ITEM_FRAME, RGB(128, 0, 128));
+			selectedItemFrame.LoadBitmap(SELECTED_ITEM_FRAME, RGB(128, 0, 128));
+			eventFrame.LoadBitmap(EVENT_FRAME, RGB(128, 0, 128));
+			statusBlocker.LoadBitmap(STATUS_BLOCKER, RGB(128, 0, 128));
+			states[0].LoadBitmap(STATE_NAME, RGB(128, 0, 128));
+			states[1].LoadBitmap(STATE_LV, RGB(128, 0, 128));
+			states[2].LoadBitmap(STATE_LIFE, RGB(128, 0, 128));
+			states[3].LoadBitmap(STATE_EXP, RGB(128, 0, 128));
+			states[4].LoadBitmap(STATE_GOLD, RGB(128, 0, 128));
+			itemLogo.LoadBitmap(ITEM_LOGO, RGB(40, 40, 40));
+			statusFrame.LoadBitmap(STATUS_FRAME, RGB(0, 0, 0));
+			hpBar.LoadBitmap(BAR_HP, RGB(128, 0, 128));
+			expBar.LoadBitmap(BAR_EXP, RGB(128, 0, 128));
+			CAudio::Instance()->Load(AUDIO_BGM, "Sounds\\KYOUDANB.MID");	// 載入編號1的聲音lake.mp3
+			loaded = true;
+		}
 
-		hero.LoadBitmap();
-		mapBrown.LoadBitMap();
-		itemFrame.LoadBitmap(ITEM_FRAME, RGB(128, 0, 128));
-		selectedItemFrame.LoadBitmap(SELECTED_ITEM_FRAME, RGB(128, 0, 128));
-		eventFrame.LoadBitmap(EVENT_FRAME, RGB(128, 0, 128));
-		statusBlocker.LoadBitmap(STATUS_BLOCKER, RGB(128, 0, 128));
-		states[0].LoadBitmap(STATE_NAME, RGB(128, 0, 128));
-		states[1].LoadBitmap(STATE_LV, RGB(128, 0, 128));
-		states[2].LoadBitmap(STATE_LIFE, RGB(128, 0, 128));
-		states[3].LoadBitmap(STATE_EXP, RGB(128, 0, 128));
-		states[4].LoadBitmap(STATE_GOLD, RGB(128, 0, 128));
-		itemLogo.LoadBitmap(ITEM_LOGO, RGB(40, 40, 40));
-		statusFrame.LoadBitmap(STATUS_FRAME, RGB(0, 0, 0));
-		hpBar.LoadBitmap(BAR_HP, RGB(128, 0, 128));
-		expBar.LoadBitmap(BAR_EXP, RGB(128, 0, 128));
 		//
 		// 完成部分Loading動作，提高進度
 		//
 		//ShowInitProgress(50);
-		Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
 		// 繼續載入其他資料
 		//
 
-		CAudio::Instance()->Load(AUDIO_BGM, "Sounds\\KYOUDANB.MID");	// 載入編號1的聲音lake.mp3
 		//
 		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 		//
@@ -775,9 +997,12 @@ namespace game_framework {
 		}
 		if (nChar == KEY_T)
 		{
-			hero.SetThunder(true);
-			thunder.initState();
-			thunder.OnPrepare();
+			isWin = true;
+			CAudio::Instance()->Stop(TITLE_BGM);
+			GotoGameState(GAME_STATE_OVER);
+			//hero.SetThunder(true);
+			//thunder.initState();
+			//thunder.OnPrepare();
 		}
 	}
 
@@ -791,7 +1016,7 @@ namespace game_framework {
 
 		if (nChar == KEY_CTRL)
 		{
-			this->SetCTRL(true);
+			this->SetCTRL(false);
 		}
 		if (nChar == KEY_LEFT) {
 			hero.SetMovingLeft(false);
@@ -857,7 +1082,7 @@ namespace game_framework {
 		hero.OnShow();
 		thunder.OnShow();
 
-		selectedItemFrame.SetTopLeft(1+32 * 18, 1 + hero.getCurrentItem() * 32);
+		selectedItemFrame.SetTopLeft(1 + 32 * 18, 1 + hero.getCurrentItem() * 32);
 		selectedItemFrame.ShowBitmap();
 
 		eventFrame.SetTopLeft(0, 416 - 25);
@@ -882,7 +1107,8 @@ namespace game_framework {
 		//hp
 		states[2].SetTopLeft(170, 446);
 		states[2].ShowBitmap();
-		hpBar.SetTopLeft(170 - 104 + 2 + hero.getHP(), 446 + 18);
+		float hpRatio = (float)hero.getHP() / (float)hero.getMaxHP();
+		hpBar.SetTopLeft(170 - 104 + 2 + +(int)(104 * hpRatio + 0.5), 446 + 18);
 		hpBar.ShowBitmap();
 		statusFrame.SetTopLeft(170, 446 + 18);
 		statusFrame.ShowBitmap();
@@ -907,7 +1133,7 @@ namespace game_framework {
 		pDC->TextOut(127, 446 + 14, Levelbuffer);
 		char goldBuffer[4];
 		snprintf(goldBuffer, 10, "%d", hero.getGold());
-		pDC->TextOut(392+18, 446 + 14, goldBuffer);
+		pDC->TextOut(392 + 18, 446 + 14, goldBuffer);
 
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC

@@ -35,6 +35,8 @@ namespace game_framework {
 		virtual bool InAttackRange(int x, int y);
 		virtual bool InWeaponHitBox(int x, int y);
 		int GetWeaponX1();
+		int getLoot1();
+		int getLoot2();
 		virtual bool InHitBox(int x, int y);
 		bool IsDistroyed();
 		int getMapLocation()
@@ -45,6 +47,8 @@ namespace game_framework {
 	protected:
 		bool lootable = false;
 		int exp = 2;
+		int loot1;
+		int loot2;
 		int location;
 		int speed;
 		bool onAttack;

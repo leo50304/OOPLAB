@@ -2,7 +2,6 @@
 #define BLOCK_H
 
 #include "stdafx.h"
-//#include "CHero.h"
 #include <stdio.h>
 #include <vector>
 

@@ -802,5 +802,41 @@
     <Image Include="data\gx_b_04.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\item\gold_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item\gold_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item\gold_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item\gold_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item\big_blood_0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item\big_blood_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item\big_blood_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item\gi_16.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gxh_01.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gxh_02.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\leaderboard.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\help.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

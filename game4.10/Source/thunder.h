@@ -11,6 +11,7 @@ namespace game_framework {
 	{
 	public:
 		Thunder();
+		void LoadBitmap();
 		void initialize();
 		void initState();
 		void OnShow();

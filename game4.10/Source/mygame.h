@@ -86,7 +86,7 @@ namespace game_framework {
 		CMovingBitmap logo;								// csie的logo
 		CMovingBitmap logoBackground;								// csie的logo
 		CMovingBitmap titleNew;
-		CMovingBitmap titleContinue;
+		CMovingBitmap titleHelp;
 		CMovingBitmap titleLeaderboard;
 		CMovingBitmap titleSetting;
 		CMovingBitmap titleExit;
@@ -95,6 +95,8 @@ namespace game_framework {
 
 		int currentSelect;
 		int titleOffset;
+		int menuState;
+		int countFlash;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -136,6 +138,7 @@ namespace game_framework {
 		CMovingBitmap expBar;
 		vector<Item*> items;
 		bool onCTRL = false;
+		bool loaded = false;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -153,6 +156,13 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		int counter;	// 倒數之計數器
+		CMovingBitmap highScore;
+		CMovingBitmap highScoreFrame;
+		CMovingBitmap leaderboardBg;
+		vector<int> scores;
+		int state;
+		int scorePos;
+		int countFlash;
 	};
 
 }

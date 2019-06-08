@@ -19,10 +19,8 @@ namespace game_framework {
 		srand((unsigned int)time(NULL));
 	}
 
-	void Thunder::initialize()
+	void Thunder::LoadBitmap() 
 	{
-		initState();
-
 		for (int i = 0; i < 5; ++i)
 		{
 			thunder[i] = CMovingBitmap();
@@ -40,7 +38,11 @@ namespace game_framework {
 
 		onEnemyThunder.AddBitmap(attack_thunder_hit_1, RGB(128, 0, 128));
 		onEnemyThunder.AddBitmap(attack_thunder_hit_2, RGB(128, 0, 128));
+	}
 
+	void Thunder::initialize()
+	{
+		initState();
 	}
 
 	void Thunder::stop() 

@@ -13,6 +13,7 @@ namespace game_framework {
 		~MapBrown();
 		MapBrown();
 		void LoadBitMap();
+		void initMap();
 		void OnShow();
 		int GetBlock(int i, int j);
 		MapObject* getMapObject(int i);

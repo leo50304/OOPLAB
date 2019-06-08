@@ -49,6 +49,30 @@ namespace game_framework {
 		hp -= d;
 	}
 
+	int Enemy::getLoot1() 
+	{
+		if (!lootable)
+		{
+			return 0;
+		}
+		return rand() % 100 < 50;
+	}
+	int Enemy::getLoot2() 
+	{
+		if (!lootable) 
+		{
+			return -1;
+		}
+		if (rand() % 100 < 5) 
+		{
+			return -1;
+		}
+		else 
+		{
+			return rand() % 4;
+		}
+	}
+
 	int Enemy::getExp() 
 	{
 		if (lootable) 

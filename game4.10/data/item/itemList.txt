@@ -1,0 +1,5 @@
+gold: 0
+
+small blood: 1
+
+big blood: 2
