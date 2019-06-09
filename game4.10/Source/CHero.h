@@ -34,7 +34,8 @@ namespace game_framework {
 		void addHp(int num);
 		void addMaxHp(int num);
 		void SetOnLadder(bool flag);
-
+		void ToggleGodStatus();
+		void ToggleInfiniteGold();
 		void SetAttack(bool flag);
 
 		bool InAttackRange(int x, int y);
@@ -69,6 +70,7 @@ namespace game_framework {
 		void moveCurrentItem(int i);
 		void setWin(bool flag);
 		bool FinishGame();
+		bool buyItem(Item* item, int price);
 
 	protected:
 		vector<Item*> items;
@@ -117,8 +119,17 @@ namespace game_framework {
 		int bookFrameCount = 0;
 		int invincibleFrameCount = 0;
 		
-		int damage = 1;
 
+
+		int tempGold;
+		int tempLevel;
+		int tempHp;
+		int tempMaxHP;
+		int tempMaxExp;
+		int tempDamage;
+		bool godMode;
+
+		int damage = 1;
 		int gold = 3;
 		int level = 1;
 		int hp;

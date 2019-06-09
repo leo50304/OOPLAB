@@ -329,6 +329,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="data\arrow.bmp" />
     <Image Include="data\attack\attackBladeLeft1.bmp" />
     <Image Include="data\attack\attackBladeLeft2.bmp" />
     <Image Include="data\attack\attackBladeLeft3.bmp" />
@@ -476,6 +477,7 @@
     <Image Include="data\e\SNAKE_3.bmp" />
     <Image Include="data\e\SNAKE_4.bmp" />
     <Image Include="data\gold.bmp" />
+    <Image Include="data\gs_01.bmp" />
     <Image Include="data\gs_03.bmp" />
     <Image Include="data\gxh_01.bmp" />
     <Image Include="data\gxh_02.bmp" />
@@ -487,8 +489,12 @@
     <Image Include="data\gx_11.bmp" />
     <Image Include="data\gx_b_00.bmp" />
     <Image Include="data\gx_b_04.bmp" />
+    <Image Include="data\gx_b_05.bmp" />
+    <Image Include="data\gx_b_16.bmp" />
     <Image Include="data\help.bmp" />
     <Image Include="data\hp-bar.bmp" />
+    <Image Include="data\item-board.bmp" />
+    <Image Include="data\item-slot.bmp" />
     <Image Include="data\item\big_blood_0.bmp" />
     <Image Include="data\item\big_blood_1.bmp" />
     <Image Include="data\item\big_blood_2.bmp" />

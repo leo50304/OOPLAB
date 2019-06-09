@@ -116,13 +116,13 @@ namespace game_framework {
 	{
 		icon.SetTopLeft(X1 + offSetX, Y1 + offSetY);
 		icon.OnShow();
-		ShowRemainingUse();
+		//ShowRemainingUse();
 	}
 
 	SmallBlood::SmallBlood(int x, int y, int d) :Item(x, y, d)
 	{
 		LoadBitMap();
-		offSetX = 0;
+		offSetX = 7;
 		offSetY = 7;
 
 	}
@@ -152,7 +152,7 @@ namespace game_framework {
 	BigBlood::BigBlood(int x, int y, int d) :Item(x, y, d)
 	{
 		LoadBitMap();
-		offSetX = 0;
+		offSetX = 7;
 		offSetY = 7;
 
 	}
@@ -208,7 +208,7 @@ namespace game_framework {
 
 	void Gold::use(CHero* hero)
 	{
-		amount = rand() % 10 + 1;
+		amount = rand() % 3 + 1;
 		hero->changeGold(amount);
 	}
 

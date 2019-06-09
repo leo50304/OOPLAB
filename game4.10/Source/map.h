@@ -20,8 +20,11 @@ namespace game_framework {
 		void UpdateMap(char nextPos);
 		bool isBlockSolid(int i, int j);
 		int getNext();
+		void enterStore(bool flag);
+		bool InStore();
 
 	protected:
+		bool inStore;
 		int map[13][18];
 		int mapOfMap[6][5];
 		//MapObject* mapObjects[12];

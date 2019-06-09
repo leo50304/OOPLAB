@@ -90,13 +90,14 @@ namespace game_framework {
 		CMovingBitmap titleLeaderboard;
 		CMovingBitmap titleSetting;
 		CMovingBitmap titleExit;
-
+		CMovingBitmap selectionArrow;
 		CMovingBitmap titleFrame;
 
 		int currentSelect;
 		int titleOffset;
 		int menuState;
 		int countFlash;
+		bool cheatHelp;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -118,6 +119,7 @@ namespace game_framework {
 		void OnRButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		void OnRButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
 		void SetCTRL(bool flag);
+		Item* ItemFactory(int id, int x, int y, int mapId);
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
@@ -136,7 +138,15 @@ namespace game_framework {
 		CMovingBitmap states[5];
 		CMovingBitmap hpBar;
 		CMovingBitmap expBar;
+		CMovingBitmap merchant;
+		CMovingBitmap itemBoard;
+		CMovingBitmap itemSlot;
+		CMovingBitmap shopItemFrame;
+
 		vector<Item*> items;
+		vector<Item*> shopItems;
+		vector<int> itemPrices;
+		int currentShopItem;
 		bool onCTRL = false;
 		bool loaded = false;
 	};

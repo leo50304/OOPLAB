@@ -838,5 +838,23 @@
     <Image Include="data\help.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\gx_b_05.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item-board.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\item-slot.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gx_b_16.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gs_01.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\arrow.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

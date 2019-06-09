@@ -476,37 +476,47 @@ STATUS_FRAME            BITMAP                  "..\\data\\gx_b_00.bmp"
 
 STATUS_BLOCKER          BITMAP                  "..\\data\\blocker.bmp"
 
-SMALL_BLOOD_1           BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\small_blood_0.bmp"
+SMALL_BLOOD_1           BITMAP                  "..\\data\\item\\small_blood_0.bmp"
 
-SMALL_BLOOD_2           BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\small_blood_1.bmp"
+SMALL_BLOOD_2           BITMAP                  "..\\data\\item\\small_blood_1.bmp"
 
-SMALL_BLOOD_3           BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\small_blood_2.bmp"
+SMALL_BLOOD_3           BITMAP                  "..\\data\\item\\small_blood_2.bmp"
 
-SELECTED_ITEM_FRAME     BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\gx_b_04.bmp"
+SELECTED_ITEM_FRAME     BITMAP                  "..\\data\\gx_b_04.bmp"
 
-GOLD_0                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\gold_0.bmp"
+GOLD_0                  BITMAP                  "..\\data\\item\\gold_0.bmp"
 
-GOLD_1                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\gold_1.bmp"
+GOLD_1                  BITMAP                  "..\\data\\item\\gold_1.bmp"
 
-GOLD_2                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\gold_2.bmp"
+GOLD_2                  BITMAP                  "..\\data\\item\\gold_2.bmp"
 
-GOLD_3                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\gold_3.bmp"
+GOLD_3                  BITMAP                  "..\\data\\item\\gold_3.bmp"
 
-BIG_BLOOD_0             BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\big_blood_0.bmp"
+BIG_BLOOD_0             BITMAP                  "..\\data\\item\\big_blood_0.bmp"
 
-BIG_BLOOD_1             BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\big_blood_1.bmp"
+BIG_BLOOD_1             BITMAP                  "..\\data\\item\\big_blood_1.bmp"
 
-BIG_BLOOD_2             BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\big_blood_2.bmp"
+BIG_BLOOD_2             BITMAP                  "..\\data\\item\\big_blood_2.bmp"
 
-RING                    BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\item\\gi_16.bmp"
+RING                    BITMAP                  "..\\data\\item\\gi_16.bmp"
 
-HIGH_SCORE              BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\gxh_01.bmp"
+HIGH_SCORE              BITMAP                  "..\\data\\gxh_01.bmp"
 
-HIGH_SCORE_FRAME        BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\gxh_02.bmp"
+HIGH_SCORE_FRAME        BITMAP                  "..\\data\\gxh_02.bmp"
 
-LEADER_BOARD_BG         BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\leaderboard.bmp"
+LEADER_BOARD_BG         BITMAP                  "..\\data\\leaderboard.bmp"
 
-TITLE_HELP              BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\help.bmp"
+TITLE_HELP              BITMAP                  "..\\data\\help.bmp"
+
+MERCHANT                BITMAP                  "..\\data\\gx_b_05.bmp"
+
+ITEM_BOARD              BITMAP                  "..\\data\\item-board.bmp"
+
+ITEM_SLOT               BITMAP                  "..\\data\\item-slot.bmp"
+
+SHOP_ITEM_FRAME         BITMAP                  "..\\data\\gs_01.bmp"
+
+SELECTION_ARROW         BITMAP                  "..\\data\\arrow.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

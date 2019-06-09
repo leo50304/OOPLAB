@@ -61,7 +61,15 @@ namespace game_framework {
 	}
 	void CHero::changeGold(int i) 
 	{
+		if (gold == 999) 
+		{
+			return;
+		}
 		gold += i;
+		if (gold > 999) 
+		{
+			gold = 999;
+		}
 	}
 
 	void CHero::addHp(int num)
@@ -149,12 +157,25 @@ namespace game_framework {
 		return items.size() >= 13;
 	}
 
+	bool  CHero::buyItem(Item* item, int price) 
+	{
+		if (gold >= price) 
+		{
+			addItem(item);
+			gold -= price;
+			return true;
+		}
+		return false;
+	}
+
+
 	void CHero::Initialize()
 	{
 		const int X_POS = 32 * 2;
 		const int Y_POS = 32 * 11;
 		x = X_POS;
 		y = Y_POS;
+		godMode = false;
 		isOnLadder = false;
 		onDrop = false;
 		onAttack = false;
@@ -394,7 +415,7 @@ namespace game_framework {
 	bool CHero::HitGround(MapBrown* map)
 	{
 		//return map->isBlockSolid(x / 32, (y + 32) / 32) || map->isBlockSolid((x + 31) / 32, (y + 32) / 32);
-		return (map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid(x / 32, (y + 1) / 32)) || (map->isBlockSolid((x + 31) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 1) / 32));
+		return (map->isBlockSolid((x + 4) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 4) / 32, (y + 1) / 32)) || (map->isBlockSolid((x + 31) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 1) / 32));
 	}
 
 	bool CHero::HitTop(MapBrown* map)
@@ -405,7 +426,7 @@ namespace game_framework {
 
 	bool CHero::GroundNotSolid(MapBrown* map)
 	{
-		return !map->isBlockSolid(x / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 32) / 32);
+		return !map->isBlockSolid((x+4) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 32) / 32);
 	}
 
 	bool CHero::isInvincible()
@@ -415,6 +436,11 @@ namespace game_framework {
 
 	void CHero::OnMove(MapBrown* map)
 	{
+
+		if (map->InStore()) 
+		{
+			return;
+		}
 
 		for (unsigned int i = 0; i < items.size(); ++i)
 		{
@@ -545,7 +571,14 @@ namespace game_framework {
 			//isMovingDown = false;
 			int px = (x + 16) / 32;
 			int py = y / 32;
-			if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Up", px * 32))
+
+			if (map->GetBlock(px, py + 1) == 4)
+			{
+				y += STEP_SIZE;
+				map->enterStore(true);
+				x = px * 32;
+			}
+			else if (!map->getMapObject(map->GetBlock(px, py))->HitHeroAction(x, y, isOnLadder, "Up", px * 32))
 			{
 				y += STEP_SIZE;
 
@@ -559,6 +592,7 @@ namespace game_framework {
 					TopLimit = y - 32 * 3;//¤j¸õ¤W­­
 				}
 			}
+
 
 			if (isOnLadder)
 			{
@@ -725,6 +759,40 @@ namespace game_framework {
 	bool CHero::FinishGame() 
 	{
 		return onFinishGame;
+	}
+
+	void CHero::ToggleInfiniteGold() 
+	{
+		gold = 999;
+	}
+
+	void CHero::ToggleGodStatus() 
+	{
+		if (godMode == false)
+		{
+			tempLevel = level;
+			tempHp = hp;
+			tempMaxHP = maxHP;
+			tempMaxExp = maxExp;
+			tempDamage = damage;
+			level = 999;
+			hp = 9999;
+			maxHP = 9999;
+			maxExp = 9999;
+			damage = 9999;
+			exp = 0;
+			godMode = true;
+		}
+		else 
+		{
+			level = tempLevel;
+			hp = tempHp;
+			maxHP = tempMaxHP;
+			maxExp = tempMaxExp;
+			exp = 0;
+			damage = tempDamage;
+			godMode = false;
+		}
 	}
 
 	void CHero::moveCurrentItem(int i)

@@ -55,7 +55,7 @@ namespace game_framework {
 		{
 			return 0;
 		}
-		return rand() % 100 < 50;
+		return rand() % 100 < 40;
 	}
 	int Enemy::getLoot2() 
 	{
@@ -63,7 +63,7 @@ namespace game_framework {
 		{
 			return -1;
 		}
-		if (rand() % 100 < 5) 
+		if (rand() % 100 > 20) 
 		{
 			return -1;
 		}

@@ -75,6 +75,8 @@ namespace game_framework {
 
 	MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
 	{
+		inStore = false;
+
 		mapObjects.push_back(new Blank());
 		mapObjects.push_back(new Grass());
 		mapObjects.push_back(new Bone());
@@ -148,7 +150,7 @@ namespace game_framework {
 
 	}
 
-	void MapBrown::initMap() 
+	void MapBrown::initMap()
 	{
 
 		mapPosX = 0;
@@ -167,6 +169,16 @@ namespace game_framework {
 	int MapBrown::getNext()
 	{
 		return next;
+	}
+
+	void MapBrown::enterStore(bool flag)
+	{
+		inStore = flag;
+	}
+
+	bool MapBrown::InStore()
+	{
+		return inStore;
 	}
 
 	MapBrown ::~MapBrown()
@@ -274,6 +286,7 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit()
 	{
+		titleOffset = 32;
 		CAudio::Instance()->Load(TITLE_BGM, "Sounds\\TSUKINOS.MID");	// 載入編號1的聲音lake.mp3
 		CAudio::Instance()->Load(JUMP_EF, "data\\se\\sb_00.wav");	// 載入編號1的聲音lake.mp3
 		CAudio::Instance()->Load(DROP_EF, "data\\se\\sb_01.wav");	// 載入編號1的聲音lake.mp3
@@ -290,10 +303,6 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
-		currentSelect = 0;
-		titleOffset = 32;
-		menuState = 0;
-		countFlash = 60;
 		titleFrame.LoadBitmap(TITLE_FRAME, RGB(128, 0, 128));
 		titleNew.LoadBitmap(TITLE_NEW, RGB(128, 0, 128));
 		titleHelp.LoadBitmap(TITLE_HELP, RGB(128, 0, 128));
@@ -302,6 +311,7 @@ namespace game_framework {
 		titleExit.LoadBitmap(TITLE_EXIT, RGB(128, 0, 128));
 		logo.LoadBitmap(MENU_0, RGB(128, 0, 128));
 		logoBackground.LoadBitmap(MENU_1, RGB(128, 0, 128));
+		selectionArrow.LoadBitmap(SELECTION_ARROW, RGB(0, 0, 0));
 		CAudio::Instance()->Play(TITLE_BGM, false);		// 撥放 WAVE
 
 		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
@@ -313,7 +323,11 @@ namespace game_framework {
 
 	void CGameStateInit::OnBeginState()
 	{
+		currentSelect = 0;
+		menuState = 0;
+		countFlash = 60;
 		onStart = true;
+		cheatHelp = false;
 	}
 
 	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -322,55 +336,78 @@ namespace game_framework {
 		const char KEY_SPACE = ' ';
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_DOWN = 0x28; // keyboard上箭頭
+		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 
-		if (menuState == 1 && nChar == KEY_SPACE)
+		if (menuState == 1)
 		{
-			menuState = 0;
-			return;
-		}
-
-		if (nChar == KEY_SPACE)
-		{
-			if (currentSelect == 0)
+			if (nChar == KEY_SPACE) 
 			{
-				CAudio::Instance()->Stop(TITLE_BGM);
-				t1 = clock();
-				onStart = false;
-				GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
+				menuState = 0;
+				return;
 			}
-			else if (currentSelect == 1)
+			else if (nChar == KEY_RIGHT)
+			{
+				menuState = 2;
+			}
+		}
+		else if (menuState == 2) 
+		{
+			if (nChar == KEY_SPACE)
+			{
+				menuState = 0;
+				return;
+			}
+			else if (nChar == KEY_RIGHT)
 			{
 				menuState = 1;
 			}
-			else if (currentSelect == 2)
-			{
-				isWin = true;
-				GotoGameState(GAME_STATE_OVER);	
-			}
-			else if (currentSelect == 4)
-			{
-				CAudio::Instance()->Stop(TITLE_BGM);
-				GotoGameState(GAME_STATE_OVER);
-			}
 		}
-		else if (nChar == KEY_UP)
+		else 
 		{
-			currentSelect--;
-			if (currentSelect < 0)
+			if (nChar == KEY_SPACE)
 			{
-				currentSelect = 4;
+				if (currentSelect == 0)
+				{
+					CAudio::Instance()->Stop(TITLE_BGM);
+					t1 = clock();
+					onStart = false;
+					GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
+				}
+				else if (currentSelect == 1)
+				{
+					menuState = 1;
+				}
+				else if (currentSelect == 2)
+				{
+					isWin = true;
+					GotoGameState(GAME_STATE_OVER);
+				}
+				else if (currentSelect == 4)
+				{
+					CAudio::Instance()->Stop(TITLE_BGM);
+					GotoGameState(GAME_STATE_OVER);
+				}
 			}
-		}
-		else if (nChar == KEY_DOWN)
-		{
-			currentSelect++;
-			if (currentSelect > 4)
+			else if (nChar == KEY_UP)
 			{
-				currentSelect = 0;
+				currentSelect--;
+				if (currentSelect < 0)
+				{
+					currentSelect = 4;
+				}
 			}
+			else if (nChar == KEY_DOWN)
+			{
+				currentSelect++;
+				if (currentSelect > 4)
+				{
+					currentSelect = 0;
+				}
+			}
+			else if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
+				PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
 		}
-		else if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
-			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+
 	}
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
@@ -404,7 +441,7 @@ namespace game_framework {
 			titleExit.SetTopLeft(270, 240 + titleOffset * 4);
 			titleExit.ShowBitmap();
 		}
-		else if (menuState == 1)
+		else if (menuState == 1 || menuState == 2)
 		{
 			countFlash--;
 			if (countFlash <= 0)
@@ -418,18 +455,31 @@ namespace game_framework {
 			pDC->SetBkColor(RGB(0, 0, 0));
 			pDC->SetTextColor(RGB(255, 200, 69));
 			pDC->TextOut(155, 230, "打倒魔王取得傳說之石，逃脫洞窟");
-			pDC->TextOut(125, 20+255, "E:           使用道具          CTRL+上下: 選擇道具");
-			pDC->TextOut(125, 20+280, "SPACE: 攻擊                   上: 跳躍 / 爬梯子");
-			pDC->TextOut(125, 20+305, "F:           火球                   下: 爬梯子");
-			pDC->TextOut(125, 20+330, "T:           雷怒九天           左右: 移動");
-			if (countFlash > 30) 
+
+			if (menuState == 1) 
+			{
+				pDC->TextOut(125-32, 20 + 255, "E:           使用道具          CTRL+上下: 選擇道具");
+				pDC->TextOut(125 - 32, 20 + 280, "SPACE: 攻擊                   上: 跳躍 / 爬梯子 / 進店");
+				pDC->TextOut(125 - 32, 20 + 305, "F:           火球                   下: 爬梯子");
+				pDC->TextOut(125 - 32, 20 + 330, "T:           雷怒九天           左右: 移動");
+			}
+			else if (menuState == 2) 
+			{
+				pDC->TextOut(125 - 32, 20 + 255, "CTRL+1:  取得通關道具，可直接離開洞窟");
+				pDC->TextOut(125 - 32, 20 + 280, "CTRL+2:  肉身成聖");
+				pDC->TextOut(125 - 32, 20 + 305, "CTRL+3:  金幣無限");
+				pDC->TextOut(125 - 32, 20 + 330, "CTRL+4:  移動到王面前");
+			}
+
+			if (countFlash > 30)
 			{
 				pDC->TextOut(237, 420, "空白鍵返回目錄");
 			}
-
-
 			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+
+			selectionArrow.SetTopLeft(530, 18 + 280);
+			selectionArrow.ShowBitmap();
 		}
 	}
 
@@ -476,7 +526,7 @@ namespace game_framework {
 			file.close();
 
 			state = 1;
-			if (!onStart) 
+			if (!onStart)
 			{
 				int t = (int)((t2 - t1) / (double)(CLOCKS_PER_SEC));
 				scorePos = -1;
@@ -624,6 +674,10 @@ namespace game_framework {
 		{
 			delete items[i];
 		}
+		for (unsigned int i = 0; i < shopItems.size(); ++i)
+		{
+			delete shopItems[i];
+		}
 	}
 
 	void CGameStateRun::SetCTRL(bool flag)
@@ -641,11 +695,13 @@ namespace game_framework {
 		const int HITS_LEFT_Y = 0;
 		const int BACKGROUND_X = 60;
 		const int ANIMATION_SPEED = 15;
+		currentShopItem = 0;
 
 		mapBrown.initMap();
 		hero.Initialize();
 		thunder.initialize();
 
+		//init map items
 		for (unsigned int i = 0; i < items.size(); ++i)
 		{
 			delete items[i];
@@ -654,8 +710,22 @@ namespace game_framework {
 		items.push_back(new SmallBlood(32 * 4, 32 * 11, 0));
 		items.push_back(new Gold(32 * 5, 32 * 11, 0));
 
+		//init hero items
 		hero.addItem(new SmallBlood());
 
+		//roll shop items
+		for (unsigned int i = 0; i < shopItems.size(); ++i)
+		{
+			delete shopItems[i];
+		}
+		shopItems.clear();
+		for (int i = 0; i < 3; ++i)
+		{
+			shopItems.push_back(ItemFactory(rand() % 3 + 1, 172 + 92 * i, 227, -1));
+			itemPrices.push_back(rand() % 15 + 5);
+		}
+
+		//init enemies
 		for (unsigned int i = 0; i < enemies.size(); ++i)
 		{
 			delete enemies[i];
@@ -713,6 +783,28 @@ namespace game_framework {
 
 	}
 
+	Item* CGameStateRun::ItemFactory(int id, int x, int y, int mapId)
+	{
+		switch (id)
+		{
+		case 0:
+			return new Gold(x, y, mapId);
+			break;
+		case 1:
+			return new SmallBlood(x, y, mapId);
+			break;
+		case 2:
+			return new BigBlood(x, y, mapId);
+			break;
+		case 3:
+			return new Ring(x, y, mapId);
+			break;
+		default:
+			return nullptr;
+			break;
+		}
+	}
+
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
 		//
@@ -721,6 +813,27 @@ namespace game_framework {
 		// SetCursor(AfxGetApp()->LoadCursor(IDC_GAMECURSOR));
 
 		hero.OnMove(&mapBrown);
+
+
+		if (mapBrown.InStore())
+		{
+			for (unsigned int i = 0; i < items.size(); ++i)
+			{
+				if (items[i]->getMap() == mapBrown.getNext())
+				{
+					items[i]->MoveIcon();
+				}
+			}
+
+			for (unsigned int i = 0; i < shopItems.size(); ++i)
+			{
+				if (shopItems[i] != nullptr) 
+				{
+					shopItems[i]->MoveIcon();
+				}
+			}
+			return;
+		}
 
 		for (unsigned int i = 0; i < items.size(); ++i)
 		{
@@ -835,32 +948,13 @@ namespace game_framework {
 			}
 
 			int item2X = enemies[i]->GetX1() + 16;
-			switch (enemies[i]->getLoot2())
+			Item* lootItem = ItemFactory(enemies[i]->getLoot2(), item2X, enemies[i]->GetY1(), mapBrown.getNext());
+			if (lootItem != nullptr)
 			{
-			case 0:
-				items.push_back(new Gold(item2X, enemies[i]->GetY1(), mapBrown.getNext()));
-				break;
-			case 1:
-				items.push_back(new SmallBlood(item2X, enemies[i]->GetY1(), mapBrown.getNext()));
-				break;
-			case 2:
-				items.push_back(new BigBlood(item2X, enemies[i]->GetY1(), mapBrown.getNext()));
-				break;
-			case 3:
-				items.push_back(new Ring(item2X, enemies[i]->GetY1(), mapBrown.getNext()));
-				break;
-			default:
-				break;
+				items.push_back(lootItem);
 			}
-			hero.addExp(enemies[i]->getExp());
-		}
 
-		for (unsigned int i = 0; i < items.size(); ++i)
-		{
-			if (items[i]->getMap() == mapBrown.getNext())
-			{
-				items[i]->MoveIcon();
-			}
+			hero.addExp(enemies[i]->getExp());
 		}
 
 		for (unsigned int i = 0; i < items.size(); ++i)
@@ -910,7 +1004,7 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
-		if (!loaded) 
+		if (!loaded)
 		{
 			thunder.LoadBitmap();
 			hero.LoadBitmap();
@@ -918,6 +1012,7 @@ namespace game_framework {
 			itemFrame.LoadBitmap(ITEM_FRAME, RGB(128, 0, 128));
 			selectedItemFrame.LoadBitmap(SELECTED_ITEM_FRAME, RGB(128, 0, 128));
 			eventFrame.LoadBitmap(EVENT_FRAME, RGB(128, 0, 128));
+			shopItemFrame.LoadBitmap(SHOP_ITEM_FRAME, RGB(128, 0, 128));
 			statusBlocker.LoadBitmap(STATUS_BLOCKER, RGB(128, 0, 128));
 			states[0].LoadBitmap(STATE_NAME, RGB(128, 0, 128));
 			states[1].LoadBitmap(STATE_LV, RGB(128, 0, 128));
@@ -928,6 +1023,9 @@ namespace game_framework {
 			statusFrame.LoadBitmap(STATUS_FRAME, RGB(0, 0, 0));
 			hpBar.LoadBitmap(BAR_HP, RGB(128, 0, 128));
 			expBar.LoadBitmap(BAR_EXP, RGB(128, 0, 128));
+			merchant.LoadBitmap(MERCHANT, RGB(128, 0, 128));
+			itemBoard.LoadBitmap(ITEM_BOARD);
+			itemSlot.LoadBitmap(ITEM_SLOT, RGB(128, 0, 128));
 			CAudio::Instance()->Load(AUDIO_BGM, "Sounds\\KYOUDANB.MID");	// 載入編號1的聲音lake.mp3
 			loaded = true;
 		}
@@ -956,6 +1054,60 @@ namespace game_framework {
 		const char KEY_E = 69;
 		const char KEY_F = 70;
 		const char KEY_T = 84;
+		const char KEY_ONE = 49;
+		const char KEY_TWO = 50;
+		const char KEY_THREE = 51;
+
+		if (mapBrown.InStore())
+		{
+			if (nChar == KEY_LEFT) {
+				currentShopItem -= 1;
+				if (currentShopItem < 0)
+				{
+					currentShopItem = 3;
+				}
+			}
+			if (nChar == KEY_RIGHT) {
+				currentShopItem += 1;
+				if (currentShopItem > 3)
+				{
+					currentShopItem = 0;
+				}
+			}
+			if (nChar == KEY_SPACE) {
+				if (currentShopItem == 3) //exit
+				{
+					mapBrown.enterStore(false);
+				}
+				else if (itemPrices[currentShopItem] == -1)
+				{
+					return;
+				}
+				else if (hero.buyItem(shopItems[currentShopItem], itemPrices[currentShopItem]))
+				{
+					itemPrices[currentShopItem] = -1;
+					shopItems[currentShopItem] = nullptr;
+				}
+			}
+			return;
+		}
+
+		if (this->onCTRL) 
+		{
+			if (nChar == KEY_ONE) 
+			{
+				hero.addItem(new LegendStone());
+			}
+			if (nChar == KEY_TWO) 
+			{
+				hero.ToggleGodStatus();
+			}
+			if (nChar == KEY_THREE)
+			{
+				hero.ToggleInfiniteGold();
+			}
+		}
+
 		if (nChar == KEY_CTRL)
 		{
 			this->SetCTRL(true);
@@ -997,12 +1149,9 @@ namespace game_framework {
 		}
 		if (nChar == KEY_T)
 		{
-			isWin = true;
-			CAudio::Instance()->Stop(TITLE_BGM);
-			GotoGameState(GAME_STATE_OVER);
-			//hero.SetThunder(true);
-			//thunder.initState();
-			//thunder.OnPrepare();
+			hero.SetThunder(true);
+			thunder.initState();
+			thunder.OnPrepare();
 		}
 	}
 
@@ -1069,18 +1218,92 @@ namespace game_framework {
 		//  貼上背景圖、撞擊數、球、擦子、彈跳的球
 		//
 
-		mapBrown.OnShow();
-
-		for (unsigned int i = 0; i < enemies.size(); ++i)
+		if (mapBrown.InStore())
 		{
-			if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed())
+			merchant.SetTopLeft(220 - 32, 77 - 16);
+			merchant.ShowBitmap();
+			itemBoard.SetTopLeft(160 - 32, 227 - 16);
+			itemBoard.ShowBitmap();
+
+			itemSlot.SetTopLeft(172, 227);
+			itemSlot.ShowBitmap();
+			itemSlot.SetTopLeft(264, 227);
+			itemSlot.ShowBitmap();
+			itemSlot.SetTopLeft(356, 227);
+			itemSlot.ShowBitmap();
+
+			for (int i = 0; i < 3; ++i)
 			{
-				enemies[i]->OnShow();
-				enemies[i]->ShowWeapon();
+				if (itemPrices[i] == -1)
+				{
+					continue;
+				}
+				shopItems[i]->ShowIcon();
 			}
+
+			if (currentShopItem == 3)
+			{
+				shopItemFrame.SetTopLeft(432, 335);
+			}
+			else
+			{
+				shopItemFrame.SetTopLeft(162 + 92 * currentShopItem, 219);
+			}
+			shopItemFrame.ShowBitmap(1.9);
+
+			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CFont f, *fp;
+			f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+			fp = pDC->SelectObject(&f);					// 選用 font f
+			pDC->SetBkMode(TRANSPARENT);
+			pDC->SetTextColor(RGB(255, 255, 0));
+			char priceBuffer[10];
+			for (int i = 0; i < 3; ++i)
+			{
+				if (itemPrices[i] == -1)
+				{
+					pDC->TextOut(162 + (int)(92.5 * i), 227 + 53, "SoldOut");
+					continue;
+				}
+				snprintf(priceBuffer, 10, "%dGold", itemPrices[i]);
+				int offset = 0;
+				if (itemPrices[i] < 10)
+				{
+					offset = 6;
+				}
+				pDC->TextOut(164 + (int)(92.5 * i) + offset, 227 + 53, priceBuffer);
+			}
+
+			pDC->SetTextColor(RGB(255, 255, 255));
+			pDC->TextOut(442, 355, "Exit");
+			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 		}
-		hero.OnShow();
-		thunder.OnShow();
+
+		if (!mapBrown.InStore())
+		{
+			mapBrown.OnShow();
+
+			for (unsigned int i = 0; i < enemies.size(); ++i)
+			{
+				if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed())
+				{
+					enemies[i]->OnShow();
+					enemies[i]->ShowWeapon();
+				}
+			}
+			hero.OnShow();
+			thunder.OnShow();
+
+			for (unsigned int i = 0; i < items.size(); ++i)
+			{
+				if (items[i]->getMap() == mapBrown.getNext())
+				{
+					items[i]->ShowIcon();
+				}
+			}
+
+		}
 
 		selectedItemFrame.SetTopLeft(1 + 32 * 18, 1 + hero.getCurrentItem() * 32);
 		selectedItemFrame.ShowBitmap();
@@ -1118,38 +1341,40 @@ namespace game_framework {
 		//name
 		states[0].SetTopLeft(8, 446);
 		states[0].ShowBitmap();
-		//
-		//lv
-		states[1].SetTopLeft(125, 446);
-		states[1].ShowBitmap();
-		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-		CFont f, *fp;
-		f.CreatePointFont(120, "Times New Roman");	// 產生 font f; 160表示16 point的字
-		fp = pDC->SelectObject(&f);					// 選用 font f
-		pDC->SetBkColor(RGB(0, 0, 0));
-		pDC->SetTextColor(RGB(255, 255, 0));
-		char Levelbuffer[4];
-		snprintf(Levelbuffer, 10, "%d", hero.getLevel());
-		pDC->TextOut(127, 446 + 14, Levelbuffer);
-		char goldBuffer[4];
-		snprintf(goldBuffer, 10, "%d", hero.getGold());
-		pDC->TextOut(392 + 18, 446 + 14, goldBuffer);
 
-		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 		//
 		//gold
 		states[4].SetTopLeft(392, 446);
 		states[4].ShowBitmap();
 
+		//lv
+		states[1].SetTopLeft(125, 446);
+		states[1].ShowBitmap();
+
+		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+		CFont f, *fp;
+		f.CreatePointFont(120, "Times New Roman");	// 產生 font f; 160表示16 point的字
+		fp = pDC->SelectObject(&f);					// 選用 font f
+		pDC->SetBkColor(RGB(0, 0, 0));
+		pDC->SetTextColor(RGB(255, 255, 255));
+		char Levelbuffer[5];
+		snprintf(Levelbuffer, 10, "%d", hero.getLevel());
+		pDC->TextOut(127, 446 + 14, Levelbuffer);
+		if (hero.getGold() == 999) 
+		{
+			pDC->TextOut(392 + 18, 446 + 14, "∞");
+		}
+		else 
+		{
+			char goldBuffer[5];
+			snprintf(goldBuffer, 10, "%d", hero.getGold());
+			pDC->TextOut(392 + 18, 446 + 14, goldBuffer);
+		}
+
+		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+
 		hero.showItemList();
 
-		for (unsigned int i = 0; i < items.size(); ++i)
-		{
-			if (items[i]->getMap() == mapBrown.getNext())
-			{
-				items[i]->ShowIcon();
-			}
-		}
 	}
 }
