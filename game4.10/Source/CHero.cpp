@@ -178,6 +178,7 @@ namespace game_framework {
 		godMode = false;
 		isOnLadder = false;
 		onDrop = false;
+		initThunder = false;
 		onAttack = false;
 		onFire = false;
 		onBook = false;
@@ -228,6 +229,16 @@ namespace game_framework {
 	int CHero::getDamage()
 	{
 		return damage;
+	}
+
+	void CHero::InitThunder(bool flag) 
+	{
+		initThunder = flag;
+	}
+
+	bool CHero::InitThunder()
+	{
+		return initThunder;
 	}
 
 	bool CHero::InAttackRange(int eX, int eY)
@@ -325,7 +336,9 @@ namespace game_framework {
 	void CHero::LoadBitmap()
 	{
 		standL.LoadBitmap(WWS_L, RGB(255, 255, 255));
+
 		standR.LoadBitmap(WWS_R, RGB(255, 255, 255));
+
 		jumpL.LoadBitmap(WWJ_L, RGB(255, 255, 255));
 		jumpR.LoadBitmap(WWJ_R, RGB(255, 255, 255));
 
@@ -414,8 +427,12 @@ namespace game_framework {
 
 	bool CHero::HitGround(MapBrown* map)
 	{
+		if (y % 32 == 0) 
+		{
+			return (map->isBlockSolid((x + 4) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 4) / 32, (y + 1) / 32)) || (map->isBlockSolid((x + 27) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 27) / 32, (y + 1) / 32));
+		}
 		//return map->isBlockSolid(x / 32, (y + 32) / 32) || map->isBlockSolid((x + 31) / 32, (y + 32) / 32);
-		return (map->isBlockSolid((x + 4) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 4) / 32, (y + 1) / 32)) || (map->isBlockSolid((x + 31) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 1) / 32));
+		return (map->isBlockSolid((x) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 4) / 32, (y + 1) / 32)) || (map->isBlockSolid((x + 31) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 1) / 32));
 	}
 
 	bool CHero::HitTop(MapBrown* map)
@@ -442,7 +459,7 @@ namespace game_framework {
 			return;
 		}
 
-		for (unsigned int i = 0; i < items.size(); ++i)
+ 	for (unsigned int i = 0; i < items.size(); ++i)
 		{
 			items[i]->MoveIcon();
 		}
@@ -666,8 +683,8 @@ namespace game_framework {
 			}
 		}
 
-		bool changeFlag = false;
-		if (x < 0)
+		bool changeFlag = true;
+		if (x < 0)//往左過圖
 		{
 			map->UpdateMap('L');
 			x = 32 * 18 - 32;
@@ -676,8 +693,8 @@ namespace game_framework {
 				x = 32 * 6;
 				y = 32 * 1;
 			}
-		}
-		else if (x > 32 * 18 - 32)
+		} 
+		else if (x > 32 * 18 - 32)//往右過圖
 		{
 			map->UpdateMap('R');
 			x = 0;
@@ -687,7 +704,7 @@ namespace game_framework {
 				y = 32 * 1;
 			}
 		}
-		else if (y < 0)
+		else if (y < 0)//往上過圖
 		{
 			map->UpdateMap('U');
 			y = 32 * 13 - 32;
@@ -697,7 +714,7 @@ namespace game_framework {
 				y = 32 * 1;
 			}
 		}
-		else if (y > 32 * 13 - 32)
+		else if (y > 32 * 13 - 32)//往下過圖
 		{
 			map->UpdateMap('D');
 			y = 0;
@@ -707,6 +724,15 @@ namespace game_framework {
 				y = 32 * 1;
 			}
 		}
+		else 
+		{
+			changeFlag = false;
+		}
+		if (changeFlag) 
+		{
+			SetThunder(false);
+		}
+
 		if (map->getNext() == 7 && canWin)
 		{
 			onFinishGame = true;

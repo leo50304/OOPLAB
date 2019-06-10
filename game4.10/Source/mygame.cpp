@@ -441,7 +441,7 @@ namespace game_framework {
 			titleExit.SetTopLeft(270, 240 + titleOffset * 4);
 			titleExit.ShowBitmap();
 		}
-		else if (menuState == 1 || menuState == 2)
+		else if (menuState == 1 || menuState == 2) //說明
 		{
 			countFlash--;
 			if (countFlash <= 0)
@@ -459,16 +459,16 @@ namespace game_framework {
 			if (menuState == 1) 
 			{
 				pDC->TextOut(125-32, 20 + 255, "E:           使用道具          CTRL+上下: 選擇道具");
-				pDC->TextOut(125 - 32, 20 + 280, "SPACE: 攻擊                   上: 跳躍 / 爬梯子 / 進店");
+				pDC->TextOut(125 - 32, 20 + 280, "SPACE: 攻擊/購買         上: 跳躍 / 爬梯子 / 進店");
 				pDC->TextOut(125 - 32, 20 + 305, "F:           火球                   下: 爬梯子");
 				pDC->TextOut(125 - 32, 20 + 330, "T:           雷怒九天           左右: 移動");
 			}
 			else if (menuState == 2) 
 			{
-				pDC->TextOut(125 - 32, 20 + 255, "CTRL+1:  取得通關道具，可直接離開洞窟");
-				pDC->TextOut(125 - 32, 20 + 280, "CTRL+2:  肉身成聖");
-				pDC->TextOut(125 - 32, 20 + 305, "CTRL+3:  金幣無限");
-				pDC->TextOut(125 - 32, 20 + 330, "CTRL+4:  移動到王面前");
+				pDC->TextOut(125 - 28, 20 + 255, "CTRL+1:  取得通關道具，可直接離開洞窟");
+				pDC->TextOut(125 - 28, 20 + 280, "CTRL+2:  肉身成聖");
+				pDC->TextOut(125 - 28, 20 + 305, "CTRL+3:  金幣無限");
+				pDC->TextOut(125 - 28, 20 + 330, "CTRL+4:  移動到王面前");
 			}
 
 			if (countFlash > 30)
@@ -480,6 +480,10 @@ namespace game_framework {
 
 			selectionArrow.SetTopLeft(530, 18 + 280);
 			selectionArrow.ShowBitmap();
+		}
+		else if (menuState == 3) //設定
+		{
+
 		}
 	}
 
@@ -814,6 +818,13 @@ namespace game_framework {
 
 		hero.OnMove(&mapBrown);
 
+		if (hero.InitThunder())
+		{
+			hero.SetThunder(true);
+			thunder.initState();
+			thunder.OnPrepare();
+			hero.InitThunder(false);
+		}
 
 		if (mapBrown.InStore())
 		{
@@ -1243,7 +1254,7 @@ namespace game_framework {
 
 			if (currentShopItem == 3)
 			{
-				shopItemFrame.SetTopLeft(432, 335);
+				shopItemFrame.SetTopLeft(426, 336);
 			}
 			else
 			{
@@ -1293,7 +1304,10 @@ namespace game_framework {
 				}
 			}
 			hero.OnShow();
-			thunder.OnShow();
+			if (hero.isOnThunder()) 
+			{
+				thunder.OnShow();
+			}
 
 			for (unsigned int i = 0; i < items.size(); ++i)
 			{

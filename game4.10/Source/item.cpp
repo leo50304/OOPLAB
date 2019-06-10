@@ -116,7 +116,7 @@ namespace game_framework {
 	{
 		icon.SetTopLeft(X1 + offSetX, Y1 + offSetY);
 		icon.OnShow();
-		//ShowRemainingUse();
+		ShowRemainingUse();
 	}
 
 	SmallBlood::SmallBlood(int x, int y, int d) :Item(x, y, d)
@@ -243,7 +243,7 @@ namespace game_framework {
 
 	void Ring::use(CHero* hero)
 	{
-		return;
+		hero->InitThunder(true);
 	}
 
 	void Ring::OnSelect(CHero * hero) 
@@ -270,7 +270,7 @@ namespace game_framework {
 
 	void LegendStone::LoadBitMap()
 	{
-		icon.AddBitmap(RING, RGB(128, 0, 128));
+		icon.AddBitmap(LEGEND_STONE, RGB(128, 0, 128));
 	}
 
 	bool LegendStone::InHitBox(int x, int y)

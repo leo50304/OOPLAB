@@ -37,6 +37,8 @@ namespace game_framework {
 		void ToggleGodStatus();
 		void ToggleInfiniteGold();
 		void SetAttack(bool flag);
+		void InitThunder(bool flag);
+		bool InitThunder();
 
 		bool InAttackRange(int x, int y);
 		bool InFireRange(int x, int y);
@@ -76,6 +78,7 @@ namespace game_framework {
 		vector<Item*> items;
 		vector<Item*> usedItem;
 		int currentItem = 0;
+
 		CMovingBitmap standL;
 		CMovingBitmap standR;
 		CMovingBitmap stayOnLadder;
@@ -87,10 +90,13 @@ namespace game_framework {
 		CMovingBitmap attackR;
 		CMovingBitmap FBookL;
 		CMovingBitmap FBookR;
-		
+		CAnimation moveRAnimation;
+		CAnimation moveLAnimation;
+		CAnimation moveUAnimation;
+		CAnimation moveDAnimation;
+
 		CAnimation FireL;
 		CAnimation FireR;
-
 		bool onCTRL = false;
 		bool hitValid = false;
 		double speed;
@@ -101,11 +107,7 @@ namespace game_framework {
 		int FireX;
 		int FireY;
 		bool FireSide;
-		CAnimation moveRAnimation;
-		CAnimation moveLAnimation;
-		CAnimation moveUAnimation;
-		CAnimation moveDAnimation;
-
+		bool initThunder;
 		bool beatBack = false;
 		bool canWin = false;
 		bool onFinishGame = false;

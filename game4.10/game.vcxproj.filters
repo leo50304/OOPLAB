@@ -856,5 +856,56 @@
     <Image Include="data\arrow.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\item\gi_29.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mgwr_01.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mgwr_02.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mgwr_03.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwd.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwhl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwhr.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwjl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwjr.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwl1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwl2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwl3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwrr.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwsr(lhf).bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ch\mwwsr(rhf).bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
