@@ -340,7 +340,7 @@ namespace game_framework {
 
 		if (menuState == 1)
 		{
-			if (nChar == KEY_SPACE) 
+			if (nChar == KEY_SPACE)
 			{
 				menuState = 0;
 				return;
@@ -350,7 +350,7 @@ namespace game_framework {
 				menuState = 2;
 			}
 		}
-		else if (menuState == 2) 
+		else if (menuState == 2)
 		{
 			if (nChar == KEY_SPACE)
 			{
@@ -362,7 +362,7 @@ namespace game_framework {
 				menuState = 1;
 			}
 		}
-		else 
+		else
 		{
 			if (nChar == KEY_SPACE)
 			{
@@ -381,6 +381,10 @@ namespace game_framework {
 				{
 					isWin = true;
 					GotoGameState(GAME_STATE_OVER);
+				}
+				else if (currentSelect == 3)
+				{
+					menuState = 3;
 				}
 				else if (currentSelect == 4)
 				{
@@ -456,14 +460,14 @@ namespace game_framework {
 			pDC->SetTextColor(RGB(255, 200, 69));
 			pDC->TextOut(155, 230, "打倒魔王取得傳說之石，逃脫洞窟");
 
-			if (menuState == 1) 
+			if (menuState == 1)
 			{
-				pDC->TextOut(125-32, 20 + 255, "E:           使用道具          CTRL+上下: 選擇道具");
+				pDC->TextOut(125 - 32, 20 + 255, "E:           使用道具          CTRL+上下: 選擇道具");
 				pDC->TextOut(125 - 32, 20 + 280, "SPACE: 攻擊/購買         上: 跳躍 / 爬梯子 / 進店");
 				pDC->TextOut(125 - 32, 20 + 305, "F:           火球                   下: 爬梯子");
 				pDC->TextOut(125 - 32, 20 + 330, "T:           雷怒九天           左右: 移動");
 			}
-			else if (menuState == 2) 
+			else if (menuState == 2)
 			{
 				pDC->TextOut(125 - 28, 20 + 255, "CTRL+1:  取得通關道具，可直接離開洞窟");
 				pDC->TextOut(125 - 28, 20 + 280, "CTRL+2:  肉身成聖");
@@ -483,7 +487,31 @@ namespace game_framework {
 		}
 		else if (menuState == 3) //設定
 		{
+			countFlash--;
+			if (countFlash <= 0)
+			{
+				countFlash = 60;
+			}
+			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CFont f, *fp;
+			f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+			fp = pDC->SelectObject(&f);					// 選用 font f
+			pDC->SetBkColor(RGB(0, 0, 0));
+			pDC->SetTextColor(RGB(255, 200, 69));
+			pDC->TextOut(140, 230, "提示: 需裝備傳說之石才可以離開洞窟，否則會有不好的事發生：）");
+			pDC->TextOut(140, 230+20, "提示: 選取道具以裝備");
 
+			pDC->TextOut(125 - 32, 20 + 255, "白戒指: 首次裝備+10HP，裝備+10MAXHP, 使用時施放雷怒九天");
+			pDC->TextOut(125 - 32, 20 + 280, "藍補藥: ");
+			pDC->TextOut(125 - 32, 20 + 305, "F:           火球                   下: 爬梯子");
+			pDC->TextOut(125 - 32, 20 + 330, "T:           雷怒九天           左右: 移動");
+
+			if (countFlash > 30)
+			{
+				pDC->TextOut(237, 420, "空白鍵返回目錄");
+			}
+			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 		}
 	}
 
@@ -735,12 +763,15 @@ namespace game_framework {
 			delete enemies[i];
 		}
 		enemies.clear();
-		enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
+
+		enemies.push_back(new Boss(0 * 32, 0 * 32, 0));
+
+		/*enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
 		enemies.push_back(new Slime(1 * 32, 1 * 32, 0));
 		enemies.push_back(new Slime(2 * 32, 8 * 32, 0));
 		enemies.push_back(new BowHead(10 * 32, 7 * 32, 0));
 		enemies.push_back(new Snake(6 * 32, 11 * 32, 0));
-
+*/
 		enemies.push_back(new MBall(12 * 32, 13 * 32, 1));
 		enemies.push_back(new MBall(9 * 32, 13 * 32, 1));
 		enemies.push_back(new MBall(6 * 32, 12 * 32, 1));
@@ -838,7 +869,7 @@ namespace game_framework {
 
 			for (unsigned int i = 0; i < shopItems.size(); ++i)
 			{
-				if (shopItems[i] != nullptr) 
+				if (shopItems[i] != nullptr)
 				{
 					shopItems[i]->MoveIcon();
 				}
@@ -878,6 +909,7 @@ namespace game_framework {
 						hero.setHitValid(false);
 						enemies[i]->hit(hero.getDamage());
 						enemies[i]->Distroy();
+						hero.addHp(5);
 					}
 				}
 			}
@@ -1011,7 +1043,6 @@ namespace game_framework {
 		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
 		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
 		//
-		//ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
 		//
 		// 開始載入資料
 		//
@@ -1103,13 +1134,13 @@ namespace game_framework {
 			return;
 		}
 
-		if (this->onCTRL) 
+		if (this->onCTRL)
 		{
-			if (nChar == KEY_ONE) 
+			if (nChar == KEY_ONE)
 			{
 				hero.addItem(new LegendStone());
 			}
-			if (nChar == KEY_TWO) 
+			if (nChar == KEY_TWO)
 			{
 				hero.ToggleGodStatus();
 			}
@@ -1156,13 +1187,19 @@ namespace game_framework {
 			hero.useItem();
 		}
 		if (nChar == KEY_F) {
-			hero.SetFire(true);
+			if (hero.isGodMode())
+			{
+				hero.SetFire(true);
+			}
 		}
 		if (nChar == KEY_T)
 		{
-			hero.SetThunder(true);
-			thunder.initState();
-			thunder.OnPrepare();
+			if (hero.isGodMode())
+			{
+				hero.SetThunder(true);
+				thunder.initState();
+				thunder.OnPrepare();
+			}
 		}
 	}
 
@@ -1304,7 +1341,7 @@ namespace game_framework {
 				}
 			}
 			hero.OnShow();
-			if (hero.isOnThunder()) 
+			if (hero.isOnThunder())
 			{
 				thunder.OnShow();
 			}
@@ -1374,11 +1411,11 @@ namespace game_framework {
 		char Levelbuffer[5];
 		snprintf(Levelbuffer, 10, "%d", hero.getLevel());
 		pDC->TextOut(127, 446 + 14, Levelbuffer);
-		if (hero.getGold() == 999) 
+		if (hero.getGold() == 999)
 		{
 			pDC->TextOut(392 + 18, 446 + 14, "∞");
 		}
-		else 
+		else
 		{
 			char goldBuffer[5];
 			snprintf(goldBuffer, 10, "%d", hero.getGold());

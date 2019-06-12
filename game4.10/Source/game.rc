@@ -524,6 +524,18 @@ MAGE_DEAD               BITMAP                  "C:\\Users\\LEO\\Desktop\\legend
 
 MAGE_HITBACK_L          BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\mwwhl.bmp"
 
+boss_attack_1           BITMAP                  "..\\data\\boss\\boss_attack_1.bmp"
+
+boss_attack_2           BITMAP                  "..\\data\\boss\\boss_attack_2.bmp"
+
+boss_attack_3           BITMAP                  "..\\data\\boss\\boss_attack_3.bmp"
+
+boss_1                  BITMAP                  "..\\data\\boss\\BOSS1.bmp"
+
+boss_2                  BITMAP                  "..\\data\\boss\\BOSS2.bmp"
+
+boss_3                  BITMAP                  "..\\data\\boss\\BOSS3.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

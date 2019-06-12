@@ -907,5 +907,23 @@
     <Image Include="data\ch\mwwsr(rhf).bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\boss\boss_attack_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\boss\boss_attack_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\boss\boss_attack_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\boss\BOSS1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\boss\BOSS2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\boss\BOSS3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

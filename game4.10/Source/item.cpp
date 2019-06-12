@@ -224,11 +224,13 @@ namespace game_framework {
 		LoadBitMap();
 		offSetX = 8;
 		offSetY = 8;
+		addhp = true;
 	}
 
 	Ring::Ring() : Item()
 	{
 		LoadBitMap();
+		addhp = true;
 	}
 
 	void Ring::LoadBitMap()
@@ -249,6 +251,11 @@ namespace game_framework {
 	void Ring::OnSelect(CHero * hero) 
 	{
 		hero->addMaxHp(10);
+		if (addhp) 
+		{
+			hero->addHp(10);
+			addhp = false;
+		}
 	}
 
 	void Ring::RemoveSelect(CHero * hero)

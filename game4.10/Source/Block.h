@@ -17,10 +17,10 @@ namespace game_framework {
 				delete block[i];
 			}
 		}
-		virtual bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px) { return false; }; //return true if can move
-		virtual void LoadBitMap() {};
-		virtual bool IsSolid() { return true; };
-		virtual void PutBlock(int px, int py, int type) {};
+		virtual bool HitHeroAction(int &x, int &y, bool &isOnLadder, string pos, int px) { return false; }; //return true if hero can move
+		virtual void LoadBitMap() {};// load bit map
+		virtual bool IsSolid() { return true; }; // is block solid or not
+		virtual void PutBlock(int px, int py, int type) {}; //choose the right block color and pos
 	protected:
 		vector<CMovingBitmap*> block;
 	};

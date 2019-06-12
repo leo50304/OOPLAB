@@ -49,7 +49,7 @@ namespace game_framework {
 		hp -= d;
 	}
 
-	int Enemy::getLoot1() 
+	int Enemy::getLoot1()
 	{
 		if (!lootable)
 		{
@@ -57,25 +57,25 @@ namespace game_framework {
 		}
 		return rand() % 100 < 40;
 	}
-	int Enemy::getLoot2() 
+	int Enemy::getLoot2()
 	{
-		if (!lootable) 
+		if (!lootable)
 		{
 			return -1;
 		}
-		if (rand() % 100 > 20) 
+		if (rand() % 100 > 20)
 		{
 			return -1;
 		}
-		else 
+		else
 		{
 			return rand() % 4;
 		}
 	}
 
-	int Enemy::getExp() 
+	int Enemy::getExp()
 	{
-		if (lootable) 
+		if (lootable)
 		{
 			lootable = false;
 			return exp;
@@ -1121,7 +1121,7 @@ namespace game_framework {
 
 	void  MBall::OnMove(MapBrown* map)
 	{
-		if (counter > 0) 
+		if (counter > 0)
 		{
 			counter--;
 		}
@@ -1185,5 +1185,281 @@ namespace game_framework {
 	bool  MBall::InAttackRange(int x, int y)
 	{
 		return false;
+	}
+	Boss::Boss(int x, int y, int d) : Enemy(x, y, d)
+	{
+
+		directX = 3;
+		directY = 1;
+		countY = 0;
+		counthit = 0;
+		LoadBitmap();
+		weaponState = 0;
+		onAttack = false;
+		attackSide = false;
+		hit = false;
+		weapon1X = -100;
+		weapon1Y = -100;
+		weapon2X = -100;
+		weapon2Y = -100;
+		weapon3X = -100;
+		weapon3Y = -100;
+	}
+	void Boss::Initialize()
+	{
+		isMovingRight = isMovingUp = isMovingDown = false;
+		isMovingLeft = true;
+		speed = 1;
+		mode = 0;
+	}
+
+	void Boss::LoadBitmap()
+	{
+		moveLAnimation.AddBitmap(boss_1, RGB(128, 0, 128));
+		moveLAnimation.AddBitmap(boss_2, RGB(128, 0, 128));
+		moveLAnimation.AddBitmap(boss_3, RGB(128, 0, 128));
+		moveRAnimation.AddBitmap(boss_1, RGB(128, 0, 128));
+		moveRAnimation.AddBitmap(boss_2, RGB(128, 0, 128));
+		moveRAnimation.AddBitmap(boss_3, RGB(128, 0, 128));
+
+		weapon1.AddBitmap(boss_attack_1, RGB(128, 0, 128));
+		weapon1.AddBitmap(boss_attack_2, RGB(128, 0, 128));
+		weapon1.AddBitmap(boss_attack_3, RGB(128, 0, 128));
+
+		weapon2.AddBitmap(boss_attack_2, RGB(128, 0, 128));
+		weapon2.AddBitmap(boss_attack_3, RGB(128, 0, 128));
+		weapon2.AddBitmap(boss_attack_1, RGB(128, 0, 128));
+
+		weapon3.AddBitmap(boss_attack_3, RGB(128, 0, 128));
+		weapon3.AddBitmap(boss_attack_1, RGB(128, 0, 128));
+		weapon3.AddBitmap(boss_attack_2, RGB(128, 0, 128));
+	}
+	void Boss::OnMove(MapBrown* map)
+	{
+		moveLAnimation.OnMove();
+		x += (int)(directX);
+		y += (int)(directY);
+
+		countY += 1;
+		if (countY >= 40)
+		{
+			if (!onAttack)
+			{
+				directY *= -1;
+				countY = 0;
+			}
+		}
+		if (mode == 0)
+		{
+			if ((y >= 32 * 13 || y <= -8) && hit)
+			{
+				// boss and item image order
+				// to do find hero position and move to hero position.
+				//撞完、重置boss位置
+				if (counthit >= 1)
+				{
+					if (y >= 32 * 15 || y <= -64)
+					{
+						x = -200;
+						y = 30;
+						directX = 3;
+						directY = 1;
+						hit = false;
+						onAttack = false;
+						counthit = 0;
+						mode = 1;
+					}
+				}
+				else
+				{
+					directY *= -1;
+					counthit++;
+				}
+			}
+
+			if ((x >= 32 * 17 || x <= -8) && hit)
+			{
+				if (counthit >= 1)
+				{
+					if (x >= 32 * 19 || x <= -64)
+					{
+						x = -200;
+						y = 30;
+						directX = 3;
+						directY = 1;
+						hit = false;
+						onAttack = false;
+						counthit = 0;
+						mode = 1;
+
+					}
+				}
+				else
+				{
+					directX *= -1;
+					counthit++;
+				}
+			}
+		}
+		else if (mode == 1)
+		{
+			directX = 3;
+			directY = 0;
+			if (x > 32 * 8)
+			{
+				directX = 0;
+				directY = 0;
+				weapon1X = x + 32;
+				weapon1Y = y + 32;
+			}
+		}
+	}
+	bool Boss::InAttackRange(int x, int y)
+	{
+		if (GetX1() >= 32 * 16)
+		{
+			mode = 0;
+			return true;
+		}
+		if (GetX1() >= 32 * 8 && mode == 1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	//onAttack 有沒有在攻擊
+	void Boss::OnAttack(int x, int y) //判定要不要攻擊
+	{
+		if (onAttack)
+		{
+			return;
+		}
+		onAttack = true;
+		hit = true;
+		dx = x - GetX1() - 32;
+		dy = y - GetY1() - 32;
+		dxl = dx + 96;
+		dxr = dx - 96;
+		unit = sqrt(dx * dx + dy * dy);
+		unitl = sqrt(dxl * dxl + dy * dy);
+		unitr = sqrt(dxr * dxr + dy * dy);
+		directX = (dx / unit) * 8;
+		directY = (dy / unit) * 8;
+		direct1X = directX;
+		direct1Y = directY;
+		direct2X = (dxl / unitl) * 8;
+		direct2Y = (dy / unitl) * 8;
+		direct3X = (dxr / unitr) * 8;
+		direct3Y = (dy / unitr) * 8;
+		weapon1.Reset();// direct attack hero
+		weapon2.Reset();// attack hero like BowHead
+		weapon3.Reset();// attack hero by a circle
+		weapon1.SetDelayCount(5);
+		weapon2.SetDelayCount(10);
+		weapon3.SetDelayCount(20);
+
+		weapon1X = GetX1();
+		weapon1Y = GetY1();
+		weapon2X = GetX1() - 96;
+		weapon2Y = GetY1();
+		weapon3X = GetX1() + 96;
+		weapon3Y = GetY1();
+		weaponState = 0;
+		weaponMoveX = 0;
+		weaponMoveY = 0;
+		weaponMove2X = 0;
+		weaponMove2Y = 0;
+		weaponMove3X = 0;
+		weaponMove3Y = 0;
+		count = 0;
+	}
+	// bug weapon1 and weapon2 move same 
+	void Boss::MoveWeapon(MapBrown* map)
+	{
+		if (!onAttack)
+		{
+			return;
+		}
+		if (mode == 1 && (x >= 32 * 8))
+		{
+			// weapon 1
+			weapon1.OnMove();
+			weaponPositionX = (int)(weapon1X + weaponMoveX);
+			weaponPositionY = (int)(weapon1Y + weaponMoveY);
+			//unit1 = sqrt(direct1X * direct1X + direct1Y * direct1Y);
+			//weapon 2
+			weapon2.OnMove();
+			weaponPosition2X = (int)(weapon2X + weaponMove2X) + 64;
+			weaponPosition2Y = (int)(weapon2Y + weaponMove2Y);
+			// weapon 3
+			weapon3.OnMove();
+			weaponPosition3X = (int)(weapon3X + weaponMove3X);
+			weaponPosition3Y = (int)(weapon3Y + weaponMove2Y);
+			//unit2 = sqrt((direct2X) * (direct2X) + direct2Y * direct2Y);
+			if (weaponState == 0)
+			{
+				weaponMove3X += (direct3X);
+				weaponMove3Y += (direct3Y);
+				weaponMove2X += (direct2X);
+				weaponMove2Y += (direct2Y);
+				weaponMoveX += (direct1X);
+				weaponMoveY += (direct1Y);
+				if (weaponPositionX < 0 || weaponPositionX > 20 * 32 || weaponPositionY < 0 || weaponPositionY > 32 * 18)
+				{
+					weaponPositionX = -100;
+					weaponPositionY = -100;
+					directX = 2;
+					directY = 0;
+					hit = false;
+					onAttack = false;
+					mode = 0;
+				}
+				if (weaponPosition2X < 0 || weaponPosition2X > 20 * 32 || weaponPosition2Y < 0 || weaponPosition2Y > 32 * 18)
+				{
+					weaponPosition2X = -100;
+					weaponPosition2Y = -100;
+				}
+				if (weaponPosition3X < 0 || weaponPosition3X > 20 * 32 || weaponPosition3Y < 0 || weaponPosition3Y > 32 * 18)
+				{
+					weaponPosition3X = -100;
+					weaponPosition3Y = -100;
+				}
+			}
+			else
+			{
+				count++;
+			}
+		}
+	}
+	void Boss::ShowWeapon()
+	{
+		if (!onAttack)
+		{
+			return;
+		}
+		weapon1.SetTopLeft((int)(weaponPositionX), (int)(weaponPositionY));
+		weapon1.OnShow();
+		weapon2.SetTopLeft((int)(weaponPosition2X), (int)(weaponPositionY));
+		weapon2.OnShow();
+		weapon3.SetTopLeft((int)(weaponPosition3X), (int)(weaponPositionY));
+		weapon3.OnShow();
+	}
+	//畫圓攻擊
+
+	//BUG 碰撞範圍定義錯誤
+	bool Boss::InHitBox(int x, int y)
+	{
+		return !isDistroyed && x < GetX1() + 96 && x + 32 > GetX1() && y < GetY1() + 96 && y + 32 > GetY1();
+	}
+
+	bool Boss::InWeaponHitBox(int x, int y)
+	{
+		bool flag1 = x < weaponPositionX + 32 && x + 32 > weaponPositionX && y < weaponPositionY + 32 && y + 32 > weaponPositionY;
+		bool flag2 = x < weaponPosition2X + 32 && x + 32 > weaponPosition2X && y < weaponPosition2Y + 32 && y + 32 > weaponPosition2Y;
+		bool flag3 = x < weaponPosition3X + 32 && x + 32 > weaponPosition3X && y < weaponPosition3Y + 32 && y + 32 > weaponPosition3Y;
+		return flag1 || flag2 || flag3;
 	}
 }

@@ -18,67 +18,65 @@ namespace game_framework {
 	public:
 		CHero();
 		~CHero();
-		int  GetX1();
-		int  GetY1();
-		void Initialize();
+		int  GetX1(); //left x of hero
+		int  GetY1(); //top y of hero
+		void Initialize(); //init hero states when begin game
 		void LoadBitmap();
-		void OnMove(MapBrown* map);
-		void OnShow(); 
-		void SetMovingDown(bool flag);
-		void SetMovingLeft(bool flag);
-		void SetMovingRight(bool flag);
-		void SetMovingUp(bool flag);
-		void SetXY(int nx, int ny);
-		bool IsOnLadder();
-		void Drop();
-		void addHp(int num);
-		void addMaxHp(int num);
-		void SetOnLadder(bool flag);
-		void ToggleGodStatus();
-		void ToggleInfiniteGold();
-		void SetAttack(bool flag);
-		void InitThunder(bool flag);
-		bool InitThunder();
-
-		bool InAttackRange(int x, int y);
-		bool InFireRange(int x, int y);
-		void SetHoldUp(bool flag);
-		bool isInvincible();
-		bool isOnAttack();
-
-		void BeatBack(bool flag, int direct);
-		bool BeatBack();
-		void setHitValid(bool flag);
-		int getDamage();
-		int getHP();
-		int getMaxHP();
-		int getMaxExp();
-		int getExp();
-		void addLevel();
-		int getLevel();
-		void SetFire(bool flag);
-		bool isOnFire();
-		bool isOnBook();
-		void addExp(int n);
-		bool isOnThunder();
-		void SetThunder(bool flag);
-		void addItem(Item* item);
-		bool ItemMax();
-		void useItem();
-		int getGold();
-		void changeGold(int i);
-		int getCurrentItem();
-		void showItemList();
-		void moveCurrentItem(int i);
-		void setWin(bool flag);
-		bool FinishGame();
-		bool buyItem(Item* item, int price);
+		void OnMove(MapBrown* map);// hero move action of every frame
+		void OnShow(); //select and show bitmaps
+		void SetMovingDown(bool flag); //set moving down
+		void SetMovingLeft(bool flag); // set moveing left
+		void SetMovingRight(bool flag); // set moving right
+		void SetMovingUp(bool flag); // set moving up
+		void SetXY(int nx, int ny); // set hero bit pos
+		bool IsOnLadder(); //is hero on ladder or not
+		void Drop();// toggle hero dropping
+		void addHp(int num); // add hp to hero, no more than maxhp
+		void addMaxHp(int num); // increase hero's maxhp
+		void SetOnLadder(bool flag);// set hero on ladder or not
+		void ToggleGodStatus();// toggle god mode status
+		bool isGodMode();//return true if is god mode
+		void ToggleInfiniteGold();// toggle infinite gold
+		void SetAttack(bool flag);// set hero is attack or not
+		void InitThunder(bool flag);// set the thunder should be initialized or not
+		bool InitThunder();//return true if thunder should be init
+		bool InAttackRange(int x, int y);// true if pos x, y is in hero's attack range
+		bool InFireRange(int x, int y);// true if pos x, y is in fire ball's attack range
+		void SetHoldUp(bool flag);// up is on pressed, for big jump
+		bool isInvincible();// true if hero invinceble
+		bool isOnAttack();//true if hero is on attack
+		void BeatBack(bool flag, int direct);// beat back hero
+		bool BeatBack();// true if hero is on beatback
+		void setHitValid(bool flag);// set hero's attack is valid or not
+		int getDamage();// return hero's damage
+		int getHP();// return hero's hp
+		int getMaxHP();// return hero's maxhp
+		int getMaxExp();// return hero's max exp
+		int getExp();// return hero's exp
+		void addLevel();// hero add level
+		int getLevel();// return hero's level
+		void SetFire(bool flag);// set true if hero is shooting fireball
+		bool isOnFire();// return true if hero is shooting fireball
+		bool isOnBook();// return true if hero is holding book
+		void addExp(int n);// add n exp to hero
+		bool isOnThunder();// return true if hero is on thunder attack
+		void SetThunder(bool flag); // set true to attack thunder
+		void addItem(Item* item);// add item to hero
+		bool ItemMax();// return true if hero holds max num of items
+		void useItem();// use current selected item 
+		int getGold();// return hero's gold
+		void changeGold(int i);// add i to hero's gold
+		int getCurrentItem();// get pos of current selected item
+		void showItemList();// show icon of item list
+		void moveCurrentItem(int i);// move current selected item
+		void setWin(bool flag);// set true if hero can win the game
+		bool FinishGame();//return true if hero can finish game
+		bool buyItem(Item* item, int price);// buy item and add it to hero
 
 	protected:
 		vector<Item*> items;
 		vector<Item*> usedItem;
 		int currentItem = 0;
-
 		CMovingBitmap standL;
 		CMovingBitmap standR;
 		CMovingBitmap stayOnLadder;
@@ -94,7 +92,6 @@ namespace game_framework {
 		CAnimation moveLAnimation;
 		CAnimation moveUAnimation;
 		CAnimation moveDAnimation;
-
 		CAnimation FireL;
 		CAnimation FireR;
 		bool onCTRL = false;
@@ -120,9 +117,6 @@ namespace game_framework {
 		int fireFrameCount = 0;
 		int bookFrameCount = 0;
 		int invincibleFrameCount = 0;
-		
-
-
 		int tempGold;
 		int tempLevel;
 		int tempHp;
@@ -130,7 +124,6 @@ namespace game_framework {
 		int tempMaxExp;
 		int tempDamage;
 		bool godMode;
-
 		int damage = 1;
 		int gold = 3;
 		int level = 1;
@@ -139,7 +132,7 @@ namespace game_framework {
 		int exp = 0;
 		int maxExp = 10;
 		int faceSide = 1;
-		int x, y;					// 擦子左上角座標
+		int x, y;					// 左上角座標
 		bool onDrop = false;
 		bool onJump = false;
 		bool onHold = false;
@@ -152,7 +145,6 @@ namespace game_framework {
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingUp;			// 是否正在往上移動
-
 		bool HitGround(MapBrown* map);
 		bool HitTop(MapBrown* map);
 		bool GroundNotSolid(MapBrown* map);

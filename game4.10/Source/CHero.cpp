@@ -162,7 +162,10 @@ namespace game_framework {
 		if (gold >= price) 
 		{
 			addItem(item);
-			gold -= price;
+			if (gold < 999) 
+			{
+				gold -= price;
+			}
 			return true;
 		}
 		return false;
@@ -263,6 +266,11 @@ namespace game_framework {
 	bool CHero::InFireRange(int eX, int eY)
 	{
 		return eX < FireX + 32 && eX + 32 > FireX && eY < FireY + 32 && eY + 32 > FireY;
+	}
+
+	bool CHero::isGodMode() 
+	{
+		return godMode;
 	}
 
 	bool CHero::isOnAttack()

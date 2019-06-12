@@ -376,6 +376,12 @@
     <Image Include="data\attack\waterRight.bmp" />
     <Image Include="data\attack\wave.bmp" />
     <Image Include="data\blocker.bmp" />
+    <Image Include="data\boss\BOSS1.bmp" />
+    <Image Include="data\boss\BOSS2.bmp" />
+    <Image Include="data\boss\BOSS3.bmp" />
+    <Image Include="data\boss\boss_attack_1.bmp" />
+    <Image Include="data\boss\boss_attack_2.bmp" />
+    <Image Include="data\boss\boss_attack_3.bmp" />
     <Image Include="data\ch\gcm_01.bmp" />
     <Image Include="data\ch\gwr_00.bmp" />
     <Image Include="data\ch\gwr_01.bmp" />

@@ -86,8 +86,10 @@ namespace game_framework {
 		void OnSelect(CHero* hero);
 		void RemoveSelect(CHero* hero);
 	private:
+		bool addhp;
 		int amount = 1;
 	};
+
 
 	class LegendStone : public Item
 	{

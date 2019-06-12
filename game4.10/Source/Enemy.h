@@ -208,5 +208,56 @@ namespace game_framework {
 		int jumpTop;
 		double jumpSpeed;
 	};
+
+
+	class Boss : public Enemy
+	{
+	public:
+		Boss(int x, int y, int d);
+		void LoadBitmap();
+		void OnMove(MapBrown* map);
+		void OnAttack(int x, int y);
+		void ShowWeapon();
+		bool InHitBox(int x, int y);
+
+		void MoveWeapon(MapBrown* map);
+		bool InAttackRange(int x, int y);
+		void Initialize();
+		bool InWeaponHitBox(int x, int y);
+	private:
+		double unit;
+		double unitl, unitr;
+		double weaponMoveX, weaponMoveY, unit1;
+		double weaponMove2X, weaponMove2Y, unit2;
+		double weaponMove3X, weaponMove3Y, unit3;
+		int weaponPositionX, weaponPositionY;
+		int weaponPosition2X, weaponPosition2Y;
+		int weaponPosition3X, weaponPosition3Y;
+
+		double directX, directY;
+		double dx, dy;
+		double dxl, dxr;
+		double direct1X, direct1Y;
+		double direct2X, direct2Y;
+		double direct3X, direct3Y;
+		bool onAttack2, onAttack3;
+		double speedx;
+		double speedy;
+		double acc;
+		int counthit;
+		int weaponState;
+		int countRolling;
+		int heroX, heroY;
+		int countY, countX;
+		bool attackSide, hit;
+		int count;
+		int weapon1X, weapon2X, weapon3X;
+		int weapon1Y, weapon2Y, weapon3Y;
+		int mode;
+		CAnimation weapon1;
+		CAnimation weapon3;
+	};
 }
 #endif
+
+
