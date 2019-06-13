@@ -329,6 +329,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="data\about.bmp" />
     <Image Include="data\arrow.bmp" />
     <Image Include="data\attack\attackBladeLeft1.bmp" />
     <Image Include="data\attack\attackBladeLeft2.bmp" />
@@ -498,6 +499,7 @@
     <Image Include="data\e\SNAKE_2.bmp" />
     <Image Include="data\e\SNAKE_3.bmp" />
     <Image Include="data\e\SNAKE_4.bmp" />
+    <Image Include="data\e\vanish.bmp" />
     <Image Include="data\gold.bmp" />
     <Image Include="data\gs_01.bmp" />
     <Image Include="data\gs_03.bmp" />

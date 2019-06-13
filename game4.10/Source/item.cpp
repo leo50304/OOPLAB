@@ -28,7 +28,7 @@ namespace game_framework {
 		resetOffset();
 	}
 
-	void Item::OnMove(MapBrown* map)
+	void Item::OnMove(Map* map)
 	{
 		if (!onGround)
 		{
@@ -261,6 +261,33 @@ namespace game_framework {
 	void Ring::RemoveSelect(CHero * hero)
 	{
 		hero->addMaxHp(-10);
+	}
+
+	FireBook::FireBook(int x, int y, int d) :Item(x, y, d)
+	{
+		LoadBitMap();
+		offSetX = 8;
+		offSetY = 8;
+	}
+
+	FireBook::FireBook() : Item()
+	{
+		LoadBitMap();
+	}
+
+	void FireBook::LoadBitMap()
+	{
+		icon.AddBitmap(fire_left, RGB(128, 0, 128));
+	}
+
+	void FireBook::use(CHero* hero) 
+	{
+		hero->SetFire(true);
+	}
+
+	bool FireBook::InHitBox(int x, int y)
+	{
+		return  x < X1 + 25 && x + 25 > X1 && y < Y1 + 28 && y + 28 > Y1;
 	}
 
 	LegendStone::LegendStone(int x, int y, int d) :Item(x, y, d)

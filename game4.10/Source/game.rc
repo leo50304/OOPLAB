@@ -520,10 +520,6 @@ SELECTION_ARROW         BITMAP                  "..\\data\\arrow.bmp"
 
 LEGEND_STONE            BITMAP                  "..\\data\\item\\gi_29.bmp"
 
-MAGE_DEAD               BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\mwwd.bmp"
-
-MAGE_HITBACK_L          BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\ch\\mwwhl.bmp"
-
 boss_attack_1           BITMAP                  "..\\data\\boss\\boss_attack_1.bmp"
 
 boss_attack_2           BITMAP                  "..\\data\\boss\\boss_attack_2.bmp"
@@ -535,6 +531,10 @@ boss_1                  BITMAP                  "..\\data\\boss\\BOSS1.bmp"
 boss_2                  BITMAP                  "..\\data\\boss\\BOSS2.bmp"
 
 boss_3                  BITMAP                  "..\\data\\boss\\BOSS3.bmp"
+
+TITLE_ABOUT             BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\about.bmp"
+
+VANISH                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\vanish.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

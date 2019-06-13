@@ -22,7 +22,7 @@ namespace game_framework {
 		int  GetY1(); //top y of hero
 		void Initialize(); //init hero states when begin game
 		void LoadBitmap();
-		void OnMove(MapBrown* map);// hero move action of every frame
+		void OnMove(Map* map);// hero move action of every frame
 		void OnShow(); //select and show bitmaps
 		void SetMovingDown(bool flag); //set moving down
 		void SetMovingLeft(bool flag); // set moveing left
@@ -72,6 +72,7 @@ namespace game_framework {
 		void setWin(bool flag);// set true if hero can win the game
 		bool FinishGame();//return true if hero can finish game
 		bool buyItem(Item* item, int price);// buy item and add it to hero
+		void moveMap();//actions when moveing map
 
 	protected:
 		vector<Item*> items;
@@ -145,9 +146,9 @@ namespace game_framework {
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingUp;			// 是否正在往上移動
-		bool HitGround(MapBrown* map);
-		bool HitTop(MapBrown* map);
-		bool GroundNotSolid(MapBrown* map);
+		bool HitGround(Map* map);
+		bool HitTop(Map* map);
+		bool GroundNotSolid(Map* map);
 	};
 }
 #endif // !CHERO_H

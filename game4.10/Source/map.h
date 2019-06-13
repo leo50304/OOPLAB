@@ -7,11 +7,11 @@
 
 namespace game_framework {
 
-	class MapBrown
+	class Map
 	{
 	public:
-		~MapBrown();
-		MapBrown();
+		~Map();
+		Map();
 		void LoadBitMap();
 		void initMap();
 		void OnShow();
@@ -20,6 +20,7 @@ namespace game_framework {
 		void UpdateMap(char nextPos);
 		bool isBlockSolid(int i, int j);
 		int getNext();
+		void setNext(int n);
 		void enterStore(bool flag);
 		bool InStore();
 

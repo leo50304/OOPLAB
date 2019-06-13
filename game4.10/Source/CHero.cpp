@@ -103,7 +103,6 @@ namespace game_framework {
 	{
 		if (invincibleFrameCount == 0)
 		{
-			hp -= 1;
 			invincibleFrameCount = 100;
 			direction = direct;
 			beatBackAy = -3;
@@ -185,8 +184,8 @@ namespace game_framework {
 		onAttack = false;
 		onFire = false;
 		onBook = false;
-		hp = 16;
-		maxHP = 16;
+		hp = 8;
+		maxHP = 8;
 		previousBlock = 0;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 
@@ -318,7 +317,7 @@ namespace game_framework {
 		maxExp = int(maxExp * 1.1 + 0.5);
 		maxHP += 5;
 		hp += 5;
-		damage += 5;
+		damage += 1;
 	}
 
 	int CHero::getLevel()
@@ -433,7 +432,7 @@ namespace game_framework {
 	}
 
 
-	bool CHero::HitGround(MapBrown* map)
+	bool CHero::HitGround(Map* map)
 	{
 		if (y % 32 == 0) 
 		{
@@ -443,13 +442,13 @@ namespace game_framework {
 		return (map->isBlockSolid((x) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 4) / 32, (y + 1) / 32)) || (map->isBlockSolid((x + 31) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 1) / 32));
 	}
 
-	bool CHero::HitTop(MapBrown* map)
+	bool CHero::HitTop(Map* map)
 	{
 		//return  map->isBlockSolid(x / 32, (y - 1) / 32) || map->isBlockSolid((x + 31) / 32, (y - 1) / 32);
 		return (map->isBlockSolid(x / 32, (y - 1) / 32) && !map->isBlockSolid(x / 32, (y + 16) / 32)) || (map->isBlockSolid((x + 31) / 32, (y - 1) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 16) / 32));
 	}
 
-	bool CHero::GroundNotSolid(MapBrown* map)
+	bool CHero::GroundNotSolid(Map* map)
 	{
 		return !map->isBlockSolid((x+4) / 32, (y + 32) / 32) && !map->isBlockSolid((x + 31) / 32, (y + 32) / 32);
 	}
@@ -459,7 +458,7 @@ namespace game_framework {
 		return invincibleFrameCount > 0;
 	}
 
-	void CHero::OnMove(MapBrown* map)
+	void CHero::OnMove(Map* map)
 	{
 
 		if (map->InStore()) 
@@ -788,6 +787,15 @@ namespace game_framework {
 	void CHero::setWin(bool flag) 
 	{
 		canWin = flag;
+	}
+
+	void CHero::moveMap() 
+	{
+		SetThunder(false);
+		isOnLadder = false;
+		isOnLadderSide = false;
+		onDrop = false;
+		onJump = false;
 	}
 
 	bool CHero::FinishGame() 

@@ -925,5 +925,11 @@
     <Image Include="data\boss\BOSS3.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="data\about.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\e\vanish.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

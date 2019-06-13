@@ -24,7 +24,7 @@ namespace game_framework {
 		void MoveIcon();
 		virtual bool pickUp(CHero* hero); //可以撿起
 		virtual bool InHitBox(int x, int y);
-		virtual void OnMove(MapBrown* map);     // 移動
+		virtual void OnMove(Map* map);     // 移動
 		void ShowRemainingUse(); //顯示剩餘次數
 		void setXY(int x, int y); //設定位置
 		int getMap(); //取得所在地圖
@@ -90,6 +90,17 @@ namespace game_framework {
 		int amount = 1;
 	};
 
+	class FireBook : public Item
+	{
+	public:
+		FireBook(int x, int y, int d);
+		FireBook();
+		void use(CHero* hero);
+		void LoadBitMap();
+		bool InHitBox(int x, int y);
+	private:
+		int amount = 1;
+	};
 
 	class LegendStone : public Item
 	{

@@ -88,7 +88,7 @@ namespace game_framework {
 		CMovingBitmap titleNew;
 		CMovingBitmap titleHelp;
 		CMovingBitmap titleLeaderboard;
-		CMovingBitmap titleSetting;
+		CMovingBitmap titleAbout;
 		CMovingBitmap titleExit;
 		CMovingBitmap selectionArrow;
 		CMovingBitmap titleFrame;
@@ -124,7 +124,7 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		MapBrown		mapBrown;
+		Map		mapBrown;
 		Thunder			thunder;
 		CMovingBitmap	corner;		// 角落圖
 		CHero			hero;
@@ -160,6 +160,7 @@ namespace game_framework {
 	public:
 		CGameStateOver(CGame *g);
 		void OnBeginState();							// 設定每次重玩所需的變數
+		void OnKeyUp(UINT, UINT, UINT);
 		void OnInit();
 	protected:
 		void OnMove();									// 移動遊戲元素

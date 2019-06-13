@@ -30,12 +30,12 @@ namespace game_framework {
 	private:
 		vector<thunder_s> thunders;
 		CMovingBitmap thunder[5];
-
 		vector<thunder_s> vThunders;
 		CMovingBitmap vThunderHead;
 		CAnimation vThunder;
 		CAnimation onEnemyThunder;
 
+		int damage = 3;
 		int finish;
 		int attackCount = 0;
 		int frameCount;

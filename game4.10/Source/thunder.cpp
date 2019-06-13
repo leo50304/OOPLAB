@@ -136,6 +136,10 @@ namespace game_framework {
 			onDone = true;
 			onDrop = false;
 			prepareCount = 0;
+			for (unsigned int i = 0; i < enemies.size(); ++i)
+			{
+				enemies[i]->isThundered(false);
+			}
 		}
 		if (prepareCount > 150 && !onDrop)
 		{
@@ -220,13 +224,18 @@ namespace game_framework {
 			{
 				if (d == enemies[i]->getMapLocation() && enemies[i]->GetY1() < 32 * 13 && !enemies[i]->IsDistroyed())
 				{
+					if (enemies[i]->isThundered()) 
+					{
+						continue;
+					}
 					thunder_s t;
 					t.x = enemies[i]->GetX1();
 					t.length = enemies[i]->GetY1() / 32;
 					t.growth = false;
 					vThunders.push_back(t);
-					enemies[i]->hit(100);
+					enemies[i]->hit(damage);
 					enemies[i]->Distroy();
+					enemies[i]->isThundered(true);
 				}
 			}
 		}

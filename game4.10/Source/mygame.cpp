@@ -64,7 +64,7 @@
 
 namespace game_framework {
 
-	const int MAPS_NUM = 17;
+	const int MAPS_NUM = 18;
 	const int MAPS_X = 5;
 	const int MAPS_Y = 6;
 	const int MAP_SIZE_X = 18;
@@ -73,7 +73,7 @@ namespace game_framework {
 	bool onStart;
 	clock_t t1, t2;
 
-	MapBrown::MapBrown() :X(0), Y(0), MV(32), MH(32)
+	Map::Map() :X(0), Y(0), MV(32), MH(32)
 	{
 		inStore = false;
 
@@ -90,18 +90,9 @@ namespace game_framework {
 		mapObjects.push_back(new Spike());
 		mapObjects.push_back(new Lever());
 
-		/*fstream mapsfile;
-		mapsfile.open("./data/map/maps.txt");
-		for (int i = 0; i < mapsY; i++) {
-			for (int j = 0; j < mapsX; j++) {
-				mapsfile >> mapOfMap[i][j];
-			}
-		}
-		mapsfile.close();*/
-
 		int maps[MAPS_Y][MAPS_X] = {
 			{99,99,99,13,99},
-			{99,99,99,11,12},
+			{99,99,17,11,12},
 			{99,8,9,10,99},
 			{4,5,6,99,99},
 			{0,1,2,3,99},
@@ -150,13 +141,22 @@ namespace game_framework {
 
 	}
 
-	void MapBrown::initMap()
+	void Map::initMap()
 	{
 
 		mapPosX = 0;
 		mapPosY = 4;
-		next = mapOfMap[mapPosY][mapPosX];
+		setNext(mapOfMap[mapPosY][mapPosX]);
+	}
 
+	int Map::getNext()
+	{
+		return next;
+	}
+
+	void Map::setNext(int n) 
+	{
+		next = n;
 		for (int i = 0; i < MAP_SIZE_Y; i++)
 		{
 			for (int j = 0; j < MAP_SIZE_X; j++)
@@ -166,22 +166,17 @@ namespace game_framework {
 		}
 	}
 
-	int MapBrown::getNext()
-	{
-		return next;
-	}
-
-	void MapBrown::enterStore(bool flag)
+	void Map::enterStore(bool flag)
 	{
 		inStore = flag;
 	}
 
-	bool MapBrown::InStore()
+	bool Map::InStore()
 	{
 		return inStore;
 	}
 
-	MapBrown ::~MapBrown()
+	Map ::~Map()
 	{
 		for (unsigned int i = 0; i < mapObjects.size(); ++i)
 		{
@@ -189,7 +184,7 @@ namespace game_framework {
 		}
 	}
 
-	void MapBrown::UpdateMap(char nextPos)
+	void Map::UpdateMap(char nextPos)
 	{
 		if (nextPos == 'L')
 		{
@@ -223,16 +218,10 @@ namespace game_framework {
 		{
 			next = 7;
 		}
-		for (int i = 0; i < 13; i++)
-		{
-			for (int j = 0; j < 18; j++)
-			{
-				map[i][j] = mapList[next][i][j];
-			}
-		}
+		setNext(next);
 	}
 
-	int MapBrown::GetBlock(int x, int y)
+	int Map::GetBlock(int x, int y)
 	{
 		if (x >= 18 || y >= 13)
 		{
@@ -243,7 +232,7 @@ namespace game_framework {
 		return (block / 100);
 	}
 
-	bool MapBrown::isBlockSolid(int i, int j)
+	bool Map::isBlockSolid(int i, int j)
 	{
 		if (i >= 18 || j >= 13)
 		{
@@ -253,12 +242,12 @@ namespace game_framework {
 		return mapObjects[GetBlock(i, j)]->IsSolid();
 	}
 
-	MapObject* MapBrown::getMapObject(int i)
+	MapObject* Map::getMapObject(int i)
 	{
 		return mapObjects[i];
 	}
 
-	void MapBrown::LoadBitMap()
+	void Map::LoadBitMap()
 	{
 		for (unsigned int i = 0; i < mapObjects.size(); ++i)
 		{
@@ -266,7 +255,7 @@ namespace game_framework {
 		}
 	}
 
-	void MapBrown::OnShow()
+	void Map::OnShow()
 	{
 		for (int i = 0; i < 13; ++i) {
 			for (int j = 0; j < 18; ++j) {
@@ -307,7 +296,7 @@ namespace game_framework {
 		titleNew.LoadBitmap(TITLE_NEW, RGB(128, 0, 128));
 		titleHelp.LoadBitmap(TITLE_HELP, RGB(128, 0, 128));
 		titleLeaderboard.LoadBitmap(TITLE_LEADERBOARD, RGB(128, 0, 128));
-		titleSetting.LoadBitmap(TITLE_SETTING, RGB(128, 0, 128));
+		titleAbout.LoadBitmap(TITLE_ABOUT, RGB(128, 0, 128));
 		titleExit.LoadBitmap(TITLE_EXIT, RGB(128, 0, 128));
 		logo.LoadBitmap(MENU_0, RGB(128, 0, 128));
 		logoBackground.LoadBitmap(MENU_1, RGB(128, 0, 128));
@@ -338,7 +327,7 @@ namespace game_framework {
 		const char KEY_DOWN = 0x28; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 
-		if (menuState == 1)
+		if (menuState == 1) //說明的第一頁
 		{
 			if (nChar == KEY_SPACE)
 			{
@@ -350,7 +339,19 @@ namespace game_framework {
 				menuState = 2;
 			}
 		}
-		else if (menuState == 2)
+		else if (menuState == 2) //說明的第二頁
+		{
+			if (nChar == KEY_SPACE)
+			{
+				menuState = 0;
+				return;
+			}
+			else if (nChar == KEY_RIGHT)
+			{
+				menuState = 3;
+			}
+		}
+		else if (menuState == 3) //說明的第三頁
 		{
 			if (nChar == KEY_SPACE)
 			{
@@ -362,7 +363,15 @@ namespace game_framework {
 				menuState = 1;
 			}
 		}
-		else
+		else if (menuState == 4) //關於
+		{
+			if (nChar == KEY_SPACE)
+			{
+				menuState = 0;
+				return;
+			}
+		}
+		else// 主頁面
 		{
 			if (nChar == KEY_SPACE)
 			{
@@ -384,7 +393,7 @@ namespace game_framework {
 				}
 				else if (currentSelect == 3)
 				{
-					menuState = 3;
+					menuState = 4;
 				}
 				else if (currentSelect == 4)
 				{
@@ -440,12 +449,12 @@ namespace game_framework {
 			titleHelp.ShowBitmap();
 			titleLeaderboard.SetTopLeft(270, 240 + titleOffset * 2);
 			titleLeaderboard.ShowBitmap();
-			titleSetting.SetTopLeft(270, 240 + titleOffset * 3);
-			titleSetting.ShowBitmap();
+			titleAbout.SetTopLeft(270, 240 + titleOffset * 3);
+			titleAbout.ShowBitmap();
 			titleExit.SetTopLeft(270, 240 + titleOffset * 4);
 			titleExit.ShowBitmap();
 		}
-		else if (menuState == 1 || menuState == 2) //說明
+		else if (menuState == 1 || menuState == 2 || menuState == 3) //說明
 		{
 			countFlash--;
 			if (countFlash <= 0)
@@ -474,7 +483,14 @@ namespace game_framework {
 				pDC->TextOut(125 - 28, 20 + 305, "CTRL+3:  金幣無限");
 				pDC->TextOut(125 - 28, 20 + 330, "CTRL+4:  移動到王面前");
 			}
-
+			else if (menuState == 3)
+			{
+				pDC->TextOut(16, 20 + 255, "提示：需裝備傳說之石才可以離開洞窟，否則會有不好的事發生：）");
+				pDC->TextOut(16, 20 + 280, "提示：選取道具以裝備");
+				pDC->TextOut(125 - 32, 20 + 305+8, "白戒指: 首次裝備+10HP，裝備+10MAXHP");
+				pDC->TextOut(125 - 32, 20 + 330 + 8,"                使用時施放雷怒九天");
+				pDC->TextOut(125 - 32, 20 + 355 + 10, "藍補藥: 回復血量(中)   紅補藥: 回復血量(極大) ");
+			}
 			if (countFlash > 30)
 			{
 				pDC->TextOut(237, 420, "空白鍵返回目錄");
@@ -485,7 +501,7 @@ namespace game_framework {
 			selectionArrow.SetTopLeft(530, 18 + 280);
 			selectionArrow.ShowBitmap();
 		}
-		else if (menuState == 3) //設定
+		else if (menuState == 4) //關於
 		{
 			countFlash--;
 			if (countFlash <= 0)
@@ -498,14 +514,11 @@ namespace game_framework {
 			fp = pDC->SelectObject(&f);					// 選用 font f
 			pDC->SetBkColor(RGB(0, 0, 0));
 			pDC->SetTextColor(RGB(255, 200, 69));
-			pDC->TextOut(140, 230, "提示: 需裝備傳說之石才可以離開洞窟，否則會有不好的事發生：）");
-			pDC->TextOut(140, 230+20, "提示: 選取道具以裝備");
-
-			pDC->TextOut(125 - 32, 20 + 255, "白戒指: 首次裝備+10HP，裝備+10MAXHP, 使用時施放雷怒九天");
-			pDC->TextOut(125 - 32, 20 + 280, "藍補藥: ");
-			pDC->TextOut(125 - 32, 20 + 305, "F:           火球                   下: 爬梯子");
-			pDC->TextOut(125 - 32, 20 + 330, "T:           雷怒九天           左右: 移動");
-
+			pDC->TextOut(125 - 28, 20 + 230, "作者介紹:");
+			pDC->TextOut(125 - 28, 20 + 255+15, "          台北科技大學電資學院大學生: 單立宇、陳柏宇");
+			pDC->TextOut(125 - 28, 20 + 280+15, "          此遊戲為我們物件導向實習課程的專案");
+			pDC->TextOut(125 - 28, 20 + 305 + 30, "授課老師: 陳偉凱");
+			pDC->TextOut(125 - 28, 20 + 330 + 30, "遊戲版本: 1.0.2");
 			if (countFlash > 30)
 			{
 				pDC->TextOut(237, 420, "空白鍵返回目錄");
@@ -522,6 +535,16 @@ namespace game_framework {
 	CGameStateOver::CGameStateOver(CGame *g)
 		: CGameState(g)
 	{
+	}
+
+	void CGameStateOver::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+	{
+		const char KEY_SPACE = ' ';
+
+		if (nChar == KEY_SPACE) 
+		{
+			GotoGameState(GAME_STATE_INIT);
+		}
 	}
 
 	void CGameStateOver::OnMove()
@@ -556,7 +579,6 @@ namespace game_framework {
 				scores.push_back(time);
 			}
 			file.close();
-
 			state = 1;
 			if (!onStart)
 			{
@@ -592,19 +614,6 @@ namespace game_framework {
 
 	void CGameStateOver::OnInit()
 	{
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
-		//ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
-		//
-		// 開始載入資料
-		//
-		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
-		//
-		// 最終進度為100%
-		//
-		//ShowInitProgress(100);
 		highScore.LoadBitmap(HIGH_SCORE, RGB(106, 3, 12));
 		highScoreFrame.LoadBitmap(HIGH_SCORE_FRAME, RGB(130, 0, 128));
 		leaderboardBg.LoadBitmap(LEADER_BOARD_BG);
@@ -612,23 +621,20 @@ namespace game_framework {
 
 	void CGameStateOver::OnShow()
 	{
-		if (state == 1)
+		if (state == 1)//leaderboard
 		{
 			leaderboardBg.SetTopLeft(0, 0);
 			leaderboardBg.ShowBitmap();
 			highScoreFrame.SetTopLeft(0, 0);
 			highScoreFrame.ShowBitmap();
-
 			highScore.SetTopLeft(147, 32);
 			highScore.ShowBitmap();
-
-			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CDC *pDC = CDDraw::GetBackCDC();
 			CFont f, *fp;
-			f.CreatePointFont(280, "Times New Roman");	// 產生 font f; 160表示16 point的字
-			fp = pDC->SelectObject(&f);					// 選用 font f
+			f.CreatePointFont(280, "Times New Roman");
+			fp = pDC->SelectObject(&f);
 			pDC->SetBkMode(TRANSPARENT);
 			pDC->SetTextColor(RGB(255, 200, 69));
-
 			if (!(scorePos == 0 && countFlash < 30))
 			{
 				pDC->TextOut(32 * 3, 5 + 32 * 4 + 0, "ＴＯＰ");
@@ -664,23 +670,22 @@ namespace game_framework {
 					pDC->TextOut(32 * 8, 5 + 32 * (4 + i) + 22 * i, timeStr);
 				}
 			}
-
-			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
-
+			pDC->SelectObject(fp);
+			CDDraw::ReleaseBackCDC();
 			return;
 		}
-		else if (state == 0)
+		else if (state == 0)//遊戲失敗
 		{
-			CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+			CDC *pDC = CDDraw::GetBackCDC();
 			CFont f, *fp;
-			f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-			fp = pDC->SelectObject(&f);					// 選用 font f
+			f.CreatePointFont(160, "Times New Roman");
+			fp = pDC->SelectObject(&f);	
 			pDC->SetBkColor(RGB(0, 0, 0));
-			pDC->SetTextColor(RGB(255, 255, 0));
+			pDC->SetTextColor(RGB(255, 0, 0));
 			char str[80];								// Demo 數字對字串的轉換
 			sprintf(str, "Game Over ! (%d)", counter / 30);
 			pDC->TextOut(240, 210, str);
+			pDC->TextOut(218, 300, "Press space to continue");
 			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 		}
@@ -764,14 +769,13 @@ namespace game_framework {
 		}
 		enemies.clear();
 
-		enemies.push_back(new Boss(0 * 32, 0 * 32, 0));
-
-		/*enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
+		enemies.push_back(new Boss(0 * 32, 0 * 32, 17));
+		enemies.push_back(new Slime(12 * 32, 9 * 32, 0));
 		enemies.push_back(new Slime(1 * 32, 1 * 32, 0));
 		enemies.push_back(new Slime(2 * 32, 8 * 32, 0));
 		enemies.push_back(new BowHead(10 * 32, 7 * 32, 0));
 		enemies.push_back(new Snake(6 * 32, 11 * 32, 0));
-*/
+
 		enemies.push_back(new MBall(12 * 32, 13 * 32, 1));
 		enemies.push_back(new MBall(9 * 32, 13 * 32, 1));
 		enemies.push_back(new MBall(6 * 32, 12 * 32, 1));
@@ -815,7 +819,6 @@ namespace game_framework {
 		enemies.push_back(new BowHead(16 * 32, 2 * 32, 7));
 
 		CAudio::Instance()->Play(AUDIO_BGM, false);		// 撥放 WAVE
-
 	}
 
 	Item* CGameStateRun::ItemFactory(int id, int x, int y, int mapId)
@@ -833,6 +836,12 @@ namespace game_framework {
 			break;
 		case 3:
 			return new Ring(x, y, mapId);
+			break;
+		case 4:
+			return new FireBook(x, y, mapId);
+			break;
+		case 5:
+			return new LegendStone(x, y, mapId);
 			break;
 		default:
 			return nullptr;
@@ -924,7 +933,10 @@ namespace game_framework {
 		{
 			if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed())
 			{
-				enemies[i]->OnMove(&mapBrown);
+				if (!enemies[i]->isThundered()) 
+				{
+					enemies[i]->OnMove(&mapBrown);
+				}
 				BowHead* bowHead = dynamic_cast<BowHead*>(enemies[i]);
 				if (bowHead != nullptr)
 				{
@@ -933,8 +945,7 @@ namespace game_framework {
 				enemies[i]->MoveWeapon(&mapBrown);
 			}
 		}
-
-
+		///跟怪物碰撞
 		for (unsigned int i = 0; i < enemies.size(); ++i)
 		{
 			if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed())
@@ -950,10 +961,11 @@ namespace game_framework {
 					{
 						hero.BeatBack(true, 1);
 					}
+					hero.addHp(-1 * enemies[i]->getDamage());
 				}
 			}
 		}
-
+		///怪物攻擊
 		for (unsigned int i = 0; i < enemies.size(); ++i)
 		{
 			if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed())
@@ -964,12 +976,12 @@ namespace game_framework {
 				}
 			}
 		}
-
+		///跟怪物武器碰撞
 		for (unsigned int i = 0; i < enemies.size(); ++i)
 		{
 			if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed())
 			{
-				if (!hero.BeatBack() && enemies[i]->InWeaponHitBox(hero.GetX1(), hero.GetY1()) && mapBrown.getNext() == enemies[i]->getMapLocation())
+				if (!hero.isInvincible() && enemies[i]->InWeaponHitBox(hero.GetX1(), hero.GetY1()) && mapBrown.getNext() == enemies[i]->getMapLocation())
 				{
 					if (hero.GetX1() < enemies[i]->GetWeaponX1())
 					{
@@ -979,6 +991,7 @@ namespace game_framework {
 					{
 						hero.BeatBack(true, 1);
 					}
+					hero.addHp(-1 * enemies[i]->getWeaponDamage());
 				}
 			}
 		}
@@ -1099,6 +1112,7 @@ namespace game_framework {
 		const char KEY_ONE = 49;
 		const char KEY_TWO = 50;
 		const char KEY_THREE = 51;
+		const char KEY_FOUR = 52;
 
 		if (mapBrown.InStore())
 		{
@@ -1147,6 +1161,11 @@ namespace game_framework {
 			if (nChar == KEY_THREE)
 			{
 				hero.ToggleInfiniteGold();
+			}
+			if (nChar == KEY_FOUR)
+			{
+				hero.moveMap();
+				mapBrown.setNext(17);
 			}
 		}
 
@@ -1334,6 +1353,7 @@ namespace game_framework {
 
 			for (unsigned int i = 0; i < enemies.size(); ++i)
 			{
+				enemies[i]->showVanish();
 				if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed())
 				{
 					enemies[i]->OnShow();
@@ -1421,7 +1441,6 @@ namespace game_framework {
 			snprintf(goldBuffer, 10, "%d", hero.getGold());
 			pDC->TextOut(392 + 18, 446 + 14, goldBuffer);
 		}
-
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 

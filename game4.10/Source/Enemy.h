@@ -17,11 +17,14 @@ namespace game_framework {
 		int  GetX1();					// 上 x 座標
 		int  GetY1();					// 上 y 座標
 		void Initialize();				// 設定擦子為初始值
+		virtual void showVanish();
 		virtual void LoadBitmap() = 0;				// 載入圖形
-		virtual void OnMove(MapBrown* map);     // 移動
-		virtual void MoveWeapon(MapBrown* map);
+		virtual void OnMove(Map* map);     // 移動
+		virtual void MoveWeapon(Map* map);
 		virtual void OnAttack(int x, int y);
 		virtual void ShowWeapon();
+		bool isThundered();
+		void isThundered(bool flag);
 		//bool HitHeroAction(int type, string pos);
 		void OnShow();      			// 將擦子圖形貼到畫面
 		void SetMovingDown(bool flag);	// 設定是否正在往下移動
@@ -30,21 +33,23 @@ namespace game_framework {
 		void SetMovingUp(bool flag);	// 設定是否正在往上移動
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
 		void Distroy();
+		virtual int getDamage();
+		virtual int getWeaponDamage();
 		virtual int getExp();
 		void hit(int d);
 		virtual bool InAttackRange(int x, int y);
 		virtual bool InWeaponHitBox(int x, int y);
 		int GetWeaponX1();
 		int getLoot1();
-		int getLoot2();
+		virtual int getLoot2();
 		virtual bool InHitBox(int x, int y);
 		bool IsDistroyed();
-		int getMapLocation()
-		{
-			return location;
-		}
+		int getMapLocation();
 
 	protected:
+		bool thundered;
+		bool isVanished;
+		int countVanish;
 		bool lootable = false;
 		int exp = 2;
 		int loot1;
@@ -54,14 +59,16 @@ namespace game_framework {
 		bool onAttack;
 		int directX;
 		int directY;
-		int hp;
+		int hp, damage, weaponDamage;
 		CAnimation moveRAnimation;
 		CAnimation moveLAnimation;
 		CMovingBitmap AtkL;
 		CMovingBitmap AtkR;
 		CAnimation weapon;
 		CAnimation weapon2;
-
+		CAnimation weapon1;
+		CAnimation weapon3;
+		CMovingBitmap vanish;
 		int x, y;
 		int weaponX;
 		int weaponY;
@@ -87,9 +94,9 @@ namespace game_framework {
 		Slime(int x, int y, int d);
 		void LoadBitmap();
 		void OnAttack(int x, int y);
-		void OnMove(MapBrown* map);     // 移動
+		void OnMove(Map* map);     // 移動
 		void ShowWeapon();
-		void MoveWeapon(MapBrown* map);
+		void MoveWeapon(Map* map);
 		bool InAttackRange(int x, int y);
 		bool InWeaponHitBox(int x, int y);
 	private:
@@ -101,7 +108,7 @@ namespace game_framework {
 	public:
 		Bat(int x, int y, int d);
 		void LoadBitmap();
-		void OnMove(MapBrown* map);     // 移動
+		void OnMove(Map* map);     // 移動
 		bool InHitBox(int x, int y);
 
 	private:
@@ -113,10 +120,10 @@ namespace game_framework {
 	public:
 		BowHead(int x, int y, int d);
 		void LoadBitmap();
-		void OnMove(MapBrown* map);
+		void OnMove(Map* map);
 		void OnAttack(int x, int y);
 		void ShowWeapon();
-		void MoveWeapon(MapBrown* map);
+		void MoveWeapon(Map* map);
 		bool InAttackRange(int x, int y);
 		void saveHeroPos(int x, int y);
 		bool InWeaponHitBox(int x, int y);
@@ -133,9 +140,9 @@ namespace game_framework {
 	public:
 		Snake(int x, int y, int d);
 		void LoadBitmap();
-		void OnMove(MapBrown* map);
-		bool HitTop(MapBrown* map);
-		bool HitGround(MapBrown* map);
+		void OnMove(Map* map);
+		bool HitTop(Map* map);
+		bool HitGround(Map* map);
 
 	private:
 		bool onJump;
@@ -149,10 +156,10 @@ namespace game_framework {
 	public:
 		Skull(int x, int y, int d);
 		void LoadBitmap();
-		void OnMove(MapBrown* map);
+		void OnMove(Map* map);
 		void OnAttack(int x, int y);
 		void ShowWeapon();
-		void MoveWeapon(MapBrown* map);
+		void MoveWeapon(Map* map);
 		bool InAttackRange(int x, int y);
 		bool InWeaponHitBox(int x, int y);
 	private:
@@ -167,9 +174,9 @@ namespace game_framework {
 	public:
 		Eye(int x, int y, int d);
 		void LoadBitmap();
-		void OnMove(MapBrown* map);
+		void OnMove(Map* map);
 		void OnAttack(int x, int y);
-		void MoveWeapon(MapBrown* map);
+		void MoveWeapon(Map* map);
 		bool InAttackRange(int x, int y);
 		void ShowWeapon();
 		bool InWeaponHitBox(int x, int y);
@@ -184,7 +191,7 @@ namespace game_framework {
 	public:
 		Orc(int x, int y, int d);
 		void LoadBitmap();
-		void OnMove(MapBrown* map);
+		void OnMove(Map* map);
 		bool InAttackRange(int x, int y);
 
 	private:
@@ -198,7 +205,7 @@ namespace game_framework {
 	public:
 		MBall(int x, int y, int d);
 		void LoadBitmap();
-		void OnMove(MapBrown* map);
+		void OnMove(Map* map);
 		bool InAttackRange(int x, int y);
 
 	private:
@@ -215,12 +222,13 @@ namespace game_framework {
 	public:
 		Boss(int x, int y, int d);
 		void LoadBitmap();
-		void OnMove(MapBrown* map);
+		void OnMove(Map* map);
 		void OnAttack(int x, int y);
 		void ShowWeapon();
 		bool InHitBox(int x, int y);
-
-		void MoveWeapon(MapBrown* map);
+		void showVanish();
+		int getLoot2();
+		void MoveWeapon(Map* map);
 		bool InAttackRange(int x, int y);
 		void Initialize();
 		bool InWeaponHitBox(int x, int y);
@@ -254,8 +262,6 @@ namespace game_framework {
 		int weapon1X, weapon2X, weapon3X;
 		int weapon1Y, weapon2Y, weapon3Y;
 		int mode;
-		CAnimation weapon1;
-		CAnimation weapon3;
 	};
 }
 #endif
