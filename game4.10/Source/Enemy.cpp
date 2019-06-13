@@ -794,7 +794,7 @@ namespace game_framework {
 		LoadBitmap();
 		hp = 3;
 		damage = 1;
-		weapon = 2;
+		weaponDamage = 2;
 		weaponState = 0;
 		attackSide = false;
 	}

@@ -1163,6 +1163,12 @@ namespace game_framework {
 		const char KEY_TWO = 50;
 		const char KEY_THREE = 51;
 		const char KEY_FOUR = 52;
+		const char KEY_ESC = 27;
+
+		if (nChar == KEY_ESC) 
+		{
+			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// Ãö³¬¹CÀ¸
+		}
 
 		if (mapBrown.InStore())
 		{

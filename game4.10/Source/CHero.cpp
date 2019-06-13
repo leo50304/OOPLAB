@@ -145,6 +145,10 @@ namespace game_framework {
 			item->resetOffset();
 			items.push_back(item);
 		}
+		if (items.size() == 1) 
+		{
+			currentItem = 0;
+		}
 	}
 
 	bool CHero::BeatBack()
@@ -157,7 +161,7 @@ namespace game_framework {
 		return items.size() >= 13;
 	}
 
-	bool  CHero::buyItem(Item* item, int price) 
+	bool CHero::buyItem(Item* item, int price) 
 	{
 		if (gold >= price) 
 		{
@@ -863,6 +867,10 @@ namespace game_framework {
 
 	void CHero::moveCurrentItem(int i)
 	{
+		if (items.size() == 0) 
+		{
+			return;
+		}
 		int preItem = currentItem;
 		currentItem += i;
 		if (currentItem > signed(items.size()) - 1)
