@@ -78,6 +78,25 @@ using namespace std;
 
 namespace game_framework {
 
+
+	enum AUDIO_ID {				// 定義各種音效的編號
+		TITLE_BGM,
+		AUDIO_BGM,
+		JUMP_EF,
+		DROP_EF,
+		ATK_EF,
+		FIRE_ATK_EF,
+		HIT_MONSTER,
+		HIT_HERO,
+		MONSTER_DEAD,
+		GET_ITEM,
+		DROP,
+		LEVEL_UP,
+		THUNDER,
+		SELECT_MOVE,
+		SELECT
+	};
+
 class CAudio {
 public:
 	~CAudio();

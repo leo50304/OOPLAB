@@ -276,13 +276,20 @@ namespace game_framework {
 	void CGameStateInit::OnInit()
 	{
 		titleOffset = 32;
-		CAudio::Instance()->Load(TITLE_BGM, "Sounds\\TSUKINOS.MID");	// 載入編號1的聲音lake.mp3
-		CAudio::Instance()->Load(JUMP_EF, "data\\se\\sb_00.wav");	// 載入編號1的聲音lake.mp3
-		CAudio::Instance()->Load(DROP_EF, "data\\se\\sb_01.wav");	// 載入編號1的聲音lake.mp3
-		CAudio::Instance()->Load(ATK_EF, "data\\se\\sb_01.wav");	// 載入編號1的聲音lake.mp3
-		CAudio::Instance()->Load(FIRE_ATK_EF, "data\\se\\sb_01.wav");	// 載入編號1的聲音lake.mp3
-		CAudio::Instance()->Load(SLIME_ATK_EF, "data\\se\\sb_01.wav");	// 載入編號1的聲音lake.mp3
-		CAudio::Instance()->Load(HIT_HERO, "data\\se\\sb_01.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(TITLE_BGM, "Sounds\\TSUKINOS.MID");
+		CAudio::Instance()->Load(JUMP_EF, "data\\se\\jump.wav");
+		CAudio::Instance()->Load(DROP_EF, "data\\se\\drop.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(ATK_EF, "data\\se\\attack.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(FIRE_ATK_EF, "data\\se\\fire.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(HIT_MONSTER, "data\\se\\hitMonster.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(HIT_HERO, "data\\se\\hurt.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(MONSTER_DEAD, "data\\se\\monsterDead.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(GET_ITEM, "data\\se\\eatItem.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(DROP, "data\\se\\drop.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(LEVEL_UP, "data\\se\\levelUp.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(THUNDER, "data\\se\\thunder.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(SELECT_MOVE, "data\\se\\selectItem.wav");	// 載入編號1的聲音lake.mp3
+		CAudio::Instance()->Load(SELECT, "data\\se\\selectYes.wav");	// 載入編號1的聲音lake.mp3
 
 		//
 		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
@@ -301,12 +308,12 @@ namespace game_framework {
 		logo.LoadBitmap(MENU_0, RGB(128, 0, 128));
 		logoBackground.LoadBitmap(MENU_1, RGB(128, 0, 128));
 		selectionArrow.LoadBitmap(SELECTION_ARROW, RGB(0, 0, 0));
-		CAudio::Instance()->Play(TITLE_BGM, false);		// 撥放 WAVE
 
 		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
 		// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
 		//
+		CAudio::Instance()->Play(TITLE_BGM, false);		// 撥放 WAVE
 
 	}
 
@@ -331,11 +338,13 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
+				CAudio::Instance()->Play(SELECT, false);
 				menuState = 0;
 				return;
 			}
 			else if (nChar == KEY_RIGHT)
 			{
+				CAudio::Instance()->Play(SELECT_MOVE, false);
 				menuState = 2;
 			}
 		}
@@ -343,11 +352,13 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
+				CAudio::Instance()->Play(SELECT, false);
 				menuState = 0;
 				return;
 			}
 			else if (nChar == KEY_RIGHT)
 			{
+				CAudio::Instance()->Play(SELECT_MOVE, false);
 				menuState = 3;
 			}
 		}
@@ -355,11 +366,13 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
+				CAudio::Instance()->Play(SELECT, false);
 				menuState = 0;
 				return;
 			}
 			else if (nChar == KEY_RIGHT)
 			{
+				CAudio::Instance()->Play(SELECT_MOVE, false);
 				menuState = 1;
 			}
 		}
@@ -367,6 +380,7 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
+				CAudio::Instance()->Play(SELECT, false);
 				menuState = 0;
 				return;
 			}
@@ -380,19 +394,23 @@ namespace game_framework {
 					CAudio::Instance()->Stop(TITLE_BGM);
 					t1 = clock();
 					onStart = false;
+					CAudio::Instance()->Play(SELECT, false);
 					GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
 				}
 				else if (currentSelect == 1)
 				{
+					CAudio::Instance()->Play(SELECT, false);
 					menuState = 1;
 				}
 				else if (currentSelect == 2)
 				{
 					isWin = true;
+					CAudio::Instance()->Play(SELECT, false);
 					GotoGameState(GAME_STATE_OVER);
 				}
 				else if (currentSelect == 3)
 				{
+					CAudio::Instance()->Play(SELECT, false);
 					menuState = 4;
 				}
 				else if (currentSelect == 4)
@@ -404,6 +422,7 @@ namespace game_framework {
 			else if (nChar == KEY_UP)
 			{
 				currentSelect--;
+				CAudio::Instance()->Play(SELECT_MOVE, false);
 				if (currentSelect < 0)
 				{
 					currentSelect = 4;
@@ -412,6 +431,7 @@ namespace game_framework {
 			else if (nChar == KEY_DOWN)
 			{
 				currentSelect++;
+				CAudio::Instance()->Play(SELECT_MOVE, false);
 				if (currentSelect > 4)
 				{
 					currentSelect = 0;
@@ -543,6 +563,9 @@ namespace game_framework {
 
 		if (nChar == KEY_SPACE) 
 		{
+			CAudio::Instance()->Stop(TITLE_BGM);
+			CAudio::Instance()->Play(SELECT, false);		// 撥放 WAVE
+			CAudio::Instance()->Play(TITLE_BGM, false);	
 			GotoGameState(GAME_STATE_INIT);
 		}
 	}
@@ -555,8 +578,13 @@ namespace game_framework {
 			countFlash = 60;
 		}
 		counter--;
-		if (counter < 0)
+		if (counter < 0) 
+		{
+			CAudio::Instance()->Stop(TITLE_BGM);
+			CAudio::Instance()->Play(SELECT, false);		// 撥放 WAVE
+			CAudio::Instance()->Play(TITLE_BGM, false);		// 撥放 WAVE
 			GotoGameState(GAME_STATE_INIT);
+		}
 	}
 
 	void CGameStateOver::OnBeginState()
@@ -996,10 +1024,13 @@ namespace game_framework {
 			}
 		}
 
+		//掉落道具
 		for (unsigned int i = 0; i < enemies.size(); ++i)
 		{
+			bool dropFlag = false;
 			if (enemies[i]->getLoot1())
 			{
+				dropFlag = true;
 				items.push_back(new Gold(enemies[i]->GetX1(), enemies[i]->GetY1(), mapBrown.getNext()));
 			}
 
@@ -1007,12 +1038,17 @@ namespace game_framework {
 			Item* lootItem = ItemFactory(enemies[i]->getLoot2(), item2X, enemies[i]->GetY1(), mapBrown.getNext());
 			if (lootItem != nullptr)
 			{
+				dropFlag = true;
 				items.push_back(lootItem);
 			}
-
+			if (dropFlag) 
+			{
+				CAudio::Instance()->Play(DROP_EF, false);		// 撥放 WAVE
+			}
 			hero.addExp(enemies[i]->getExp());
 		}
 
+		//獲得道具
 		for (unsigned int i = 0; i < items.size(); ++i)
 		{
 			if (items[i]->InHitBox(hero.GetX1(), hero.GetY1()) && mapBrown.getNext() == items[i]->getMap())
@@ -1023,6 +1059,7 @@ namespace game_framework {
 				}
 				if (items[i]->pickUp(&hero)) //可以收到道具欄
 				{
+					CAudio::Instance()->Play(GET_ITEM, false);		// 撥放 WAVE
 					hero.addItem(items[i]);
 				}
 				else
@@ -1038,14 +1075,14 @@ namespace game_framework {
 		if (hero.FinishGame())
 		{
 			isWin = true;
-			CAudio::Instance()->Stop(TITLE_BGM);
+			CAudio::Instance()->Stop(AUDIO_BGM);
 			GotoGameState(GAME_STATE_OVER);
 		}
 
 		if (hero.getHP() <= 0)
 		{
 			isWin = false;
-			CAudio::Instance()->Stop(TITLE_BGM);
+			CAudio::Instance()->Stop(AUDIO_BGM);
 			GotoGameState(GAME_STATE_OVER);
 		}
 	}
@@ -1118,12 +1155,14 @@ namespace game_framework {
 		{
 			if (nChar == KEY_LEFT) {
 				currentShopItem -= 1;
+				CAudio::Instance()->Play(SELECT_MOVE, false);		// 撥放 WAVE
 				if (currentShopItem < 0)
 				{
 					currentShopItem = 3;
 				}
 			}
 			if (nChar == KEY_RIGHT) {
+				CAudio::Instance()->Play(SELECT_MOVE, false);		// 撥放 WAVE
 				currentShopItem += 1;
 				if (currentShopItem > 3)
 				{

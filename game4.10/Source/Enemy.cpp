@@ -85,6 +85,7 @@ namespace game_framework {
 
 	void Enemy::hit(int d)
 	{
+		CAudio::Instance()->Play(HIT_MONSTER, false);		// ¼·©ñ WAVE
 		hp -= d;
 	}
 
@@ -128,6 +129,7 @@ namespace game_framework {
 		{
 			lootable = true;
 			isDistroyed = true;
+			CAudio::Instance()->Play(MONSTER_DEAD, false);		// ¼·©ñ WAVE
 		}
 	}
 

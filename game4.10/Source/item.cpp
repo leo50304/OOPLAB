@@ -210,6 +210,7 @@ namespace game_framework {
 	{
 		amount = rand() % 3 + 1;
 		hero->changeGold(amount);
+		CAudio::Instance()->Play(GET_ITEM, false);		// ¼·©ñ WAVE
 	}
 
 	bool Gold::pickUp(CHero* hero)

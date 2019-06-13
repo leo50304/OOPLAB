@@ -220,6 +220,7 @@ namespace game_framework {
 		{
 			onEnemyThunder.OnMove();
 			attackCount++;
+			bool hasDrop = false;
 			for (unsigned int i = 0; i < enemies.size(); ++i)
 			{
 				if (d == enemies[i]->getMapLocation() && enemies[i]->GetY1() < 32 * 13 && !enemies[i]->IsDistroyed())
@@ -228,6 +229,7 @@ namespace game_framework {
 					{
 						continue;
 					}
+					hasDrop = true;
 					thunder_s t;
 					t.x = enemies[i]->GetX1();
 					t.length = enemies[i]->GetY1() / 32;
@@ -237,6 +239,10 @@ namespace game_framework {
 					enemies[i]->Distroy();
 					enemies[i]->isThundered(true);
 				}
+			}
+			if (hasDrop) 
+			{
+				CAudio::Instance()->Play(THUNDER, false);		// ¼·©ñ WAVE
 			}
 		}
 	}

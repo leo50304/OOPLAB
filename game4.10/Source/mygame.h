@@ -57,17 +57,6 @@ namespace game_framework {
 	// Constants
 	/////////////////////////////////////////////////////////////////////////////
 
-	enum AUDIO_ID {				// 定義各種音效的編號
-		TITLE_BGM,
-		AUDIO_BGM,
-		JUMP_EF,
-		DROP_EF,
-		ATK_EF,
-		FIRE_ATK_EF,
-		SLIME_ATK_EF,
-		HIT_HERO
-	};
-
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
 	// 每個Member function的Implementation都要弄懂

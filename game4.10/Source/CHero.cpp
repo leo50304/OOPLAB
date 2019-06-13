@@ -46,6 +46,7 @@ namespace game_framework {
 		{
 			return;
 		}
+		CAudio::Instance()->Play(GET_ITEM, false);		// ¼·©ñ WAVE
 		usedItem.push_back(items[currentItem]);
 		items[currentItem]->use(this);
 		items.erase(items.begin() + currentItem);
@@ -308,6 +309,7 @@ namespace game_framework {
 			exp = 0;
 			addLevel();
 			addExp(dif);
+			CAudio::Instance()->Play(LEVEL_UP, false);		// ¼·©ñ WAVE
 		}
 	}
 
