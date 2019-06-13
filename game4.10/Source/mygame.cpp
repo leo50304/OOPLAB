@@ -143,7 +143,6 @@ namespace game_framework {
 
 	void Map::initMap()
 	{
-
 		mapPosX = 0;
 		mapPosY = 4;
 		setNext(mapOfMap[mapPosY][mapPosX]);
@@ -154,9 +153,14 @@ namespace game_framework {
 		return next;
 	}
 
-	void Map::setNext(int n) 
+	void Map::setNext(int n)
 	{
 		next = n;
+		if (next == 17) 
+		{
+			mapPosX = 2;
+			mapPosY = 1;
+		}
 		for (int i = 0; i < MAP_SIZE_Y; i++)
 		{
 			for (int j = 0; j < MAP_SIZE_X; j++)
@@ -413,10 +417,10 @@ namespace game_framework {
 					CAudio::Instance()->Play(SELECT, false);
 					menuState = 4;
 				}
-				else if (currentSelect == 4)
+				else if (currentSelect == 4) //結束遊戲
 				{
 					CAudio::Instance()->Stop(TITLE_BGM);
-					GotoGameState(GAME_STATE_OVER);
+					PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
 				}
 			}
 			else if (nChar == KEY_UP)
@@ -507,8 +511,8 @@ namespace game_framework {
 			{
 				pDC->TextOut(16, 20 + 255, "提示：需裝備傳說之石才可以離開洞窟，否則會有不好的事發生：）");
 				pDC->TextOut(16, 20 + 280, "提示：選取道具以裝備");
-				pDC->TextOut(125 - 32, 20 + 305+8, "白戒指: 首次裝備+10HP，裝備+10MAXHP");
-				pDC->TextOut(125 - 32, 20 + 330 + 8,"                使用時施放雷怒九天");
+				pDC->TextOut(125 - 32, 20 + 305 + 8, "白戒指: 首次裝備+10HP，裝備+10MAXHP");
+				pDC->TextOut(125 - 32, 20 + 330 + 8, "                使用時施放雷怒九天");
 				pDC->TextOut(125 - 32, 20 + 355 + 10, "藍補藥: 回復血量(中)   紅補藥: 回復血量(極大) ");
 			}
 			if (countFlash > 30)
@@ -535,8 +539,8 @@ namespace game_framework {
 			pDC->SetBkColor(RGB(0, 0, 0));
 			pDC->SetTextColor(RGB(255, 200, 69));
 			pDC->TextOut(125 - 28, 20 + 230, "作者介紹:");
-			pDC->TextOut(125 - 28, 20 + 255+15, "          台北科技大學電資學院大學生: 單立宇、陳柏宇");
-			pDC->TextOut(125 - 28, 20 + 280+15, "          此遊戲為我們物件導向實習課程的專案");
+			pDC->TextOut(125 - 28, 20 + 255 + 15, "          台北科技大學電資學院大學生: 單立宇、陳柏宇");
+			pDC->TextOut(125 - 28, 20 + 280 + 15, "          此遊戲為我們物件導向實習課程的專案");
 			pDC->TextOut(125 - 28, 20 + 305 + 30, "授課老師: 陳偉凱");
 			pDC->TextOut(125 - 28, 20 + 330 + 30, "遊戲版本: 1.0.2");
 			if (countFlash > 30)
@@ -561,11 +565,11 @@ namespace game_framework {
 	{
 		const char KEY_SPACE = ' ';
 
-		if (nChar == KEY_SPACE) 
+		if (nChar == KEY_SPACE)
 		{
 			CAudio::Instance()->Stop(TITLE_BGM);
 			CAudio::Instance()->Play(SELECT, false);		// 撥放 WAVE
-			CAudio::Instance()->Play(TITLE_BGM, false);	
+			CAudio::Instance()->Play(TITLE_BGM, false);
 			GotoGameState(GAME_STATE_INIT);
 		}
 	}
@@ -578,7 +582,7 @@ namespace game_framework {
 			countFlash = 60;
 		}
 		counter--;
-		if (counter < 0) 
+		if (counter < 0)
 		{
 			CAudio::Instance()->Stop(TITLE_BGM);
 			CAudio::Instance()->Play(SELECT, false);		// 撥放 WAVE
@@ -707,7 +711,7 @@ namespace game_framework {
 			CDC *pDC = CDDraw::GetBackCDC();
 			CFont f, *fp;
 			f.CreatePointFont(160, "Times New Roman");
-			fp = pDC->SelectObject(&f);	
+			fp = pDC->SelectObject(&f);
 			pDC->SetBkColor(RGB(0, 0, 0));
 			pDC->SetTextColor(RGB(255, 0, 0));
 			char str[80];								// Demo 數字對字串的轉換
@@ -926,7 +930,16 @@ namespace game_framework {
 			{
 				if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed())
 				{
-					if (hero.InAttackRange(enemies[i]->GetX1(), enemies[i]->GetY1()))
+					if (mapBrown.getNext() == 17) 
+					{
+						if (hero.InBossRange(enemies[i]->GetX1(), enemies[i]->GetY1()))
+						{
+							hero.setHitValid(false);
+							enemies[i]->hit(hero.getDamage());
+							enemies[i]->Distroy();
+						}
+					}
+					else if (hero.InAttackRange(enemies[i]->GetX1(), enemies[i]->GetY1()))
 					{
 						hero.setHitValid(false);
 						enemies[i]->hit(hero.getDamage());
@@ -961,7 +974,7 @@ namespace game_framework {
 		{
 			if (mapBrown.getNext() == enemies[i]->getMapLocation() && !enemies[i]->IsDistroyed())
 			{
-				if (!enemies[i]->isThundered()) 
+				if (!enemies[i]->isThundered())
 				{
 					enemies[i]->OnMove(&mapBrown);
 				}
@@ -1041,7 +1054,7 @@ namespace game_framework {
 				dropFlag = true;
 				items.push_back(lootItem);
 			}
-			if (dropFlag) 
+			if (dropFlag)
 			{
 				CAudio::Instance()->Play(DROP_EF, false);		// 撥放 WAVE
 			}
@@ -1205,6 +1218,7 @@ namespace game_framework {
 			{
 				hero.moveMap();
 				mapBrown.setNext(17);
+				hero.SetXY(32*2,32*9);
 			}
 		}
 

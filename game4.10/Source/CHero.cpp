@@ -188,6 +188,7 @@ namespace game_framework {
 		hp = 8;
 		maxHP = 8;
 		previousBlock = 0;
+		currentItem = 0;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 
 
@@ -263,6 +264,27 @@ namespace game_framework {
 		}
 		return false;
 	}
+
+	bool CHero::InBossRange(int eX, int eY)
+	{
+		if (!hitValid)
+		{
+			return false;
+		}
+		if (eY - y <16 && eY - y > -16)
+		{
+			if (faceSide == 0)
+			{
+				return x - eX < 64+64 && eX < x - 32;
+			}
+			else if (faceSide == 1)
+			{
+				return eX - x < 64 + 64 && x + 32 < eX;
+			}
+		}
+		return false;
+	}
+
 	bool CHero::InFireRange(int eX, int eY)
 	{
 		return eX < FireX + 32 && eX + 32 > FireX && eY < FireY + 32 && eY + 32 > FireY;

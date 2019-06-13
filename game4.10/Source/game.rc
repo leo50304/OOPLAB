@@ -532,9 +532,9 @@ boss_2                  BITMAP                  "..\\data\\boss\\BOSS2.bmp"
 
 boss_3                  BITMAP                  "..\\data\\boss\\BOSS3.bmp"
 
-TITLE_ABOUT             BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\about.bmp"
+TITLE_ABOUT             BITMAP                  "..\\data\\about.bmp"
 
-VANISH                  BITMAP                  "C:\\Users\\LEO\\Desktop\\legendcave\\game4.10\\data\\e\\vanish.bmp"
+VANISH                  BITMAP                  "..\\data\\e\\vanish.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

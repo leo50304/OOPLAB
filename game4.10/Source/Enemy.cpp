@@ -259,6 +259,7 @@ namespace game_framework {
 	Frog::Frog(int x, int y, int d) :Enemy(x, y, d)
 	{
 		LoadBitmap();
+		damage = 1;
 	}
 
 	void Frog::LoadBitmap()
@@ -273,6 +274,8 @@ namespace game_framework {
 	Slime::Slime(int x, int y, int d) : Enemy(x, y, d)
 	{
 		srand((unsigned int)time(NULL));
+		damage = 1;
+		weaponDamage = 2;
 		LoadBitmap();
 	}
 
@@ -397,6 +400,7 @@ namespace game_framework {
 		directY = 1;
 		countY = 0;
 		hp = 2;
+		damage = 1;
 	}
 
 	void Bat::LoadBitmap()
@@ -441,6 +445,8 @@ namespace game_framework {
 		hp = 4;
 		countRolling = 0;
 		weaponState = 0;
+		damage = 3;
+		weaponDamage = 3;
 		heroX = x;
 		heroY = y;
 		attackSide = false;
@@ -654,6 +660,7 @@ namespace game_framework {
 		onJump = false;
 		speed = 1;
 		hp = 3;
+		damage = 2;
 	}
 
 	void Snake::LoadBitmap()
@@ -786,6 +793,8 @@ namespace game_framework {
 	{
 		LoadBitmap();
 		hp = 3;
+		damage = 1;
+		weapon = 2;
 		weaponState = 0;
 		attackSide = false;
 	}
@@ -959,6 +968,8 @@ namespace game_framework {
 	{
 		LoadBitmap();
 		hp = 4;
+		damage = 1;
+		weaponDamage = 3;
 	}
 
 	void Eye::LoadBitmap()
@@ -1020,7 +1031,6 @@ namespace game_framework {
 		weapon.Reset();
 		weaponX = GetX1();
 		weaponY = GetY1();
-
 		if (x <= GetX1())
 		{
 			directX = -1;
@@ -1031,7 +1041,6 @@ namespace game_framework {
 		{
 			directX = 1;
 			weaponX += 32;
-
 			attackSide = true;
 		}
 	}
@@ -1096,6 +1105,7 @@ namespace game_framework {
 		sprintSpeed = 0;
 		speed = 0;
 		hp = 3;
+		damage = 2;
 		onAttackAnime = true;//true代表不衝刺
 	}
 
@@ -1104,13 +1114,10 @@ namespace game_framework {
 		moveLAnimation.AddBitmap(ORC_0, RGB(128, 0, 128));
 		moveLAnimation.AddBitmap(ORC_1, RGB(128, 0, 128));
 		AtkL.LoadBitmap(ORC_2, RGB(128, 0, 128));
-
 		moveRAnimation.AddBitmap(ORC_3, RGB(128, 0, 128));
 		moveRAnimation.AddBitmap(ORC_4, RGB(128, 0, 128));
 		AtkR.LoadBitmap(ORC_5, RGB(128, 0, 128));
 		vanish.LoadBitmap(VANISH, RGB(128, 0, 128));
-
-
 	}
 
 	void  Orc::OnMove(Map* map)
@@ -1174,6 +1181,7 @@ namespace game_framework {
 		onJump = false;
 		onDrop = false;
 		counter = 0;
+		damage = 1;
 		hp = 200;
 	}
 
@@ -1263,6 +1271,8 @@ namespace game_framework {
 		attackSide = false;
 		hit = false;
 		hp = 120;
+		damage = 3;
+		weaponDamage = 5;
 		weapon1X = -100;
 		weapon1Y = -100;
 		weapon2X = -100;
@@ -1287,20 +1297,16 @@ namespace game_framework {
 		moveRAnimation.AddBitmap(boss_1, RGB(128, 0, 128));
 		moveRAnimation.AddBitmap(boss_2, RGB(128, 0, 128));
 		moveRAnimation.AddBitmap(boss_3, RGB(128, 0, 128));
-
 		weapon1.AddBitmap(boss_attack_1, RGB(128, 0, 128));
 		weapon1.AddBitmap(boss_attack_2, RGB(128, 0, 128));
 		weapon1.AddBitmap(boss_attack_3, RGB(128, 0, 128));
-
 		weapon2.AddBitmap(boss_attack_2, RGB(128, 0, 128));
 		weapon2.AddBitmap(boss_attack_3, RGB(128, 0, 128));
 		weapon2.AddBitmap(boss_attack_1, RGB(128, 0, 128));
-
 		weapon3.AddBitmap(boss_attack_3, RGB(128, 0, 128));
 		weapon3.AddBitmap(boss_attack_1, RGB(128, 0, 128));
 		weapon3.AddBitmap(boss_attack_2, RGB(128, 0, 128));
 		vanish.LoadBitmap(VANISH, RGB(128, 0, 128));
-
 	}
 	void Boss::OnMove(Map* map)
 	{
@@ -1417,7 +1423,6 @@ namespace game_framework {
 		return;
 	}
 
-	//onAttack 有沒有在攻擊
 	void Boss::OnAttack(int x, int y) //判定要不要攻擊
 	{
 		if (onAttack)
@@ -1444,7 +1449,6 @@ namespace game_framework {
 		weapon1.Reset();// direct attack hero
 		weapon2.Reset();// attack hero like BowHead
 		weapon3.Reset();// attack hero by a circle
-
 		weapon1X = GetX1();
 		weapon1Y = GetY1();
 		weapon2X = GetX1() - 96;
@@ -1531,9 +1535,7 @@ namespace game_framework {
 		weapon3.SetTopLeft((int)(weaponPosition3X), (int)(weaponPositionY));
 		weapon3.OnShow();
 	}
-	//畫圓攻擊
 
-	//BUG 碰撞範圍定義錯誤
 	bool Boss::InHitBox(int x, int y)
 	{
 		return !isDistroyed && x < GetX1() + 96 && x + 32 > GetX1() && y < GetY1() + 96 && y + 32 > GetY1();

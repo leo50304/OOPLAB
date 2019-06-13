@@ -41,6 +41,7 @@ namespace game_framework {
 		void InitThunder(bool flag);// set the thunder should be initialized or not
 		bool InitThunder();//return true if thunder should be init
 		bool InAttackRange(int x, int y);// true if pos x, y is in hero's attack range
+		bool InBossRange(int eX, int eY);//boss is in hit range
 		bool InFireRange(int x, int y);// true if pos x, y is in fire ball's attack range
 		void SetHoldUp(bool flag);// up is on pressed, for big jump
 		bool isInvincible();// true if hero invinceble
@@ -77,7 +78,7 @@ namespace game_framework {
 	protected:
 		vector<Item*> items;
 		vector<Item*> usedItem;
-		int currentItem = 0;
+		int currentItem;
 		CMovingBitmap standL;
 		CMovingBitmap standR;
 		CMovingBitmap stayOnLadder;
